@@ -1,0 +1,5395 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-page-node-id="BbZmmof5TValymEkIX5Fl0">
+<head data-page-node-id="rgNnHAaBe0wI2QoPQk6ICH">
+<meta charset="UTF-8" data-page-node-id="dylrb9m14NYByf6nQHxaIM">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" data-page-node-id="d8pOQbrDxYAxz5EWQ8gnUE">
+<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta name="app-version" content="v2.9.1">
+<title>喻慕左的学习能量站</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;background:#f0f4f8;color:#333;min-height:100vh;}
+/* Header */
+.header{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:#fff;padding:16px 24px;box-shadow:0 2px 12px rgba(0,0,0,.15);}
+.header-row1{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.header-title{font-size:24px;font-weight:700;display:flex;align-items:center;gap:8px;}
+.grade-badge{background:rgba(255,255,255,.25);padding:4px 16px;border-radius:20px;font-size:18px;cursor:pointer;transition:.2s;border:2px solid rgba(255,255,255,.4);}
+.grade-badge:hover{background:rgba(255,255,255,.35);}
+.grade-select-wrap{display:none;align-items:center;gap:8px;}
+.grade-select-wrap.show{display:flex;}
+.grade-select-wrap select{padding:6px 12px;border-radius:8px;border:none;font-size:16px;cursor:pointer;}
+.grade-select-wrap button{padding:6px 16px;border-radius:8px;border:none;background:#fff;color:#764ba2;font-weight:600;cursor:pointer;}
+.header-row2{display:flex;gap:16px;margin-top:12px;flex-wrap:wrap;}
+.stat-card{background:rgba(255,255,255,.18);padding:10px 20px;border-radius:12px;min-width:100px;text-align:center;backdrop-filter:blur(4px);}
+.stat-card .stat-icon{font-size:24px;}
+.stat-card .stat-label{font-size:12px;opacity:.85;margin-top:2px;}
+.stat-card .stat-value{font-size:20px;font-weight:700;margin-top:2px;}
+.stat-card .stat-sub{font-size:11px;opacity:.9;margin-top:4px;line-height:1.4;min-height:16px;}
+.gem-exchange{background:rgba(255,255,255,.12);padding:8px 16px;border-radius:10px;font-size:13px;margin-top:10px;text-align:center;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;}
+.gem-ex-title{font-weight:700;}
+.gem-ex-item{display:inline-flex;align-items:center;gap:4px;}
+.gem-ex-item input{width:52px;padding:2px 4px;border:none;border-radius:6px;text-align:center;font-size:13px;font-weight:700;background:rgba(255,255,255,.85);color:#333;outline:2px solid transparent;}
+.gem-ex-item input:focus{outline-color:#667eea;}
+.gem-ex-tip{font-size:11px;opacity:.7;}
+.stat-card.checked{background:rgba(46,204,113,.4);}
+.stat-card.unchecked{background:rgba(255,255,255,.15);}
+.gem-rule{background:rgba(255,255,255,.12);padding:6px 16px;border-radius:10px;font-size:12px;margin-top:10px;text-align:center;opacity:.9;}
+.weekly-streak{margin-top:10px;padding:9px 16px;border-radius:10px;font-size:13px;text-align:center;font-weight:600;display:flex;align-items:center;justify-content:center;gap:4px;flex-wrap:wrap;}
+.weekly-streak.ready{background:#fff3e0;color:#e65100;border:1px solid #ffcc80;}
+.weekly-streak.redeemed{background:#e8f5e9;color:#2E7D32;border:1px solid #a5d6a7;}
+.redeem-btn{margin-left:8px;border:none;background:#43A047;color:#fff;padding:5px 14px;border-radius:8px;font-size:13px;cursor:pointer;font-weight:600;transition:.2s;}
+.redeem-btn:hover{background:#2E7D32;}
+/* Main layout */
+.main{display:flex;min-height:calc(100vh - 160px);}
+.sidebar{width:200px;background:#fff;box-shadow:2px 0 8px rgba(0,0,0,.06);padding:16px 0;display:flex;flex-direction:column;flex-shrink:0;}
+.subject-btn{display:flex;align-items:center;gap:10px;padding:12px 20px;cursor:pointer;border:none;background:none;width:100%;text-align:left;font-size:15px;transition:.2s;border-left:4px solid transparent;}
+.subject-btn:hover{background:#f5f5f5;}
+.subject-btn.active{background:#f0f4f8;font-weight:600;}
+.subject-btn .subject-color{width:12px;height:12px;border-radius:50%;flex-shrink:0;}
+.subject-btn .subject-icon{font-size:18px;}
+.sidebar-divider{height:1px;background:#e0e0e0;margin:8px 20px;}
+.action-btn{padding:10px 20px;cursor:pointer;border:none;background:none;width:100%;text-align:left;font-size:14px;color:#555;transition:.2s;display:flex;align-items:center;gap:8px;}
+.action-btn:hover{background:#f5f5f5;color:#333;}
+.content{flex:1;padding:20px;overflow-y:auto;max-height:calc(100vh - 160px);}
+/* Recommendations */
+.recommend-section{background:#fff;border-radius:12px;padding:16px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,.06);}
+.recommend-title{font-size:16px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:6px;}
+.recommend-tasks{display:flex;gap:12px;flex-wrap:wrap;}
+.recommend-task{background:linear-gradient(135deg,#f5f7fa 0%,#e9ecef 100%);padding:10px 16px;border-radius:10px;font-size:14px;cursor:pointer;transition:.2s;border:2px solid transparent;}
+.recommend-task:hover{border-color:#667eea;transform:translateY(-2px);}
+.recommend-task .rec-subject{font-size:11px;color:#888;}
+.recommend-task .rec-name{font-weight:600;margin-top:2px;}
+.recommend-task.household{background:linear-gradient(135deg,#FFF8E1 0%,#FFECB3 100%);border-color:#FFB300;}
+.recommend-task.household .rec-points{color:#FF8F00;font-weight:600;font-size:12px;margin-top:2px;}
+.recommend-task.poem{background:linear-gradient(135deg,#E8F5E9 0%,#C8E6C9 100%);border-color:#43A047;min-width:210px;}
+.recommend-task.poem .rec-points{color:#2E7D32;font-weight:600;font-size:12px;margin-top:2px;}
+.recommend-task.done{opacity:.55;filter:grayscale(.25);}
+.recommend-task.done .rec-name{text-decoration:line-through;}
+.recommend-task.done .rec-points{color:#43A047;font-weight:600;font-size:12px;margin-top:2px;}
+.poem-progress{height:6px;background:rgba(0,0,0,.12);border-radius:3px;overflow:hidden;margin-top:6px;}
+.poem-progress-fill{height:100%;background:#43A047;border-radius:3px;transition:width .4s ease;}
+.refresh-btn{margin-left:auto;padding:6px 14px;border-radius:8px;border:none;background:#667eea;color:#fff;font-size:13px;cursor:pointer;font-weight:600;transition:.2s;}
+.refresh-btn:hover{background:#5566d8;}
+.poem-refresh-btn{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(67,160,71,.15);color:#2E7D32;font-size:12px;cursor:pointer;transition:.2s;flex-shrink:0;margin-left:auto;}
+.poem-refresh-btn:hover{background:#43A047;color:#fff;}
+.poem-del-btn{border:none;background:none;font-size:15px;cursor:pointer;opacity:.55;padding:2px 6px;border-radius:6px;transition:.2s;flex-shrink:0;}
+.poem-del-btn:hover{opacity:1;background:#fdecea;}
+.poems-overview{background:#fff;border-radius:12px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,.06);}
+/* Progress bars */
+.progress-section{margin-bottom:20px;}
+.progress-bar-item{margin-bottom:10px;}
+.progress-bar-header{display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px;}
+.progress-bar-track{height:24px;background:#e0e0e0;border-radius:12px;overflow:hidden;}
+.progress-bar-fill{height:100%;border-radius:12px;transition:width .5s ease;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;font-size:12px;color:#fff;font-weight:600;min-width:0;}
+/* Task cards - two columns */
+.task-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.unit-card{background:#fff;border-radius:12px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,.06);}
+.unit-title{font-size:15px;font-weight:700;margin-bottom:10px;padding-bottom:8px;border-bottom:2px solid #f0f0f0;display:flex;align-items:center;gap:6px;}
+.unit-title .unit-progress{margin-left:auto;font-size:12px;color:#888;font-weight:400;}
+.task-item{display:flex;align-items:center;gap:10px;padding:8px;border-radius:8px;transition:.2s;cursor:pointer;font-size:13px;}
+.task-item:hover{background:#f9f9f9;}
+.task-checkbox{width:20px;height:20px;border:2px solid #ccc;border-radius:5px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:.2s;}
+.task-item.done .task-checkbox{background:#4CAF50;border-color:#4CAF50;color:#fff;}
+.task-checkbox svg{width:13px;height:13px;display:none;}
+.task-item.done .task-checkbox svg{display:block;}
+.task-name{flex:1;font-size:13px;line-height:1.4;}
+.task-item.done .task-name{color:#999;text-decoration:line-through;}
+.task-points{font-size:11px;color:#FF9800;font-weight:600;flex-shrink:0;}
+.task-item.done .task-points{color:#4CAF50;}
+/* Check-in button */
+.checkin-btn{background:linear-gradient(135deg,#FF9800,#FF5722);color:#fff;border:none;padding:12px 20px;border-radius:12px;font-size:15px;font-weight:600;cursor:pointer;width:calc(100% - 40px);margin:8px 20px;transition:.2s;}
+.checkin-btn:hover{transform:scale(1.02);}
+.checkin-btn:disabled{background:#ccc;cursor:not-allowed;transform:none;}
+/* Grade change confirm */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:998;}
+.grade-confirm-box{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#fff;border-radius:16px;padding:24px;box-shadow:0 4px 24px rgba(0,0,0,.2);z-index:999;text-align:center;max-width:360px;}
+.grade-confirm-box h3{margin-bottom:12px;}
+.grade-confirm-box p{margin-bottom:16px;color:#666;}
+.grade-confirm-box button{padding:8px 24px;border-radius:8px;border:none;margin:0 4px;cursor:pointer;font-size:14px;}
+.grade-confirm-box .btn-confirm{background:#667eea;color:#fff;}
+.grade-confirm-box .btn-cancel{background:#e0e0e0;}
+/* Toast */
+.toast{position:fixed;top:20px;right:20px;background:#333;color:#fff;padding:12px 24px;border-radius:8px;z-index:2000;animation:slideIn .3s ease;font-size:14px;}
+@keyframes slideIn{from{transform:translateX(100%);opacity:0;}to{transform:translateX(0);opacity:1;}}
+/* 诗词全文与释义卡片（v2.9.1） */
+.poem-detail{margin-top:8px;background:#f1f8e9;border:1px solid #c5e1a5;border-radius:8px;padding:10px 12px;text-align:left;}
+.poem-detail.hidden{display:none;}
+.poem-detail-toggle{display:inline-flex;align-items:center;gap:4px;background:#e8f5e9;border:1px solid #a5d6a7;color:#2E7D32;font-size:12px;padding:3px 10px;border-radius:12px;cursor:pointer;margin-top:6px;user-select:none;}
+.poem-detail-text{font-size:15px;line-height:1.9;color:#33691e;font-weight:500;}
+.poem-detail-mean{font-size:13px;line-height:1.7;color:#556b2f;margin-top:8px;padding-top:8px;border-top:1px dashed #c5e1a5;}
+.poem-detail-missing{font-size:12px;color:#999;margin-top:6px;}
+/* Responsive */
+@media(max-width:768px){
+  .sidebar{width:60px;}
+  .subject-btn span:not(.subject-color):not(.subject-icon){display:none;}
+  .action-btn span:not(.action-icon){display:none;}
+  .checkin-btn{font-size:0;width:40px;height:40px;margin:8px 10px;padding:0;}
+  .header-title{font-size:18px;}
+  .task-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body data-page-node-id="3TdR4iJDIxKWwKbfrSUgQZ">
+
+<div class="header" data-page-node-id="9KgFbf3dEsryDurhlAGo60">
+  <div class="header-row1" data-page-node-id="mhuIW9mfs575XyhCdWLJvg">
+    <div class="header-title" data-page-node-id="uEQUUKUAHTajn0PLTcea1M">
+      <span data-page-node-id="OFTkSiwcC3qg3AAAeHfBWX">喻慕左</span>
+      <span class="grade-badge" id="gradeBadge" onclick="toggleGradeSelect()" data-page-node-id="blKbDPzH94Qwi70QBDptca">一年级</span>
+      <span data-page-node-id="dEuNIkAhTdgsRJ7HtcR0St">的学习能量站</span>
+    </div>
+    <div class="grade-select-wrap" id="gradeSelectWrap" data-page-node-id="szXld3B7bz1hVtvRN28rAM">
+      <select id="gradeSelect" data-page-node-id="Epj6tsJNEyCEE8iqIfyvYd">
+        <option value="1" data-page-node-id="DWrp75EbjTnGD1O0dGVUkb">一年级</option>
+        <option value="2" data-page-node-id="K2mFDBwcGDTUBH6WxN947N">二年级</option>
+        <option value="3" data-page-node-id="mQ3xHp02EAenPKF3DXpSst">三年级</option>
+        <option value="4" data-page-node-id="W6W19znpGcIOHjHSAv9T7v">四年级</option>
+        <option value="5" data-page-node-id="Upf3e2N5VsiVNHvijdeuvf">五年级</option>
+        <option value="6" data-page-node-id="d6ViKDj9GDjFQHkZ0SQdwI">六年级</option>
+      </select>
+      <select id="semSelect" data-page-node-id="vWu2kESdIEfIhioRttD5uA">
+        <option value="a" data-page-node-id="FzKDFO2D57oghP12tPiRIK">上学期</option>
+        <option value="b" data-page-node-id="e0JfHy5GTXbZ8d7OxTYp0b">下学期</option>
+      </select>
+      <button onclick="confirmGrade()" data-page-node-id="Oe551OWYzc1kYkaBUZatHV">确认切换</button>
+      <button onclick="toggleGradeSelect()" style="background:#e0e0e0;color:#667eea;" data-page-node-id="QeZc0Xj8eggmEgHBZvHMFF">取消</button>
+    </div>
+  </div>
+  <div class="header-row2" data-page-node-id="QJGSOKYUlaxA6HfIAIQFqQ">
+    <div class="stat-card" id="levelCard" data-page-node-id="f3SGYThNFZ0ruZFku6tAhZ">
+      <div class="stat-icon" data-page-node-id="2h4rBeIv455cVaHLYPT8RT">🏆</div>
+      <div class="stat-label" data-page-node-id="Wt2kBuMiTtYQR80ELzCBBr">当前级别</div>
+      <div class="stat-value" id="levelText" data-page-node-id="oaPgbFJUMBt4tOQOdlsmVh">Lv.1</div>
+    </div>
+    <div class="stat-card" id="streakCard" data-page-node-id="Zk8Z3rbNwBYYNM6vG3HqSb">
+      <div class="stat-icon" data-page-node-id="5ber7cmrNDUfOl4nw1uKpL">🔥</div>
+      <div class="stat-label" data-page-node-id="szAacCoFjNRxTX1kQUBXtH">连续打卡</div>
+      <div class="stat-value" id="streakText" data-page-node-id="JvSA5yszP7IsLIWcpYib1N">0天</div>
+    </div>
+    <div class="stat-card" id="pointsCard" data-page-node-id="nh4R6XkUmnAF6lh7TLdDqZ">
+      <div class="stat-icon" data-page-node-id="gX9I1z1KrelpaqnfKaFAFH">⭐</div>
+      <div class="stat-label" data-page-node-id="Di5pYzlRaNtF2s2Kdae02k">积分数量</div>
+      <div class="stat-value" id="pointsText" data-page-node-id="bxwVEzOJiCkMPZ0IPPgE1C">0</div>
+      <div class="stat-sub" id="pointsSub" data-page-node-id="TRArFEpsWxd028ZMr1jPD0"></div>
+    </div>
+    <div class="stat-card unchecked" id="checkinCard" data-page-node-id="Py24YKF6bwQK6bfdcAFZHE">
+      <div class="stat-icon" id="checkinIcon" data-page-node-id="QNmSt4uSmv6X4FHGZJCQjP">📋</div>
+      <div class="stat-label" id="checkinLabel" data-page-node-id="KEb5C46uAPeFioGa2pdDpJ">今日打卡</div>
+      <div class="stat-value" id="checkinText" data-page-node-id="jwxq08epFdFpmMZDQSt1yg">未打卡</div>
+    </div>
+  </div>
+  <div class="gem-exchange" id="gemExchange" data-page-node-id="kVc1FS4CRfbryGLkHgwGNO">
+    <span class="gem-ex-title" data-page-node-id="6IaFwcbvmwPreJuGYlqLqQ">💠 线下已兑换宝石</span>
+    <span class="gem-ex-item" data-page-node-id="twJkcfDLIAwSugIsn0dRc1">🟣 彩色宝石 <input type="number" id="exColorInput" min="0" step="1" onchange="updateExchangedGem('color',this.value)" data-page-node-id="X3P1AADIXhSELry6Z4bKEg"> 颗</span>
+    <span class="gem-ex-item" data-page-node-id="PHsbBzg5GAP29acjNyh5dX">⚪ 白宝石 <input type="number" id="exWhiteInput" min="0" step="1" onchange="updateExchangedGem('white',this.value)" data-page-node-id="pJheXi1u51HkizxbrN5UDt"> 颗</span>
+    <span class="gem-ex-tip" data-page-node-id="X78c4gXj9L8qKZ9taVR4yu">（点击数字可修改，只能增加，不能减少）</span>
+  </div>
+  <div class="weekly-streak" id="weeklyStreak" style="display:none" data-page-node-id="JEiClLIo72TR0THsqYqxCd"></div>
+  <div class="gem-rule" id="gemRule" data-page-node-id="vHs8Yb0swx6HeyCgVJBXif"></div>
+</div>
+
+<div class="main" data-page-node-id="6YoUPjzM6iH3OxBDFj2Enr">
+  <div class="sidebar" data-page-node-id="saEFsYzBHDZjSy1PNWwAev">
+    <div id="subjectNav" data-page-node-id="Ds2lxuTw2kKEkE0j1VMrZp"></div>
+    <div class="sidebar-divider" data-page-node-id="gTRz5RbjSpXndLcEYHvoeX"></div>
+    <button class="checkin-btn" id="checkinBtn" onclick="doCheckin()" data-page-node-id="pPTwU8CmDCsAdyrYE0M9du">📅 每日打卡</button>
+    <div class="sidebar-divider" data-page-node-id="mxHMtX786e4FjukCRZLumL"></div>
+    <button class="action-btn" onclick="exportData()" data-page-node-id="puB0q5rB3RW2I6WQMMeMeC">📤 <span data-page-node-id="4eE3IrADETxOozM3qVy7C0">导出数据</span></button>
+    <button class="action-btn" onclick="document.getElementById('importFile').click()" data-page-node-id="44NBoxQrcTJQCj66XReZaf">📥 <span data-page-node-id="mNsEvbHVJ5g017M3YItqeT">导入数据</span></button>
+    <button class="action-btn" onclick="showDataDiag()" data-page-node-id="c0azwENHmpxG32pJ67TKj7">🔍 <span data-page-node-id="Wi3V6RkF7uVMl1xmSmFVoL">数据体检</span></button>
+    <input type="file" id="importFile" accept=".json" style="display:none" onchange="importData(event)" data-page-node-id="LzWW4R8X7ABi8LUCiphc4u">
+  </div>
+  <div class="content" data-page-node-id="VHbQB8dsxYWSp2woPNG0jl">
+    <div class="recommend-section" data-page-node-id="x7BeOg0eSeoFdLBvIV8IIj">
+      <div class="recommend-title" data-page-node-id="AdJvAQDr199OSW5TL4GVvC">🌟 本周推荐任务<span id="weekLabel" data-page-node-id="FzxjGU2BvxlgTgu3OJM1Wj"></span></div>
+      <div class="recommend-tasks" id="recommendTasks" data-page-node-id="FUMhVSuwC856cTrA5kM9aM"></div>
+    </div>
+    <div class="progress-section" id="progressSection" data-page-node-id="j4zhF2xMjso8I7MYsubRyb"></div>
+    <div class="task-grid" id="taskCards" data-page-node-id="UV3ezJTBpc4qUUV5H72XKo"></div>
+  </div>
+</div>
+
+<script>
+// ==================== 数据定义 ====================
+const SUBJECTS=[
+  {id:'chinese',name:'语文',color:'#E74C3C',icon:'📖'},
+  {id:'math',name:'数学',color:'#3498DB',icon:'🔢'},
+  {id:'english',name:'英语',color:'#27AE60',icon:'🔤'},
+  {id:'science',name:'科学',color:'#9B59B6',icon:'🔬'},
+  {id:'moral',name:'道法',color:'#E67E22',icon:'🧭'},
+  {id:'pe',name:'体育',color:'#16A085',icon:'⚽'},
+  {id:'art',name:'艺术',color:'#E91E63',icon:'🎨'},
+  {id:'labor',name:'劳动',color:'#8D6E63',icon:'🔨'},
+  {id:'practice',name:'综合实践',color:'#00ACC1',icon:'🌟'},
+];
+
+// 周推荐按单元门控的科目：前一个单元全部完成，推荐才进入下一个单元
+const UNIT_GATED_SUBJECTS=['chinese','math','english','science','moral'];
+
+// 升级体系
+const LEVELS=[
+  {lv:1,name:'学习萌芽',min:0,icon:'🌱'},
+  {lv:2,name:'学习新芽',min:100,icon:'🌿'},
+  {lv:3,name:'学习小树',min:300,icon:'🌳'},
+  {lv:4,name:'学习繁花',min:600,icon:'🌸'},
+  {lv:5,name:'学习硕果',min:1000,icon:'🍎'},
+  {lv:6,name:'学习达人',min:1500,icon:'⭐'},
+  {lv:7,name:'学习能手',min:2200,icon:'🌟'},
+  {lv:8,name:'学习高手',min:3000,icon:'🏆'},
+  {lv:9,name:'学习大师',min:4000,icon:'👑'},
+  {lv:10,name:'学习状元',min:5500,icon:'💎'},
+  {lv:11,name:'传奇学者',min:7000,icon:'🔮'},
+  {lv:12,name:'智慧之星',min:9000,icon:'✨'},
+];
+
+// 家务/实践任务池（每周随机抽取）
+const HOUSEHOLD_TASK_POOL=[
+  {task:'帮爸爸妈妈扫地',desc:'拿起扫帚，把客厅和餐厅扫干净'},
+  {task:'自己整理书包和文具',desc:'按课表把明天要用的书本和文具放整齐'},
+  {task:'擦干净餐桌',desc:'吃完饭帮家人把桌子擦得干干净净'},
+  {task:'帮大人收衣服叠衣服',desc:'把晾干的衣服收进来并叠整齐'},
+  {task:'整理自己的玩具',desc:'把玩过的玩具放回原来的位置'},
+  {task:'给家里的植物浇水',desc:'检查植物是否需要浇水，细心照顾'},
+  {task:'帮忙倒垃圾并换垃圾袋',desc:'把垃圾桶清空并套上新垃圾袋'},
+  {task:'收拾自己的床铺',desc:'起床后叠好被子，整理枕头'},
+  {task:'帮大人洗菜择菜',desc:'帮妈妈把菜洗干净、择好'},
+  {task:'饭后擦桌子洗碗',desc:'吃完饭帮忙把碗筷收到厨房'},
+  {task:'整理自己的书柜',desc:'把书籍按大小或类别摆放整齐'},
+  {task:'自己洗漱并准备睡觉',desc:'独立完成刷牙洗脸，按时上床'},
+  {task:'帮家人取快递或拿东西',desc:'帮家里取快递或拿需要的物品'},
+  {task:'学习系鞋带',desc:'练习自己系鞋带，不用大人帮忙'},
+  {task:'帮忙摆放餐具',desc:'开饭前把碗筷按人数摆放好'},
+  {task:'收拾自己的文具',desc:'把铅笔削好，橡皮、尺子归位'},
+  {task:'打扫自己的房间',desc:'用扫帚把自己房间的地面扫干净'},
+  {task:'帮忙擦窗户或镜子',desc:'用抹布把窗户玻璃擦亮'},
+  {task:'整理门口的鞋子',desc:'把家人的鞋子按大小摆放整齐'},
+  {task:'帮家人倒水或端茶',desc:'给爸爸妈妈倒一杯温水'},
+];
+
+// 诗词背诵池：按小学→初中→高中必备顺序，背完前一级进入下一级
+const POEM_STAGES=[
+  {name:'小学必备',poems:[
+    '《江南》汉乐府','《长歌行》汉乐府','《敕勒歌》北朝民歌','《咏鹅》骆宾王','《风》李峤',
+    '《咏柳》贺知章','《回乡偶书》贺知章','《登鹳雀楼》王之涣','《凉州词·黄河远上白云间》王之涣','《春晓》孟浩然',
+    '《凉州词·葡萄美酒夜光杯》王翰','《出塞》王昌龄','《芙蓉楼送辛渐》王昌龄','《鹿柴》王维','《送元二使安西》王维',
+    '《九月九日忆山东兄弟》王维','《静夜思》李白','《古朗月行》李白','《望庐山瀑布》李白','《赠汪伦》李白',
+    '《黄鹤楼送孟浩然之广陵》李白','《早发白帝城》李白','《望天门山》李白','《别董大》高适','《绝句·两个黄鹂鸣翠柳》杜甫',
+    '《春夜喜雨》杜甫','《绝句·迟日江山丽》杜甫','《江雪》柳宗元','《寻隐者不遇》贾岛','《枫桥夜泊》张继',
+    '《渔歌子》张志和','《塞下曲·月黑雁飞高》卢纶','《望洞庭》刘禹锡','《浪淘沙·九曲黄河万里沙》刘禹锡','《赋得古原草送别》白居易',
+    '《池上》白居易','《忆江南》白居易','《小儿垂钓》胡令能','《悯农·春种一粒粟》李绅','《悯农·锄禾日当午》李绅',
+    '《江上渔者》范仲淹','《元日》王安石','《泊船瓜洲》王安石','《书湖阴先生壁》王安石','《六月二十七日望湖楼醉书》苏轼',
+    '《饮湖上初晴后雨》苏轼','《惠崇春江晚景》苏轼','《题西林壁》苏轼','《夏日绝句》李清照','《三衢道中》曾几',
+    '《示儿》陆游','《秋夜将晓出篱门迎凉有感》陆游','《四时田园杂兴·梅子金黄》范成大','《四时田园杂兴·昼出耘田》范成大','《小池》杨万里',
+    '《晓出净慈寺送林子方》杨万里','《春日》朱熹','《观书有感》朱熹','《题临安邸》林升','《游园不值》叶绍翁',
+    '《独坐敬亭山》李白','《宿建德江》孟浩然','《舟夜书所见》查慎行','《所见》袁枚','《村居》高鼎',
+    '《己亥杂诗·九州生气恃风雷》龚自珍','《山行》杜牧','《清明》杜牧','《江南春》杜牧','《夜书所见》叶绍翁',
+    '《竹石》郑燮','《石灰吟》于谦','《墨梅》王冕','《蜂》罗隐','《赠刘景文》苏轼',
+    '《乞巧》林杰','《嫦娥》李商隐',
+  ]},
+  {name:'初中必备',poems:[
+    '《关雎》诗经','《蒹葭》诗经','《观沧海》曹操','《龟虽寿》曹操','《次北固山下》王湾',
+    '《闻王昌龄左迁龙标遥有此寄》李白','《行路难》李白','《渡荆门送别》李白','《使至塞上》王维','《送杜少府之任蜀州》王勃',
+    '《登幽州台歌》陈子昂','《望岳》杜甫','《春望》杜甫','《茅屋为秋风所破歌》杜甫','《白雪歌送武判官归京》岑参',
+    '《酬乐天扬州初逢席上见赠》刘禹锡','《钱塘湖春行》白居易','《雁门太守行》李贺','《赤壁》杜牧','《泊秦淮》杜牧',
+    '《夜雨寄北》李商隐','《无题》李商隐','《相见欢·无言独上西楼》李煜','《渔家傲·秋思》范仲淹','《浣溪沙·一曲新词酒一杯》晏殊',
+    '《登飞来峰》王安石','《江城子·密州出猎》苏轼','《水调歌头·明月几时有》苏轼','《破阵子·为陈同甫赋壮词以寄之》辛弃疾','《过零丁洋》文天祥',
+    '《天净沙·秋思》马致远','《山坡羊·潼关怀古》张养浩','《饮酒·结庐在人境》陶渊明','《桃花源记》陶渊明','《爱莲说》周敦颐',
+    '《陋室铭》刘禹锡','《岳阳楼记》范仲淹','《醉翁亭记》欧阳修','《记承天寺夜游》苏轼','《河中石兽》纪昀',
+    '《论语十二章》','《诫子书》诸葛亮','《出师表》诸葛亮','《虽有嘉肴》礼记','《马说》韩愈','《湖心亭看雪》张岱',
+    '《答谢中书书》陶弘景','《三峡》郦道元','《与朱元思书》吴均','《满江红·怒发冲冠》岳飞','《南乡子·登京口北固亭有怀》辛弃疾',
+    '《太常引·建康中秋夜为吕叔潜赋》辛弃疾','《丑奴儿·书博山道中壁》辛弃疾','《定风波·莫听穿林打叶声》苏轼','《临江仙·夜归临皋》苏轼','《卜算子·咏梅》陆游',
+  ]},
+  {name:'高中必备',poems:[
+    '《劝学》荀子','《师说》韩愈','《阿房宫赋》杜牧','《赤壁赋》苏轼','《氓》诗经',
+    '《离骚》屈原','《蜀道难》李白','《登高》杜甫','《琵琶行》白居易','《锦瑟》李商隐',
+    '《虞美人·春花秋月何时了》李煜','《念奴娇·赤壁怀古》苏轼','《永遇乐·京口北固亭怀古》辛弃疾','《声声慢》李清照','《短歌行》曹操',
+    '《归园田居》陶渊明','《滕王阁序》王勃','《陈情表》李密','《兰亭集序》王羲之','《六国论》苏洵',
+    '《蜀相》杜甫','《书愤》陆游','《游山西村》陆游','《将进酒》李白','《梦游天姥吟留别》李白',
+    '《李凭箜篌引》李贺','《扬州慢·淮左名都》姜夔','《春江花月夜》张若虚','《屈原列传》司马迁','《苏武传》班固',
+  ]},
+];
+
+// 诗词全文与释义（key 与 POEM_STAGES 中的字符串完全一致；t=全文，m=释义）
+const POEM_DETAILS={
+'《江南》汉乐府':{t:'江南可采莲，莲叶何田田。鱼戏莲叶间。鱼戏莲叶东，鱼戏莲叶西，鱼戏莲叶南，鱼戏莲叶北。',m:'江南又到了采莲的季节，莲叶多么茂盛。小鱼在莲叶间游来游去，一会儿东一会儿西，快乐极了。'},
+'《长歌行》汉乐府':{t:'青青园中葵，朝露待日晞。阳春布德泽，万物生光辉。常恐秋节至，焜黄华叶衰。百川东到海，何时复西归？少壮不努力，老大徒伤悲。',m:'园里的葵菜绿油油，早上的露水等太阳晒干。春天把阳光雨露洒给万物，一切都有生机。可秋天一到，叶子就枯黄了。江河东流入海，什么时候才能回来呢？少年时不努力，老了只能白白伤心。'},
+'《敕勒歌》北朝民歌':{t:'敕勒川，阴山下。天似穹庐，笼盖四野。天苍苍，野茫茫，风吹草低见牛羊。',m:'敕勒族居住的地方在阴山脚下。天空像圆圆的大帐篷，罩住草原的四面八方。天蓝蓝，草原辽阔无边，风一吹过，草弯下腰就露出成群的牛羊。'},
+'《咏鹅》骆宾王':{t:'鹅，鹅，鹅，曲项向天歌。白毛浮绿水，红掌拨清波。',m:'鹅呀鹅呀鹅，弯着脖子向天唱歌。雪白的羽毛浮在绿水上，红色的脚掌划动清清的水波。'},
+'《风》李峤':{t:'解落三秋叶，能开二月花。过江千尺浪，入竹万竿斜。',m:'风能吹落秋天的树叶，也能吹开春天的鲜花。它吹过江面能掀起千尺巨浪，吹进竹林能让万竿翠竹倾斜摇摆。'},
+'《咏柳》贺知章':{t:'碧玉妆成一树高，万条垂下绿丝绦。不知细叶谁裁出，二月春风似剪刀。',m:'高高的柳树像用碧玉打扮过，无数柳条像绿色丝带垂下来。不知这细细的柳叶是谁裁剪出来的？原来二月的春风就像一把神奇的剪刀。'},
+'《回乡偶书》贺知章':{t:'少小离家老大回，乡音无改鬓毛衰。儿童相见不相识，笑问客从何处来。',m:'小时候离开家乡，老了才回来，家乡话没变，可两鬓头发已经白了。村里的孩子见到我都不认识，笑着问我：客人从哪里来呀？'},
+'《登鹳雀楼》王之涣':{t:'白日依山尽，黄河入海流。欲穷千里目，更上一层楼。',m:'太阳依着远山慢慢落下，黄河向大海奔流。想看到千里之外的风光，就要再登上一层楼。'},
+'《凉州词·黄河远上白云间》王之涣':{t:'黄河远上白云间，一片孤城万仞山。羌笛何须怨杨柳，春风不度玉门关。',m:'黄河好像从白云间流下来，一座孤城守在万重高山间。羌笛何必吹奏哀怨的《折杨柳》呢？春风本来就吹不到玉门关外啊。'},
+'《春晓》孟浩然':{t:'春眠不觉晓，处处闻啼鸟。夜来风雨声，花落知多少。',m:'春天的夜里睡得香甜不知不觉天亮了，到处都能听到鸟儿的叫声。想起昨夜的风声雨声，不知有多少花儿被吹落了。'},
+'《凉州词·葡萄美酒夜光杯》王翰':{t:'葡萄美酒夜光杯，欲饮琵琶马上催。醉卧沙场君莫笑，古来征战几人回？',m:'葡萄美酒斟满夜光杯，正想畅饮，马上又传来琵琶催征的乐声。即使醉倒在战场上也请别笑，自古以来出征打仗的人有几个能回来呢？'},
+'《出塞》王昌龄':{t:'秦时明月汉时关，万里长征人未还。但使龙城飞将在，不教胡马度阴山。',m:'还是秦汉时的明月和边关，远征万里的将士们还没能回家。只要有像李广那样的飞将军镇守，绝不让敌人的战马越过阴山。'},
+'《芙蓉楼送辛渐》王昌龄':{t:'寒雨连江夜入吴，平明送客楚山孤。洛阳亲友如相问，一片冰心在玉壶。',m:'冷冷的秋雨洒满江面，夜里来到吴地。清晨送走友人，只留楚山孤零零。洛阳的亲友如果问起我，就说我的心依然像玉壶里的冰一样纯洁。'},
+'《鹿柴》王维':{t:'空山不见人，但闻人语响。返景入深林，复照青苔上。',m:'空旷的山里看不见人，只偶尔听到有人说话的声音。夕阳的金光射进深林，又照在那片青苔上。'},
+'《送元二使安西》王维':{t:'渭城朝雨浥轻尘，客舍青青柳色新。劝君更尽一杯酒，西出阳关无故人。',m:'渭城早晨的雨打湿了路上尘土，旅店旁的柳枝显得格外清新。朋友，请再干了这杯酒吧，向西出了阳关，就再没有老朋友陪你啦。'},
+'《九月九日忆山东兄弟》王维':{t:'独在异乡为异客，每逢佳节倍思亲。遥知兄弟登高处，遍插茱萸少一人。',m:'独自一人在他乡做客，每到节日就加倍想念亲人。远远想到兄弟们登高望远、身上插着茱萸时，会发现唯独少了我一个人。'},
+'《静夜思》李白':{t:'床前明月光，疑是地上霜。举头望明月，低头思故乡。',m:'床前洒满明亮的月光，好像地上铺了一层白霜。抬起头望着天上的明月，低下头思念起遥远的故乡。'},
+'《古朗月行》李白':{t:'小时不识月，呼作白玉盘。又疑瑶台镜，飞在青云端。',m:'小时候不认识月亮，把它叫作白玉盘。又怀疑它是仙人家的镜子，飞挂在了青云的边上。'},
+'《望庐山瀑布》李白':{t:'日照香炉生紫烟，遥看瀑布挂前川。飞流直下三千尺，疑是银河落九天。',m:'阳光照在香炉峰上，升起紫色的云烟。远远望去，瀑布像一条白练挂在山前。水流飞奔直下足足三千尺，让人以为是银河从九重天倾泻下来。'},
+'《赠汪伦》李白':{t:'李白乘舟将欲行，忽闻岸上踏歌声。桃花潭水深千尺，不及汪伦送我情。',m:'我坐上小船正要出发，忽然听见岸上传来踏歌送行的声音。桃花潭的水就算有千尺深，也比不上汪伦送别我的情谊。'},
+'《黄鹤楼送孟浩然之广陵》李白':{t:'故人西辞黄鹤楼，烟花三月下扬州。孤帆远影碧空尽，唯见长江天际流。',m:'老朋友在黄鹤楼向我挥手告别，在柳絮如烟、繁花似锦的三月去扬州。船越走越远，帆影消失在碧蓝的天空尽头，只看见长江水向天边奔流。'},
+'《早发白帝城》李白':{t:'朝辞白帝彩云间，千里江陵一日还。两岸猿声啼不住，轻舟已过万重山。',m:'清晨告别彩云缭绕的白帝城，千里之外的江陵一天就到了。两岸猿猴的叫声还没停，轻快的小船已经驶过了万重青山。'},
+'《望天门山》李白':{t:'天门中断楚江开，碧水东流至此回。两岸青山相对出，孤帆一片日边来。',m:'天门山从中断开，给楚江让出通道，碧绿的江水东流到这里回旋。两岸的青山相对耸立，一只小帆船从太阳那边驶来。'},
+'《别董大》高适':{t:'千里黄云白日曛，北风吹雁雪纷纷。莫愁前路无知己，天下谁人不识君。',m:'千里黄云遮天蔽日，天色昏暗，北风送着大雁，大雪纷飞。不要担心前面的路上没有知心朋友，天下有谁不认识你呢？'},
+'《绝句·两个黄鹂鸣翠柳》杜甫':{t:'两个黄鹂鸣翠柳，一行白鹭上青天。窗含西岭千秋雪，门泊东吴万里船。',m:'两只黄鹂在翠绿的柳枝间鸣叫，一行白鹭飞上蓝天。窗口正对着西岭千年不化的积雪，门外停泊着要去东吴的万里航船。'},
+'《春夜喜雨》杜甫':{t:'好雨知时节，当春乃发生。随风潜入夜，润物细无声。野径云俱黑，江船火独明。晓看红湿处，花重锦官城。',m:'好雨好像知道时节，春天一到就下起来。它随着春风在夜里悄悄落下，无声地滋润着万物。田野小路和乌云一样黑漆漆，只有江上的船灯亮着。天亮后去看带雨的红花，锦官城里的花儿开得沉甸甸的。'},
+'《绝句·迟日江山丽》杜甫':{t:'迟日江山丽，春风花草香。泥融飞燕子，沙暖睡鸳鸯。',m:'春天阳光普照，江山秀丽，春风送来花草的芳香。燕子衔着湿泥飞来飞去筑巢，鸳鸯睡在温暖的沙滩上。'},
+'《江雪》柳宗元':{t:'千山鸟飞绝，万径人踪灭。孤舟蓑笠翁，独钓寒江雪。',m:'所有的山上都看不到飞鸟，所有的路上都没有人的踪迹。只有一位披蓑戴笠的老渔翁，坐在小船上独自在漫天风雪的寒江上钓鱼。'},
+'《寻隐者不遇》贾岛':{t:'松下问童子，言师采药去。只在此山中，云深不知处。',m:'松树下我问童子：你师父呢？童子说师父采药去了。他就在这座大山里，可山上云雾深深，不知道具体在哪里。'},
+'《枫桥夜泊》张继':{t:'月落乌啼霜满天，江枫渔火对愁眠。姑苏城外寒山寺，夜半钟声到客船。',m:'月亮落下，乌鸦啼叫，寒霜满天。江边的枫树和点点渔火，伴着满怀愁绪的我难以入眠。半夜里，姑苏城外寒山寺的钟声，悠悠传到了客船上。'},
+'《渔歌子》张志和':{t:'西塞山前白鹭飞，桃花流水鳜鱼肥。青箬笠，绿蓑衣，斜风细雨不须归。',m:'西塞山前白鹭自由地飞翔，桃花盛开的江水里鳜鱼肥美。老渔翁戴着青斗笠、披着绿蓑衣，在斜风细雨中悠然垂钓，都舍不得回家。'},
+'《塞下曲·月黑雁飞高》卢纶':{t:'月黑雁飞高，单于夜遁逃。欲将轻骑逐，大雪满弓刀。',m:'没有月亮的夜里，大雁受惊高高飞起，敌军首领趁夜悄悄逃跑了。将军正要率领轻骑兵去追赶，纷纷扬扬的大雪落满了弓和刀。'},
+'《望洞庭》刘禹锡':{t:'湖光秋月两相和，潭面无风镜未磨。遥望洞庭山水翠，白银盘里一青螺。',m:'湖水和秋月融为一体，风平浪静的湖面像没有打磨的铜镜。远远望去洞庭湖山水苍翠可爱，就像白银盘里托着一颗小小的青螺。'},
+'《浪淘沙·九曲黄河万里沙》刘禹锡':{t:'九曲黄河万里沙，浪淘风簸自天涯。如今直上银河去，同到牵牛织女家。',m:'弯弯曲曲的黄河夹带着万里黄沙，波涛翻滚像从天边奔来。如今我要沿着黄河直上银河，一起去牛郎织女的家里做客。'},
+'《赋得古原草送别》白居易':{t:'离离原上草，一岁一枯荣。野火烧不尽，春风吹又生。远芳侵古道，晴翠接荒城。又送王孙去，萋萋满别情。',m:'古原上的野草多么茂密，每年枯萎又繁荣。野火烧也烧不尽它，春风一吹它又生长出来。芳草蔓延到遥远的古道，阳光下的翠绿连接着荒城。又到了送别朋友的时候，茂密的青草都好像装满了依依不舍的深情。'},
+'《池上》白居易':{t:'小娃撑小艇，偷采白莲回。不解藏踪迹，浮萍一道开。',m:'小娃娃撑着小船，偷偷采了池里的白莲回来。他还不懂得要藏好自己的踪迹，船儿过处，水面的浮萍分开了一条小路。'},
+'《忆江南》白居易':{t:'江南好，风景旧曾谙。日出江花红胜火，春来江水绿如蓝。能不忆江南？',m:'江南真好，那儿的风景我曾经很熟悉。太阳升起时，江边的鲜花比火还红；春天到来时，江水碧绿如蓝草。怎么能不怀念江南呢？'},
+'《小儿垂钓》胡令能':{t:'蓬头稚子学垂纶，侧坐莓苔草映身。路人借问遥招手，怕得鱼惊不应人。',m:'一个头发乱蓬蓬的小孩在学钓鱼，侧身坐在莓苔上，野草掩映着他的身影。过路人向他问路，他远远地摆手不回答，生怕惊动了鱼儿。'},
+'《悯农·春种一粒粟》李绅':{t:'春种一粒粟，秋收万颗子。四海无闲田，农夫犹饿死。',m:'春天种下一粒种子，秋天就能收获许多粮食。可是天下没有一块闲着的田地，辛苦种田的农民还是有人会饿死。'},
+'《悯农·锄禾日当午》李绅':{t:'锄禾日当午，汗滴禾下土。谁知盘中餐，粒粒皆辛苦。',m:'农民在正午的烈日下锄地，汗水一滴一滴落进禾苗下的泥土里。有谁知道盘子里的饭食，每一粒都饱含着农民的辛苦呢？'},
+'《江上渔者》范仲淹':{t:'江上往来人，但爱鲈鱼美。君看一叶舟，出没风波里。',m:'江上来来往往的人，只知道喜爱鲈鱼的鲜美。你看看那像一片树叶的小渔船，正在风浪里忽隐忽现地打鱼呢。'},
+'《元日》王安石':{t:'爆竹声中一岁除，春风送暖入屠苏。千门万户曈曈日，总把新桃换旧符。',m:'爆竹声中旧的一年过去了，春风把暖意送进屠苏酒里。初升的太阳照耀着千家万户，大家都取下旧桃符换上新桃符。'},
+'《泊船瓜洲》王安石':{t:'京口瓜洲一水间，钟山只隔数重山。春风又绿江南岸，明月何时照我还。',m:'京口和瓜洲只隔一条江，钟山也只隔着几重山峦。春风又吹绿了江南两岸，明月啊，什么时候能照着我回家呢？'},
+'《书湖阴先生壁》王安石':{t:'茅檐长扫净无苔，花木成畦手自栽。一水护田将绿绕，两山排闼送青来。',m:'茅屋檐下经常打扫，干净得连青苔都没有，花草树木成行成垄，都是主人亲手栽种。一条溪水守护着稻田把绿意环绕，两座青山像推开门送来满眼青翠。'},
+'《六月二十七日望湖楼醉书》苏轼':{t:'黑云翻墨未遮山，白雨跳珠乱入船。卷地风来忽吹散，望湖楼下水如天。',m:'乌云像打翻的墨汁一样涌来，还没遮住山头，白亮的雨点就像珍珠一样乱跳进船里。忽然一阵大风卷地而来，把乌云和暴雨吹散，望湖楼下的湖水平静得像天空一样。'},
+'《饮湖上初晴后雨》苏轼':{t:'水光潋滟晴方好，山色空蒙雨亦奇。欲把西湖比西子，淡妆浓抹总相宜。',m:'晴天时西湖水波闪动真美好，下雨时山色朦胧也很奇妙。如果把西湖比作美女西施，无论淡妆还是浓妆都是那么合适。'},
+'《惠崇春江晚景》苏轼':{t:'竹外桃花三两枝，春江水暖鸭先知。蒌蒿满地芦芽短，正是河豚欲上时。',m:'竹林外两三枝桃花初开，春天江水变暖，鸭子最先知道。蒌蒿长满地面，芦苇冒出短短的嫩芽，这正是河豚要逆流而上的时候。'},
+'《题西林壁》苏轼':{t:'横看成岭侧成峰，远近高低各不同。不识庐山真面目，只缘身在此山中。',m:'横着看是连绵的山岭，侧着看是高耸的山峰，从远近高低不同的位置看，庐山的模样都不一样。看不清庐山真正的样子，只因为自己就在这座山里呀。'},
+'《夏日绝句》李清照':{t:'生当作人杰，死亦为鬼雄。至今思项羽，不肯过江东。',m:'活着就要做杰出的人，死了也要做英雄豪杰。直到今天人们还在思念项羽，因为他宁死也不肯逃到江东去。'},
+'《三衢道中》曾几':{t:'梅子黄时日日晴，小溪泛尽却山行。绿阴不减来时路，添得黄鹂四五声。',m:'梅子黄熟的季节天天都是好天气，我乘小船到小溪尽头，再改走山路继续前行。山路上绿树成荫，不比来时差，还多了几声黄鹂清脆的鸣叫。'},
+'《示儿》陆游':{t:'死去元知万事空，但悲不见九州同。王师北定中原日，家祭无忘告乃翁。',m:'我本来知道人死后就什么都不知道了，只是悲伤没能亲眼看到国家统一。等到朝廷军队收复中原的那一天，家祭时别忘了把这个好消息告诉你们的父亲。'},
+'《秋夜将晓出篱门迎凉有感》陆游':{t:'三万里河东入海，五千仞岳上摩天。遗民泪尽胡尘里，南望王师又一年。',m:'三万里长的黄河向东流入大海，五千仞高的华山高耸直插云天。中原的百姓在敌人的统治下眼泪都流干了，他们盼望着朝廷军队北伐，一年又一年地空等。'},
+'《四时田园杂兴·梅子金黄》范成大':{t:'梅子金黄杏子肥，麦花雪白菜花稀。日长篱落无人过，惟有蜻蜓蛱蝶飞。',m:'梅子变得金黄，杏子长得肥大，荞麦花一片雪白，油菜花倒显得稀稀落落。白天变长了，篱笆边没人走过，只有蜻蜓和蝴蝶在飞舞。'},
+'《四时田园杂兴·昼出耘田》范成大':{t:'昼出耘田夜绩麻，村庄儿女各当家。童孙未解供耕织，也傍桑阴学种瓜。',m:'大人们白天去田里除草，晚上在家搓麻线，村里的男男女女都各自当家干活。小孩子虽然还不懂耕田织布，也在桑树荫下学着大人种瓜呢。'},
+'《小池》杨万里':{t:'泉眼无声惜细流，树阴照水爱晴柔。小荷才露尖尖角，早有蜻蜓立上头。',m:'泉眼悄悄无声，好像舍不得细细的水流，树荫倒映在水面上，喜爱这晴日的温柔。小小的荷叶刚露出尖尖的角，早就有蜻蜓站在上面了。'},
+'《晓出净慈寺送林子方》杨万里':{t:'毕竟西湖六月中，风光不与四时同。接天莲叶无穷碧，映日荷花别样红。',m:'六月里的西湖，风光到底和其他季节不同：碧绿的莲叶一直铺到天边，阳光下的荷花显得格外鲜红美丽。'},
+'《春日》朱熹':{t:'胜日寻芳泗水滨，无边光景一时新。等闲识得东风面，万紫千红总是春。',m:'风和日丽的日子到泗水边赏花踏青，无边无际的风光焕然一新。随便一瞥就能感受到春风的面貌，万紫千红的景象都是春天的杰作。'},
+'《观书有感》朱熹':{t:'半亩方塘一鉴开，天光云影共徘徊。问渠那得清如许？为有源头活水来。',m:'半亩大的方形池塘像一面打开的镜子，天空的光和云的影子在水面一起晃动。要问它为什么这么清澈？因为源头总有活水不断流进来。'},
+'《题临安邸》林升':{t:'山外青山楼外楼，西湖歌舞几时休？暖风熏得游人醉，直把杭州作汴州。',m:'青山之外还有青山，高楼之外还有高楼，西湖边的歌舞什么时候才能停止？暖洋洋的风把游人吹得醉醺醺，简直把杭州当成了故都汴州。'},
+'《游园不值》叶绍翁':{t:'应怜屐齿印苍苔，小扣柴扉久不开。春色满园关不住，一枝红杏出墙来。',m:'大概是园主人爱惜苍苔，怕我的木底鞋在上面留下脚印吧，我轻轻敲着柴门，好久也没人来开。可满园的春色是关不住的，瞧，一枝红杏已经伸出墙外来啦。'},
+'《独坐敬亭山》李白':{t:'众鸟高飞尽，孤云独去闲。相看两不厌，只有敬亭山。',m:'鸟儿们都高高地飞走了，孤零零的云也悠闲地飘远了。和我互相望着、怎么看都不厌倦的，只有眼前的敬亭山。'},
+'《宿建德江》孟浩然':{t:'移舟泊烟渚，日暮客愁新。野旷天低树，江清月近人。',m:'把船停在烟雾迷蒙的小洲边，傍晚时分，旅途的愁绪又涌上心头。原野空旷，远处的天空显得比树还低，江水清澈，水中的月亮好像离人更近了。'},
+'《舟夜书所见》查慎行':{t:'月黑见渔灯，孤光一点萤。微微风簇浪，散作满河星。',m:'没有月亮的夜里，只见渔船上一盏孤灯，像一只萤火虫发出微弱的光。微风吹起细细的波浪，灯光倒映在水中，散开成满河的星星。'},
+'《所见》袁枚':{t:'牧童骑黄牛，歌声振林樾。意欲捕鸣蝉，忽然闭口立。',m:'牧童骑在黄牛背上，嘹亮的歌声在树林里回荡。忽然想捉树上鸣叫的知了，他马上停止唱歌，一声不响地站住了。'},
+'《村居》高鼎':{t:'草长莺飞二月天，拂堤杨柳醉春烟。儿童散学归来早，忙趁东风放纸鸢。',m:'农历二月，青草生长，黄莺飞舞，杨柳轻拂堤岸，像陶醉在春天的烟雾里。孩子们放学回来得早，赶忙趁着东风放起了风筝。'},
+'《己亥杂诗·九州生气恃风雷》龚自珍':{t:'九州生气恃风雷，万马齐喑究可哀。我劝天公重抖擞，不拘一格降人才。',m:'中国要有生机勃勃的局面，得依靠像风雷一样的社会变革。如今到处沉默无声，实在令人悲哀。我奉劝上天重新振作精神，不要只用一种标准选用人才。'},
+'《山行》杜牧':{t:'远上寒山石径斜，白云生处有人家。停车坐爱枫林晚，霜叶红于二月花。',m:'沿着弯弯的石子小路远远走向深秋的寒山，白云缭绕的地方还有人家。我停下车来，因为太喜爱这傍晚的枫林，经霜的枫叶比二月的鲜花还要红艳。'},
+'《清明》杜牧':{t:'清明时节雨纷纷，路上行人欲断魂。借问酒家何处有？牧童遥指杏花村。',m:'清明节的时候细雨纷纷飘落，路上的行人个个愁苦伤感。请问哪里有酒馆？牧童远远地指着杏花深处的村庄。'},
+'《江南春》杜牧':{t:'千里莺啼绿映红，水村山郭酒旗风。南朝四百八十寺，多少楼台烟雨中。',m:'辽阔的江南到处莺歌燕舞、绿树红花，水乡村庄和依山的城郭都有酒旗在风中飘动。南朝留下的四百八十多座古寺，无数楼台都笼罩在朦胧的烟雨中。'},
+'《夜书所见》叶绍翁':{t:'萧萧梧叶送寒声，江上秋风动客情。知有儿童挑促织，夜深篱落一灯明。',m:'萧萧的梧桐叶送来阵阵寒意，江上的秋风让我想念起家乡。忽然看到远处篱笆下有一盏灯火，知道是孩子们在捉蟋蟀呢。'},
+'《竹石》郑燮':{t:'咬定青山不放松，立根原在破岩中。千磨万击还坚劲，任尔东西南北风。',m:'竹子牢牢咬住青山绝不放松，它的根深深扎在破裂的岩石缝里。经过千万次磨难和打击，它依然挺拔坚强，任凭你东西南北的狂风怎么吹！'},
+'《石灰吟》于谦':{t:'千锤万凿出深山，烈火焚烧若等闲。粉骨碎身浑不怕，要留清白在人间。',m:'石灰石经过千万次锤打才能从深山开采出来，面对烈火的焚烧也看得平平常常。就算粉身碎骨也不害怕，只要把清白留在人世间。'},
+'《墨梅》王冕':{t:'我家洗砚池头树，朵朵花开淡墨痕。不要人夸好颜色，只留清气满乾坤。',m:'我家洗砚池边有一株梅树，朵朵梅花都像淡淡的墨迹点染而成。它不需要别人夸赞颜色艳丽，只愿把清雅的香气留满天地间。'},
+'《蜂》罗隐':{t:'不论平地与山尖，无限风光尽被占。采得百花成蜜后，为谁辛苦为谁甜。',m:'不管是平地还是山尖，凡是鲜花盛开的地方，都被蜜蜂占领。它们采尽百花酿成蜂蜜后，到底为谁辛苦、又让谁品尝甜蜜呢？'},
+'《赠刘景文》苏轼':{t:'荷尽已无擎雨盖，菊残犹有傲霜枝。一年好景君须记，最是橙黄橘绿时。',m:'荷花凋谢了，那擎雨的荷叶也枯萎了；菊花虽已残败，却还有傲霜挺立的枝条。一年中最好的景致你一定要记住，那就是橙子金黄、橘子青绿的初冬时节啊。'},
+'《乞巧》林杰':{t:'七夕今宵看碧霄，牵牛织女渡河桥。家家乞巧望秋月，穿尽红丝几万条。',m:'七夕的晚上，人们仰望碧蓝的天空，想象牛郎织女在鹊桥上相会。家家户户的姑娘们望着秋月穿针引线向织女乞巧，穿过的红线都有几万条了。'},
+'《嫦娥》李商隐':{t:'云母屏风烛影深，长河渐落晓星沉。嫦娥应悔偷灵药，碧海青天夜夜心。',m:'云母屏风上映着深深的烛影，银河渐渐西斜，晨星慢慢下沉。嫦娥应该后悔偷吃了不死灵药吧，如今只能夜夜对着碧海一样的青天，独自寂寞。'},
+};
+
+// 诗词全文+释义面板（插入推荐任务卡片内；点击面板不会误触发"完成背诵"）
+function renderPoemDetail(poemKey){
+  const d=POEM_DETAILS[poemKey];
+  if(!d) return '<div class="poem-detail-missing" onclick="event.stopPropagation();">📖 全文请对照课本朗读</div>';
+  const textHtml=(d.t||'').replace(/([，。？！；：])/g,'$1<br>');
+  return `
+    <div class="poem-detail-toggle" id="poemDetailToggle" onclick="event.stopPropagation();togglePoemDetail()">📖 收起全文/释义</div>
+    <div class="poem-detail" id="poemDetailBody" onclick="event.stopPropagation();">
+      <div class="poem-detail-text">${textHtml}</div>
+      <div class="poem-detail-mean">💡 <b>释义：</b>${d.m||''}</div>
+    </div>
+  `;
+}
+function togglePoemDetail(){
+  const body=document.getElementById('poemDetailBody');
+  const toggle=document.getElementById('poemDetailToggle');
+  if(!body) return;
+  const isHidden=body.classList.toggle('hidden');
+  if(toggle) toggle.textContent=isHidden?'📖 展开全文/释义':'📖 收起全文/释义';
+}
+
+// 各年级各学科任务数据（grade → semester(a/b) → subject → units）
+const _GRADE_DATA={
+ "1": {
+  "a": {
+   "chinese": [
+    {
+     "unit": "我上学了",
+     "tasks": [
+      "知道我们都是中国人，爱说普通话",
+      "认识国旗、国徽，学唱国歌",
+      "学会背《上学歌》，做个好小学生",
+      "学会正确的读书、写字姿势",
+      "认识语文书，学会爱护课本和文具"
+     ]
+    },
+    {
+     "unit": "第一单元 识字：天地人",
+     "tasks": [
+      "认读《天地人》：天地人你我他",
+      "认读并背诵《金木水火土》",
+      "认读《口耳目手足》，说说它们的用处",
+      "认读《日月山川》",
+      "完成语文园地一",
+      "快乐读书吧：读一本喜欢的图画书"
+     ]
+    },
+    {
+     "unit": "第二单元 汉语拼音（一）",
+     "tasks": [
+      "认读并书写单韵母a o e",
+      "认读并书写单韵母i u ü",
+      "认读声母b p m f，练习拼读音节",
+      "认读声母d t n l，练习拼读音节",
+      "完成语文园地二"
+     ]
+    },
+    {
+     "unit": "第三单元 汉语拼音（二）",
+     "tasks": [
+      "认读声母g k h，练习拼读音节",
+      "认读声母j q x，知道和ü相拼的规则",
+      "认读声母z c s",
+      "认读声母zh ch sh r",
+      "认读声母y w，学习整体认读音节",
+      "完成语文园地三"
+     ]
+    },
+    {
+     "unit": "第四单元 汉语拼音（三）",
+     "tasks": [
+      "认读复韵母ai ei ui",
+      "认读复韵母ao ou iu",
+      "认读复韵母ie üe er",
+      "认读前鼻韵母an en in un ün",
+      "认读后鼻韵母ang eng ing ong",
+      "完成语文园地四"
+     ]
+    },
+    {
+     "unit": "第五单元 阅读：秋天",
+     "tasks": [
+      "朗读并背诵《秋天》",
+      "朗读并背诵《江南》",
+      "朗读《雪地里的小画家》，认识小画家们的画",
+      "朗读并背诵《四季》",
+      "完成语文园地五"
+     ]
+    },
+    {
+     "unit": "第六单元 识字：对韵歌",
+     "tasks": [
+      "朗读并背诵《对韵歌》",
+      "朗读《日月明》，了解会意字的奥妙",
+      "认读《小书包》生字，学会整理书包",
+      "朗读《升国旗》，学习升旗礼仪",
+      "完成语文园地六"
+     ]
+    },
+    {
+     "unit": "第七单元 阅读：小小的船",
+     "tasks": [
+      "朗读并背诵《小小的船》",
+      "朗读并背诵《影子》",
+      "朗读并背诵《两件宝》，说说手和脑的用处",
+      "完成语文园地七"
+     ]
+    },
+    {
+     "unit": "第八单元 阅读：比尾巴",
+     "tasks": [
+      "朗读并背诵《比尾巴》",
+      "朗读《乌鸦喝水》，讲讲乌鸦的办法",
+      "朗读《雨点儿》",
+      "完成语文园地八"
+     ]
+    }
+   ],
+   "math": [
+    {
+     "unit": "数学游戏分享（和幼儿园的数学说你好）",
+     "tasks": [
+      "说说幼儿园里玩过的数学游戏",
+      "玩数数比比游戏（数一数、比多少）",
+      "用积木搭搭拼拼",
+      "玩围“草地”游戏",
+      "学习整理物品（分一分、理一理）"
+     ]
+    },
+    {
+     "unit": "第一单元 0~5的认识和加减法",
+     "tasks": [
+      "认识1~5各数并会写",
+      "认识几和第几",
+      "认识0的含义",
+      "认识=、>和<",
+      "认识加法，算5以内加法",
+      "认识减法，算5以内减法",
+      "说清自己在教室里的位置（前后左右）",
+      "用数学话介绍我们的教室"
+     ]
+    },
+    {
+     "unit": "第二单元 6~9的认识和加减法",
+     "tasks": [
+      "认识6~9各数",
+      "算得数是6~9的加法",
+      "算得数是6~9的减法",
+      "连加、连减",
+      "加减混合"
+     ]
+    },
+    {
+     "unit": "第三单元 图形的初步认识（一）",
+     "tasks": [
+      "认识长方体和正方体",
+      "认识圆柱和球",
+      "找一找生活中的立体图形",
+      "用小方块拼一拼、数一数"
+     ]
+    },
+    {
+     "unit": "第四单元 10的认识和加减法",
+     "tasks": [
+      "认识10并会写",
+      "算得数是10的加法和相应的减法",
+      "解决简单的加减法实际问题",
+      "玩“抢10”纸牌游戏"
+     ]
+    },
+    {
+     "unit": "第五单元 认识11~19",
+     "tasks": [
+      "认识11~19各数",
+      "读一读、写一写11~19",
+      "算十几加几（不进位）",
+      "算十几减几（不退位）"
+     ]
+    },
+    {
+     "unit": "期末复习",
+     "tasks": [
+      "“数与运算”总复习",
+      "“数量关系”总复习",
+      "“图形的认识”总复习",
+      "口算小达人自测"
+     ]
+    }
+   ],
+   "english": [
+    {
+     "unit": "英语启蒙一 儿歌热身（学校三年级开英语课，先在家启蒙）",
+     "tasks": [
+      "听唱 ABC Song，认识26个字母",
+      "听唱 Hello Song，学会打招呼",
+      "跟唱一首英语儿歌给家人听"
+     ]
+    },
+    {
+     "unit": "英语启蒙二 认识字母",
+     "tasks": [
+      "认读字母 Aa~Mm",
+      "认读字母 Nn~Zz",
+      "玩大小写字母配对游戏",
+      "写一写自己名字里的字母"
+     ]
+    },
+    {
+     "unit": "英语启蒙三 日常小用语",
+     "tasks": [
+      "学会用 Hello / Hi 打招呼",
+      "学会说 Thank you 和 Sorry",
+      "学会说 Goodbye 再见",
+      "和爸爸妈妈玩英语问答小游戏"
+     ]
+    },
+    {
+     "unit": "英语启蒙四 生活中的英语",
+     "tasks": [
+      "认一认生活中的英文标识（EXIT等）",
+      "用英语数一数 one 到 ten",
+      "说出 red、blue 等常见颜色",
+      "说说 apple、banana 等喜欢的水果"
+     ]
+    },
+    {
+     "unit": "英语启蒙五 绘本与动画",
+     "tasks": [
+      "看一本英语启蒙绘本",
+      "看一集英语启蒙小动画",
+      "跟着动画说一说简单台词",
+      "把学会的英语表演给家人看"
+     ]
+    }
+   ],
+   "science": [
+    {
+     "unit": "第一单元 植物是我们的朋友（一）认识植物",
+     "tasks": [
+      "说说我们知道的植物",
+      "观察一棵植物的根、茎、叶",
+      "了解植物长在哪里（土里、水里）",
+      "找一找家里和小区里的植物",
+      "说一说植物给我们带来的好处"
+     ]
+    },
+    {
+     "unit": "第二单元 植物是我们的朋友（二）观察与记录",
+     "tasks": [
+      "给喜欢的植物画张“像”",
+      "观察并记录植物一周的变化",
+      "认识校园里的植物",
+      "种一盆小植物并负责浇水照顾",
+      "比一比大树和小草有什么不同"
+     ]
+    },
+    {
+     "unit": "第三单元 认识我们的身体",
+     "tasks": [
+      "认识身体的主要部位（头、颈、躯干、四肢）",
+      "说说眼、耳、口、鼻、手的本领",
+      "找一找自己长大的证据",
+      "比一比：我和小时候有什么不一样",
+      "学会保护自己的身体"
+     ]
+    },
+    {
+     "unit": "第四单元 感官观察小能手",
+     "tasks": [
+      "在游戏里学观察",
+      "用眼睛看：颜色、形状、大小",
+      "用耳朵听：分辨不同的声音",
+      "用鼻子闻：气味告诉我们什么",
+      "用手摸：分辨软硬、粗糙与光滑"
+     ]
+    },
+    {
+     "unit": "第五单元 比较与发现",
+     "tasks": [
+      "观察并比较两个不同的物体",
+      "按大小给物品排排队",
+      "按颜色或形状给物品分分类",
+      "猜一猜：盒子里装的是什么",
+      "做个“时间胶囊”留给未来的自己"
+     ]
+    },
+    {
+     "unit": "第六单元 生活中的科学",
+     "tasks": [
+      "认一认常见材料（木头、纸、塑料、布）",
+      "观察一张纸的特点并说说用途",
+      "玩一玩磁铁，发现吸铁的秘密",
+      "观察一周的天气变化（晴、阴、雨）",
+      "说说冬天和夏天有什么不同"
+     ]
+    }
+   ],
+   "moral": [
+    {
+     "unit": "第一单元 我是小学生啦",
+     "tasks": [
+      "学第1课《开开心心上学去》",
+      "学第2课《我向国旗敬个礼》",
+      "自己动手包书皮、整理新书",
+      "说说上学第一天的心情",
+      "认识国旗，跟着唱国歌"
+     ]
+    },
+    {
+     "unit": "第二单元 我们的校园",
+     "tasks": [
+      "学第3课《这是我们的校园》",
+      "学第4课《平平安安回家来》",
+      "参观校园，认一认各功能教室",
+      "记住自己的教室和回家的路线",
+      "演一演：过马路看红绿灯"
+     ]
+    },
+    {
+     "unit": "第三单元 老师与朋友",
+     "tasks": [
+      "学第5课《老师，您好！》",
+      "学第6课《拉拉手，交朋友》",
+      "主动向一位老师问好",
+      "认识一位新朋友并记住名字",
+      "和同学合作完成一件小事"
+     ]
+    },
+    {
+     "unit": "第四单元 快乐学习",
+     "tasks": [
+      "学第7课《上课了，好好学》",
+      "学第8课《课余生活真丰富》",
+      "说说上课好习惯（举手发言、认真听）",
+      "制定我的课余生活小计划",
+      "分享一个课间安全小游戏"
+     ]
+    },
+    {
+     "unit": "第五单元 健康生活好习惯（一）",
+     "tasks": [
+      "学第9课《作息有规律》",
+      "学第10课《吃饭有讲究》",
+      "早睡早起，一周打卡",
+      "说说健康饮食（不挑食、少吃零食）",
+      "练一练：饭前洗手、细嚼慢咽"
+     ]
+    },
+    {
+     "unit": "第六单元 健康生活好习惯（二）",
+     "tasks": [
+      "学第11课《对人有礼貌》",
+      "学第12课《玩也有学问》",
+      "学会用礼貌用语（请、谢谢、对不起）",
+      "说说怎样玩才安全",
+      "演一演：礼貌待客小情景"
+     ]
+    },
+    {
+     "unit": "第七单元 公共场所讲文明",
+     "tasks": [
+      "学第13课《我们小点儿声》",
+      "学第14课《人人爱护公物》",
+      "在图书馆、医院里轻轻说话",
+      "爱护课桌椅和公共设施",
+      "找一找身边的文明行为并夸一夸"
+     ]
+    },
+    {
+     "unit": "第八单元 环保与秩序",
+     "tasks": [
+      "学第15课《我们不乱扔》",
+      "学第16课《大家排好队》",
+      "练一练垃圾分类",
+      "练一练排队（上车、打饭、上下楼梯）",
+      "说说自己做到的环保小事"
+     ]
+    }
+   ],
+   "pe": [
+    {
+     "unit": "第一单元 队列队形好习惯",
+     "tasks": [
+      "学习正确的站姿和坐姿",
+      "学习立正与稍息",
+      "练习原地踏步",
+      "听口令快快集合"
+     ]
+    },
+    {
+     "unit": "第二单元 走跑跳本领（移动性技能）",
+     "tasks": [
+      "练习直线跑、自然摆臂",
+      "听信号变向跑和躲闪",
+      "玩单脚、双脚跳格子",
+      "钻“山洞”、爬垫子"
+     ]
+    },
+    {
+     "unit": "第三单元 跳绳小达人（操控性技能）",
+     "tasks": [
+      "练习摇绳",
+      "并脚跳绳单个跳",
+      "连续并脚跳绳5个以上",
+      "和家人比赛跳绳"
+     ]
+    },
+    {
+     "unit": "第四单元 玩球小能手（操控性技能）",
+     "tasks": [
+      "练习原地拍球",
+      "练习双手抛接球",
+      "玩滚球击物",
+      "练习踢球射门"
+     ]
+    },
+    {
+     "unit": "第五单元 韵律与体操",
+     "tasks": [
+      "学做小学生广播体操",
+      "学做动物模仿操",
+      "练习走直线、保持平衡",
+      "练习投掷轻物（沙包、纸球）"
+     ]
+    },
+    {
+     "unit": "第六单元 体能与游戏",
+     "tasks": [
+      "练习立定跳远",
+      "练习20米快速跑",
+      "玩老鹰捉小鸡等追逐游戏",
+      "每天户外运动1小时"
+     ]
+    },
+    {
+     "unit": "第七单元 健康好习惯",
+     "tasks": [
+      "学会七步洗手法",
+      "读写坐姿“三个一”",
+      "认真做眼保健操",
+      "运动后喝水休息不贪凉"
+     ]
+    }
+   ],
+   "art": [
+    {
+     "unit": "唱游·音乐一 快乐学唱歌",
+     "tasks": [
+      "学唱《上学歌》",
+      "学唱《国旗国旗真美丽》",
+      "学唱《小青蛙找家》",
+      "学唱《新年好》"
+     ]
+    },
+    {
+     "unit": "唱游·音乐二 聆听与感受",
+     "tasks": [
+      "聆听《中华人民共和国国歌》",
+      "感受音乐的快与慢",
+      "感受音乐的强与弱",
+      "跟着音乐做律动"
+     ]
+    },
+    {
+     "unit": "唱游·音乐三 节奏与表演",
+     "tasks": [
+      "认识 X 和 XX 节奏",
+      "用拍手或打击乐器伴奏",
+      "边唱边表演动作",
+      "和同学合作表演一首歌"
+     ]
+    },
+    {
+     "unit": "造型·美术一 画画我的生活",
+     "tasks": [
+      "画画我的老师和同学",
+      "用线条画一画身边事物",
+      "用基本形状拼一幅画",
+      "画一画秋天"
+     ]
+    },
+    {
+     "unit": "造型·美术二 色彩小天地",
+     "tasks": [
+      "认识红黄蓝三原色",
+      "彩笔涂色练习",
+      "画一幅彩色的画",
+      "用色彩表达心情"
+     ]
+    },
+    {
+     "unit": "造型·美术三 巧手小工匠",
+     "tasks": [
+      "折纸小船或纸飞机",
+      "做撕纸贴画",
+      "彩泥捏小动物",
+      "做一件新年小装饰"
+     ]
+    },
+    {
+     "unit": "造型·美术四 欣赏与评述",
+     "tasks": [
+      "欣赏大自然的美",
+      "欣赏同学的作品并夸一夸",
+      "说一说最喜欢的画",
+      "看一次画展或翻看画册"
+     ]
+    }
+   ],
+   "labor": [
+    {
+     "unit": "第一单元 清洁与卫生",
+     "tasks": [
+      "学习用扫帚扫地",
+      "学习用抹布擦桌椅",
+      "学习洗手绢和袜子",
+      "帮家人倒垃圾并分类"
+     ]
+    },
+    {
+     "unit": "第二单元 整理与收纳",
+     "tasks": [
+      "按课程表整理书包",
+      "整理书桌和文具盒",
+      "整理自己的玩具",
+      "叠衣服和袜子"
+     ]
+    },
+    {
+     "unit": "第三单元 烹饪与营养",
+     "tasks": [
+      "学习择菜、洗菜",
+      "学习剥豆子、剥鸡蛋",
+      "饭前摆碗筷、饭后收餐桌",
+      "做一个水果拼盘"
+     ]
+    },
+    {
+     "unit": "第四单元 农业生产劳动",
+     "tasks": [
+      "水培一颗大蒜",
+      "种一盆小绿植并浇水",
+      "观察记录植物生长",
+      "认一认菜市场里的蔬菜"
+     ]
+    },
+    {
+     "unit": "第五单元 传统工艺制作",
+     "tasks": [
+      "学简单的折纸",
+      "做撕纸贴画",
+      "彩泥小制作",
+      "做一件节日小装饰"
+     ]
+    }
+   ],
+   "practice": [
+    {
+     "unit": "第一单元 我的新校园",
+     "tasks": [
+      "参观校园，认一认各功能室",
+      "画一张校园地图",
+      "认识一位老师和一位校工",
+      "制作一张校园介绍卡"
+     ]
+    },
+    {
+     "unit": "第二单元 秋天的发现",
+     "tasks": [
+      "观察秋天的自然变化",
+      "收集秋天的落叶",
+      "制作一幅秋叶画",
+      "和家人分享秋天的发现"
+     ]
+    },
+    {
+     "unit": "第三单元 我爱我家",
+     "tasks": [
+      "画一棵家庭树",
+      "采访家人的爱好和工作",
+      "帮家人做一件事",
+      "分享一个家庭小故事"
+     ]
+    },
+    {
+     "unit": "第四单元 安全小卫士",
+     "tasks": [
+      "认识常见的安全标志",
+      "设计安全上学路线",
+      "演练遇到陌生人怎么办",
+      "制作安全宣传卡"
+     ]
+    },
+    {
+     "unit": "第五单元 欢欢喜喜迎新年",
+     "tasks": [
+      "制作新年贺卡",
+      "学写新年祝福语",
+      "参加一次家庭大扫除",
+      "说说我的新年愿望"
+     ]
+    }
+   ]
+  },
+  "b": {
+   "chinese": [
+    {
+     "unit": "第一单元 识字（一）",
+     "tasks": [
+      "认识《春夏秋冬》中的生字",
+      "学习《姓氏歌》",
+      "学习《小青蛙》中的生字",
+      "学习《猜字谜》",
+      "完成语文园地一练习"
+     ]
+    },
+    {
+     "unit": "第二单元 课文（一）",
+     "tasks": [
+      "朗读《吃水不忘挖井人》",
+      "朗读《我多想去看看》",
+      "朗读《一个接一个》",
+      "朗读《四个太阳》",
+      "完成语文园地二练习"
+     ]
+    },
+    {
+     "unit": "第三单元 课文（二）",
+     "tasks": [
+      "朗读《小公鸡和小鸭子》",
+      "朗读《树和喜鹊》",
+      "朗读《怎么都快乐》",
+      "把喜欢的故事讲给家人听"
+     ]
+    },
+    {
+     "unit": "第四单元 课文（三）",
+     "tasks": [
+      "背诵《静夜思》",
+      "朗读《夜色》",
+      "朗读《端午粽》",
+      "朗读《彩虹》",
+      "完成语文园地四练习"
+     ]
+    },
+    {
+     "unit": "第五单元 识字（二）",
+     "tasks": [
+      "学习《动物儿歌》中的生字",
+      "学习《古对今》中的生字",
+      "学习《操场上》中的生字",
+      "学习《人之初》",
+      "完成语文园地五练习"
+     ]
+    },
+    {
+     "unit": "第六单元 课文（四）",
+     "tasks": [
+      "背诵《池上》《小池》",
+      "朗读《荷叶圆圆》",
+      "朗读《要下雨了》",
+      "完成语文园地六练习"
+     ]
+    },
+    {
+     "unit": "第七单元 课文（五）",
+     "tasks": [
+      "朗读《文具的家》",
+      "朗读《一分钟》",
+      "朗读《动物王国开大会》",
+      "朗读《小猴子下山》",
+      "完成语文园地七练习"
+     ]
+    },
+    {
+     "unit": "第八单元 课文（六）",
+     "tasks": [
+      "朗读《棉花姑娘》",
+      "朗读《咕咚》",
+      "朗读《小壁虎借尾巴》",
+      "完成整册识字盘点",
+      "分享本学期读书收获"
+     ]
+    }
+   ],
+   "math": [
+    {
+     "unit": "第一单元 20以内的退位减法",
+     "tasks": [
+      "学习十几减9",
+      "学习十几减8、7",
+      "学习十几减6、5",
+      "练习退位减法口算",
+      "解决退位减法实际问题"
+     ]
+    },
+    {
+     "unit": "第二单元 认识图形（二）",
+     "tasks": [
+      "认识长方形和正方形",
+      "认识三角形和圆",
+      "用图形拼搭图案",
+      "完成认图形练习"
+     ]
+    },
+    {
+     "unit": "第三单元 认识100以内的数",
+     "tasks": [
+      "认识几十",
+      "认识几十几",
+      "读写100以内的数",
+      "比较100以内数的大小",
+      "完成认数练习"
+     ]
+    },
+    {
+     "unit": "第四单元 整十数加减",
+     "tasks": [
+      "整十数加整十数",
+      "整十数减整十数",
+      "整十数加一位数",
+      "整十数口算练习"
+     ]
+    },
+    {
+     "unit": "第五单元 100以内的加法和减法（一）",
+     "tasks": [
+      "两位数加整十数",
+      "两位数加一位数",
+      "两位数减整十数",
+      "两位数减一位数",
+      "解决加减实际问题"
+     ]
+    },
+    {
+     "unit": "第六单元 元、角、分",
+     "tasks": [
+      "认识人民币",
+      "学习元角分的换算",
+      "模拟购物付款",
+      "完成元角分练习"
+     ]
+    },
+    {
+     "unit": "第七单元 100以内的加法和减法（二）",
+     "tasks": [
+      "学习进位加法",
+      "学习退位减法",
+      "练习连加连减",
+      "练习加减混合运算",
+      "解决两步计算问题"
+     ]
+    },
+    {
+     "unit": "第八单元 期末复习与综合应用",
+     "tasks": [
+      "复习100以内的计算",
+      "解决购物问题",
+      "用图形拼搭创意作品",
+      "学期口算达标练习"
+     ]
+    }
+   ],
+   "english": [
+    {
+     "unit": "Unit 1：Weather",
+     "tasks": [
+      "认识sunny/rainy等天气词",
+      "简单描述今天的天气",
+      "学唱Weather Song",
+      "记录一周的天气"
+     ]
+    },
+    {
+     "unit": "Unit 2：Seasons",
+     "tasks": [
+      "认识spring/summer等季节词",
+      "说出四季的特征",
+      "学唱Season Song",
+      "画四季并用英语介绍"
+     ]
+    },
+    {
+     "unit": "Unit 3：Toys",
+     "tasks": [
+      "认识ball/doll等玩具词",
+      "说出自己喜欢的玩具",
+      "学唱Toy Song",
+      "玩具分享小游戏"
+     ]
+    },
+    {
+     "unit": "Unit 4：Clothes",
+     "tasks": [
+      "认识T-shirt/dress等衣物词",
+      "说出自己穿的衣服",
+      "学唱Clothes Song",
+      "衣物配对游戏"
+     ]
+    },
+    {
+     "unit": "Unit 5：Transport",
+     "tasks": [
+      "认识bus/car等交通工具",
+      "说出上学乘坐的交通方式",
+      "学唱Transport Song",
+      "交通工具卡片游戏"
+     ]
+    },
+    {
+     "unit": "Unit 6：My Home",
+     "tasks": [
+      "认识bedroom/kitchen等房间词",
+      "介绍我的家",
+      "学唱Home Song",
+      "画一画我的家"
+     ]
+    },
+    {
+     "unit": "Unit 7：Friends",
+     "tasks": [
+      "学习朋友相关的英语表达",
+      "介绍我的好朋友",
+      "学唱Friends Song",
+      "和好朋友做英文小游戏"
+     ]
+    },
+    {
+     "unit": "Unit 8：Nature",
+     "tasks": [
+      "认识tree/flower等自然词",
+      "描述大自然中的景物",
+      "学唱Nature Song",
+      "收集自然物并说英文"
+     ]
+    }
+   ],
+   "science": [
+    {
+     "unit": "第一单元 观察水",
+     "tasks": [
+      "观察水的颜色和透明度",
+      "感受水的流动",
+      "观察冰块融化",
+      "了解水的三态变化"
+     ]
+    },
+    {
+     "unit": "第二单元 空气与风",
+     "tasks": [
+      "用塑料袋捕捉空气",
+      "感受风的存在",
+      "观察空气流动的方向",
+      "制作一个小风车"
+     ]
+    },
+    {
+     "unit": "第三单元 常见材料",
+     "tasks": [
+      "认识木头、塑料、金属",
+      "比较不同材料的特性",
+      "了解材料的用途",
+      "给物品找一找材料"
+     ]
+    },
+    {
+     "unit": "第四单元 推和拉",
+     "tasks": [
+      "感受推力的作用",
+      "感受拉力的作用",
+      "力能改变物体的形状",
+      "力能改变物体的运动"
+     ]
+    },
+    {
+     "unit": "第五单元 位置与方向",
+     "tasks": [
+      "认识前后左右",
+      "描述物体的位置",
+      "学习简单的方向",
+      "玩方位寻宝游戏"
+     ]
+    },
+    {
+     "unit": "第六单元 春天的植物",
+     "tasks": [
+      "观察种子发芽",
+      "记录植物生长",
+      "了解植物需要阳光和水",
+      "种植一种小植物"
+     ]
+    }
+   ],
+   "moral": [
+    {
+     "unit": "第一单元 我们爱整洁",
+     "tasks": [
+      "学习保持个人卫生",
+      "整理自己的书包和房间",
+      "穿衣整洁大方",
+      "爱惜自己的物品"
+     ]
+    },
+    {
+     "unit": "第二单元 我和大自然",
+     "tasks": [
+      "爱护花草树木",
+      "观察春天的变化",
+      "和小动物交朋友",
+      "保护自然环境"
+     ]
+    },
+    {
+     "unit": "第三单元 我爱我家",
+     "tasks": [
+      "了解家人的工作和爱好",
+      "关心帮助家人",
+      "学做家庭小帮手",
+      "和家人一起做游戏"
+     ]
+    },
+    {
+     "unit": "第四单元 我们在一起",
+     "tasks": [
+      "学会分享玩具和图书",
+      "学会合作完成任务",
+      "帮助有困难的同学",
+      "尊重和欣赏他人"
+     ]
+    },
+    {
+     "unit": "第五单元 我的好习惯",
+     "tasks": [
+      "养成按时作息的习惯",
+      "吃饭不挑食",
+      "爱护眼睛保护视力",
+      "坚持每天锻炼身体"
+     ]
+    },
+    {
+     "unit": "第六单元 快乐成长",
+     "tasks": [
+      "发现自己的优点",
+      "学习他人的长处",
+      "勇敢面对小困难",
+      "记录成长的小进步"
+     ]
+    }
+   ],
+   "pe": [
+    {
+     "unit": "第一单元 平衡与协调",
+     "tasks": [
+      "练习单脚站立",
+      "走平衡木",
+      "练习左右脚交替走",
+      "玩推小车游戏"
+     ]
+    },
+    {
+     "unit": "第二单元 体操与技巧",
+     "tasks": [
+      "学习前滚翻的准备动作",
+      "学习简单的仰卧起坐",
+      "练习坐位体前屈",
+      "做动物模仿操"
+     ]
+    },
+    {
+     "unit": "第三单元 跳跃与游戏",
+     "tasks": [
+      "练习单脚跳",
+      "练习立定跳远",
+      "玩跳房子游戏",
+      "玩青蛙跳荷叶游戏"
+     ]
+    },
+    {
+     "unit": "第四单元 篮球游戏",
+     "tasks": [
+      "练习原地运球",
+      "练习行进间运球",
+      "学习胸前传球",
+      "玩运球接力游戏"
+     ]
+    },
+    {
+     "unit": "第五单元 足球游戏",
+     "tasks": [
+      "学习用脚运球",
+      "练习定点踢球",
+      "学习传球",
+      "玩射门小游戏"
+     ]
+    },
+    {
+     "unit": "第六单元 田径游戏",
+     "tasks": [
+      "练习快速跑",
+      "练习往返跑",
+      "学习接力跑",
+      "玩追逐游戏"
+     ]
+    },
+    {
+     "unit": "第七单元 团队合作与健康",
+     "tasks": [
+      "参与小组合作游戏",
+      "学习比赛规则",
+      "学会正确面对输赢",
+      "坚持体育锻炼打卡"
+     ]
+    }
+   ],
+   "art": [
+    {
+     "unit": "第一单元 歌曲演唱（音乐）",
+     "tasks": [
+      "学唱《春晓》",
+      "学唱《小雨沙沙》",
+      "有感情地演唱歌曲",
+      "边唱边加动作表演"
+     ]
+    },
+    {
+     "unit": "第二单元 音乐欣赏（音乐）",
+     "tasks": [
+      "聆听中外儿童音乐",
+      "感受音乐的情绪",
+      "用动作表现音乐节奏",
+      "学习简单的欣赏方法"
+     ]
+    },
+    {
+     "unit": "第三单元 打击乐合奏（音乐）",
+     "tasks": [
+      "认识沙锤、铃鼓等乐器",
+      "用打击乐为歌曲伴奏",
+      "学习轮奏与合奏",
+      "自编简单节奏"
+     ]
+    },
+    {
+     "unit": "第四单元 音乐游戏（音乐）",
+     "tasks": [
+      "玩音乐传球游戏",
+      "听音乐做动作",
+      "音乐停摆造型",
+      "表演小音乐剧"
+     ]
+    },
+    {
+     "unit": "第五单元 创意绘画（美术）",
+     "tasks": [
+      "画一画春天",
+      "画自己喜欢的小动物",
+      "学习蜡笔画",
+      "创作一幅想象画"
+     ]
+    },
+    {
+     "unit": "第六单元 手工制作（美术）",
+     "tasks": [
+      "用彩纸折小动物",
+      "制作纸杯花",
+      "用彩泥做水果",
+      "制作立体小房子"
+     ]
+    },
+    {
+     "unit": "第七单元 设计应用（美术）",
+     "tasks": [
+      "装饰自己的名字",
+      "设计一张书签",
+      "美化教室一角",
+      "设计节日贺卡"
+     ]
+    },
+    {
+     "unit": "第八单元 美术欣赏（美术）",
+     "tasks": [
+      "欣赏关于春天的画",
+      "欣赏民间剪纸艺术",
+      "用语言描述喜欢的作品",
+      "举办班级小画展"
+     ]
+    }
+   ],
+   "labor": [
+    {
+     "unit": "第一单元 清洁与卫生",
+     "tasks": [
+      "学习洗自己的袜子",
+      "学习擦窗户",
+      "学习扫地拖地",
+      "学会垃圾分类"
+     ]
+    },
+    {
+     "unit": "第二单元 整理与收纳",
+     "tasks": [
+      "整理自己的房间",
+      "整理书柜和衣柜",
+      "归类收纳物品",
+      "保持房间整洁"
+     ]
+    },
+    {
+     "unit": "第三单元 烹饪与营养",
+     "tasks": [
+      "学习洗菜切菜",
+      "学习拌凉菜",
+      "制作水果拼盘",
+      "了解营养搭配"
+     ]
+    },
+    {
+     "unit": "第四单元 农业生产",
+     "tasks": [
+      "种植一种蔬菜",
+      "给植物浇水施肥",
+      "观察记录植物生长",
+      "收获并分享劳动成果"
+     ]
+    },
+    {
+     "unit": "第五单元 传统工艺制作",
+     "tasks": [
+      "学习简单的编织",
+      "学习缝扣子入门",
+      "制作香包或挂饰",
+      "制作母亲节礼物"
+     ]
+    }
+   ],
+   "practice": [
+    {
+     "unit": "第一单元 春天的发现",
+     "tasks": [
+      "观察春天的植物变化",
+      "收集春天的花和叶",
+      "制作春天观察手册",
+      "分享春天的发现"
+     ]
+    },
+    {
+     "unit": "第二单元 种植体验",
+     "tasks": [
+      "选择要种的小植物",
+      "学习种植的方法",
+      "照顾并记录植物生长",
+      "分享种植成果"
+     ]
+    },
+    {
+     "unit": "第三单元 环保小卫士",
+     "tasks": [
+      "了解垃圾分类",
+      "设计环保标语",
+      "参与校园清洁行动",
+      "制作环保手抄报"
+     ]
+    },
+    {
+     "unit": "第四单元 劳动技能大比拼",
+     "tasks": [
+      "练习叠衣服",
+      "练习整理书包比赛",
+      "练习系鞋带",
+      "参加班级劳动比赛"
+     ]
+    },
+    {
+     "unit": "第五单元 我爱阅读",
+     "tasks": [
+      "选择一本喜欢的书",
+      "坚持每天阅读10分钟",
+      "和爸妈分享故事",
+      "制作阅读记录卡"
+     ]
+    },
+    {
+     "unit": "第六单元 学期成长总结",
+     "tasks": [
+      "回顾本学期的收获",
+      "完成一件成长作品",
+      "向家人展示学习成果",
+      "制定新学期目标"
+     ]
+    }
+   ]
+  }
+ },
+ "2": {
+  "a": {
+   "chinese": [
+    {
+     "unit": "第一单元：识字写字",
+     "tasks": [
+      "学习本单元重点生字词",
+      "朗读本单元课文并理解内容",
+      "完成本单元练习与思考题",
+      "背诵指定段落或积累好词好句"
+     ]
+    },
+    {
+     "unit": "第二单元：课文阅读",
+     "tasks": [
+      "学习本单元重点生字词",
+      "朗读本单元课文并理解内容",
+      "完成本单元练习与思考题",
+      "背诵指定段落或积累好词好句"
+     ]
+    },
+    {
+     "unit": "语文园地（复习巩固）",
+     "tasks": [
+      "认读本册重点生字",
+      "复习本册重点词语",
+      "完成语文园地练习",
+      "开展课外阅读"
+     ]
+    }
+   ],
+   "math": [
+    {
+     "unit": "第一单元：表内乘法",
+     "tasks": [
+      "学习本单元核心概念",
+      "练习本单元计算或方法",
+      "解决本单元实际问题",
+      "完成本单元综合练习"
+     ]
+    },
+    {
+     "unit": "第二单元：表内除法",
+     "tasks": [
+      "学习本单元核心概念",
+      "练习本单元计算或方法",
+      "解决本单元实际问题",
+      "完成本单元综合练习"
+     ]
+    },
+    {
+     "unit": "综合与实践",
+     "tasks": [
+      "完成单元整理与复习",
+      "练习口算和计算",
+      "解决生活实际问题",
+      "整理错题本"
+     ]
+    }
+   ],
+   "english": [
+    {
+     "unit": "Unit 1：Greetings",
+     "tasks": [
+      "学习本单元核心词汇",
+      "练习本单元重点句型",
+      "完成本单元听说练习",
+      "用英语进行简单交流"
+     ]
+    },
+    {
+     "unit": "Unit 2：My School",
+     "tasks": [
+      "学习本单元核心词汇",
+      "练习本单元重点句型",
+      "完成本单元听说练习",
+      "用英语进行简单交流"
+     ]
+    },
+    {
+     "unit": "Revision（复习巩固）",
+     "tasks": [
+      "复习本单元单词",
+      "复习重点句型",
+      "完成听力练习",
+      "英语口语展示"
+     ]
+    }
+   ],
+   "science": [
+    {
+     "unit": "第一单元：磁铁",
+     "tasks": [
+      "学习本单元科学概念",
+      "观察并记录实验现象",
+      "动手完成一个探究活动",
+      "总结本单元科学结论"
+     ]
+    },
+    {
+     "unit": "第二单元：植物的生长",
+     "tasks": [
+      "学习本单元科学概念",
+      "观察并记录实验现象",
+      "动手完成一个探究活动",
+      "总结本单元科学结论"
+     ]
+    },
+    {
+     "unit": "科学探究活动",
+     "tasks": [
+      "提出一个科学问题",
+      "设计一个小实验",
+      "记录实验现象",
+      "分享实验结果"
+     ]
+    }
+   ],
+   "moral": [
+    {
+     "unit": "第一单元：班级生活",
+     "tasks": [
+      "学习本单元道德认知",
+      "参与讨论分享看法",
+      "完成一项实践活动",
+      "反思并记录收获"
+     ]
+    },
+    {
+     "unit": "第二单元：家庭责任",
+     "tasks": [
+      "学习本单元道德认知",
+      "参与讨论分享看法",
+      "完成一项实践活动",
+      "反思并记录收获"
+     ]
+    },
+    {
+     "unit": "实践活动",
+     "tasks": [
+      "参与一次班级活动",
+      "完成一项家务劳动",
+      "帮助一位同学",
+      "记录活动感受"
+     ]
+    }
+   ],
+   "pe": [
+    {
+     "unit": "第一单元：跳绳进阶",
+     "tasks": [
+      "学习本单元运动技能",
+      "练习本单元动作要领",
+      "参加一次运动游戏",
+      "完成体能小测试"
+     ]
+    },
+    {
+     "unit": "第二单元：快速跑",
+     "tasks": [
+      "学习本单元运动技能",
+      "练习本单元动作要领",
+      "参加一次运动游戏",
+      "完成体能小测试"
+     ]
+    },
+    {
+     "unit": "体能与健康",
+     "tasks": [
+      "坚持每周锻炼3次",
+      "练习本册体能项目",
+      "了解运动安全知识",
+      "记录锻炼打卡"
+     ]
+    }
+   ],
+   "art": [
+    {
+     "unit": "第一单元：歌曲演唱",
+     "tasks": [
+      "学习本单元艺术知识",
+      "完成一件艺术作品",
+      "欣赏并评价作品",
+      "参加展示与分享"
+     ]
+    },
+    {
+     "unit": "第二单元：绘画创作",
+     "tasks": [
+      "学习本单元艺术知识",
+      "完成一件艺术作品",
+      "欣赏并评价作品",
+      "参加展示与分享"
+     ]
+    },
+    {
+     "unit": "艺术实践",
+     "tasks": [
+      "练习本册歌曲",
+      "完成一幅绘画作品",
+      "参加一次艺术活动",
+      "展示艺术才艺"
+     ]
+    }
+   ],
+   "labor": [
+    {
+     "unit": "第一单元：清洁进阶",
+     "tasks": [
+      "学习本单元劳动技能",
+      "独立完成一项劳动任务",
+      "记录劳动过程和感受",
+      "养成爱劳动的好习惯"
+     ]
+    },
+    {
+     "unit": "第二单元：整理房间",
+     "tasks": [
+      "学习本单元劳动技能",
+      "独立完成一项劳动任务",
+      "记录劳动过程和感受",
+      "养成爱劳动的好习惯"
+     ]
+    },
+    {
+     "unit": "劳动实践",
+     "tasks": [
+      "独立完成一项家务",
+      "学习本册劳动技能",
+      "参加校园劳动",
+      "记录劳动过程"
+     ]
+    }
+   ],
+   "practice": [
+    {
+     "unit": "第一单元：社区观察",
+     "tasks": [
+      "明确本单元活动主题",
+      "制定活动计划",
+      "参与并完成实践活动",
+      "展示交流活动成果"
+     ]
+    },
+    {
+     "unit": "第二单元：季节探索",
+     "tasks": [
+      "明确本单元活动主题",
+      "制定活动计划",
+      "参与并完成实践活动",
+      "展示交流活动成果"
+     ]
+    },
+    {
+     "unit": "项目展示",
+     "tasks": [
+      "整理项目成果",
+      "制作展示材料",
+      "向同学展示成果",
+      "听取改进意见"
+     ]
+    }
+   ]
+  },
+  "b": {
+   "chinese": [
+    {
+     "unit": "第三单元：看图写话",
+     "tasks": [
+      "学习本单元重点生字词",
+      "朗读本单元课文并理解内容",
+      "完成本单元练习与思考题",
+      "背诵指定段落或积累好词好句"
+     ]
+    },
+    {
+     "unit": "第四单元：古诗诵读",
+     "tasks": [
+      "学习本单元重点生字词",
+      "朗读本单元课文并理解内容",
+      "完成本单元练习与思考题",
+      "背诵指定段落或积累好词好句"
+     ]
+    },
+    {
+     "unit": "综合实践：语文活动",
+     "tasks": [
+      "参加一次朗读活动",
+      "写一篇小练笔",
+      "和同学分享读书心得",
+      "完成本册复习自查"
+     ]
+    }
+   ],
+   "math": [
+    {
+     "unit": "第三单元：万以内数的认识",
+     "tasks": [
+      "学习本单元核心概念",
+      "练习本单元计算或方法",
+      "解决本单元实际问题",
+      "完成本单元综合练习"
+     ]
+    },
+    {
+     "unit": "第四单元：图形与测量",
+     "tasks": [
+      "学习本单元核心概念",
+      "练习本单元计算或方法",
+      "解决本单元实际问题",
+      "完成本单元综合练习"
+     ]
+    },
+    {
+     "unit": "数学思维拓展",
+     "tasks": [
+      "挑战一道思维题",
+      "学习数学小故事",
+      "玩一个数学小游戏",
+      "向家人讲解一道题"
+     ]
+    }
+   ],
+   "english": [
+    {
+     "unit": "Unit 3：Food",
+     "tasks": [
+      "学习本单元核心词汇",
+      "练习本单元重点句型",
+      "完成本单元听说练习",
+      "用英语进行简单交流"
+     ]
+    },
+    {
+     "unit": "Unit 4：Weather",
+     "tasks": [
+      "学习本单元核心词汇",
+      "练习本单元重点句型",
+      "完成本单元听说练习",
+      "用英语进行简单交流"
+     ]
+    },
+    {
+     "unit": "Story Time（故事阅读）",
+     "tasks": [
+      "读一个英语小故事",
+      "学习故事中的生词",
+      "复述故事大意",
+      "角色扮演小故事"
+     ]
+    }
+   ],
+   "science": [
+    {
+     "unit": "第三单元：推和拉",
+     "tasks": [
+      "学习本单元科学概念",
+      "观察并记录实验现象",
+      "动手完成一个探究活动",
+      "总结本单元科学结论"
+     ]
+    },
+    {
+     "unit": "第四单元：天气观察",
+     "tasks": [
+      "学习本单元科学概念",
+      "观察并记录实验现象",
+      "动手完成一个探究活动",
+      "总结本单元科学结论"
+     ]
+    },
+    {
+     "unit": "科技小制作",
+     "tasks": [
+      "收集废旧材料",
+      "设计制作方案",
+      "制作一个科技小作品",
+      "展示并介绍作品"
+     ]
+    }
+   ],
+   "moral": [
+    {
+     "unit": "第三单元：安全常识",
+     "tasks": [
+      "学习本单元道德认知",
+      "参与讨论分享看法",
+      "完成一项实践活动",
+      "反思并记录收获"
+     ]
+    },
+    {
+     "unit": "第四单元：传统文化",
+     "tasks": [
+      "学习本单元道德认知",
+      "参与讨论分享看法",
+      "完成一项实践活动",
+      "反思并记录收获"
+     ]
+    },
+    {
+     "unit": "成长与反思",
+     "tasks": [
+      "反思自己的进步",
+      "学习他人的优点",
+      "制定一个小目标",
+      "写下成长心得"
+     ]
+    }
+   ],
+   "pe": [
+    {
+     "unit": "第三单元：球类基础",
+     "tasks": [
+      "学习本单元运动技能",
+      "练习本单元动作要领",
+      "参加一次运动游戏",
+      "完成体能小测试"
+     ]
+    },
+    {
+     "unit": "第四单元：体操基础",
+     "tasks": [
+      "学习本单元运动技能",
+      "练习本单元动作要领",
+      "参加一次运动游戏",
+      "完成体能小测试"
+     ]
+    },
+    {
+     "unit": "游戏与竞赛",
+     "tasks": [
+      "学习一个体育游戏",
+      "参与一次班级比赛",
+      "遵守比赛规则",
+      "和同学合作比赛"
+     ]
+    }
+   ],
+   "art": [
+    {
+     "unit": "第三单元：手工制作",
+     "tasks": [
+      "学习本单元艺术知识",
+      "完成一件艺术作品",
+      "欣赏并评价作品",
+      "参加展示与分享"
+     ]
+    },
+    {
+     "unit": "第四单元：音乐欣赏",
+     "tasks": [
+      "学习本单元艺术知识",
+      "完成一件艺术作品",
+      "欣赏并评价作品",
+      "参加展示与分享"
+     ]
+    },
+    {
+     "unit": "作品展示与评价",
+     "tasks": [
+      "整理学期作品",
+      "欣赏同学的作品",
+      "评价和改进作品",
+      "举办班级作品展"
+     ]
+    }
+   ],
+   "labor": [
+    {
+     "unit": "第三单元：简单烹饪",
+     "tasks": [
+      "学习本单元劳动技能",
+      "独立完成一项劳动任务",
+      "记录劳动过程和感受",
+      "养成爱劳动的好习惯"
+     ]
+    },
+    {
+     "unit": "第四单元：植物养护",
+     "tasks": [
+      "学习本单元劳动技能",
+      "独立完成一项劳动任务",
+      "记录劳动过程和感受",
+      "养成爱劳动的好习惯"
+     ]
+    },
+    {
+     "unit": "劳动成果展示",
+     "tasks": [
+      "展示一件劳动作品",
+      "分享劳动经验",
+      "评价劳动成果",
+      "体验劳动的快乐"
+     ]
+    }
+   ],
+   "practice": [
+    {
+     "unit": "第三单元：手工制作",
+     "tasks": [
+      "明确本单元活动主题",
+      "制定活动计划",
+      "参与并完成实践活动",
+      "展示交流活动成果"
+     ]
+    },
+    {
+     "unit": "第四单元：安全实践",
+     "tasks": [
+      "明确本单元活动主题",
+      "制定活动计划",
+      "参与并完成实践活动",
+      "展示交流活动成果"
+     ]
+    },
+    {
+     "unit": "学期总结与展望",
+     "tasks": [
+      "回顾学期收获",
+      "完成学期总结",
+      "制定下阶段计划",
+      "分享成长故事"
+     ]
+    }
+   ]
+  }
+ },
+ "3": {
+  "a": {
+   "chinese": [
+    {
+     "unit": "第一单元：汉字书写",
+     "tasks": [
+      "学习本单元重点生字词",
+      "朗读本单元课文并理解内容",
+      "完成本单元练习与思考题",
+      "背诵指定段落或积累好词好句"
+     ]
+    },
+    {
+     "unit": "第二单元：阅读理解",
+     "tasks": [
+      "学习本单元重点生字词",
+      "朗读本单元课文并理解内容",
+      "完成本单元练习与思考题",
+      "背诵指定段落或积累好词好句"
+     ]
+    },
+    {
+     "unit": "语文园地（复习巩固）",
+     "tasks": [
+      "认读本册重点生字",
+      "复习本册重点词语",
+      "完成语文园地练习",
+      "开展课外阅读"
+     ]
+    }
+   ],
+   "math": [
+    {
+     "unit": "第一单元：万以内加减法",
+     "tasks": [
+      "学习本单元核心概念",
+      "练习本单元计算或方法",
+      "解决本单元实际问题",
+      "完成本单元综合练习"
+     ]
+    },
+    {
+     "unit": "第二单元：多位数乘一位数",
+     "tasks": [
+      "学习本单元核心概念",
+      "练习本单元计算或方法",
+      "解决本单元实际问题",
+      "完成本单元综合练习"
+     ]
+    },
+    {
+     "unit": "综合与实践",
+     "tasks": [
+      "完成单元整理与复习",
+      "练习口算和计算",
+      "解决生活实际问题",
+      "整理错题本"
+     ]
+    }
+   ],
+   "english": [
+    {
+     "unit": "Unit 1：Self Introduction",
+     "tasks": [
+      "学习本单元核心词汇",
+      "练习本单元重点句型",
+      "完成本单元听说练习",
+      "用英语进行简单交流"
+     ]
+    },
+    {
+     "unit": "Unit 2：School Life",
+     "tasks": [
+      "学习本单元核心词汇",
+      "练习本单元重点句型",
+      "完成本单元听说练习",
+      "用英语进行简单交流"
+     ]
+    },
+    {
+     "unit": "Revision（复习巩固）",
+     "tasks": [
+      "复习本单元单词",
+      "复习重点句型",
+      "完成听力练习",
+      "英语口语展示"
+     ]
+    }
+   ],
+   "science": [
+    {
+     "unit": "第一单元：水的三态",
+     "tasks": [
+      "学习本单元科学概念",
+      "观察并记录实验现象",
+      "动手完成一个探究活动",
+      "总结本单元科学结论"
+     ]
+    },
+    {
+     "unit": "第二单元：空气",
+     "tasks": [
+      "学习本单元科学概念",
+      "观察并记录实验现象",
+      "动手完成一个探究活动",
+      "总结本单元科学结论"
+     ]
+    },
+    {
+     "unit": "科学探究活动",
+     "tasks": [
+      "提出一个科学问题",
+      "设计一个小实验",
+      "记录实验现象",
+      "分享实验结果"
+     ]
+    }
+   ],
+   "moral": [
+    {
+     "unit": "第一单元：集体生活",
+     "tasks": [
+      "学习本单元道德认知",
+      "参与讨论分享看法",
+      "完成一项实践活动",
+      "反思并记录收获"
+     ]
+    },
+    {
+     "unit": "第二单元：规则意识",
+     "tasks": [
+      "学习本单元道德认知",
+      "参与讨论分享看法",
+      "完成一项实践活动",
+      "反思并记录收获"
+     ]
+    },
+    {
+     "unit": "实践活动",
+     "tasks": [
+      "参与一次班级活动",
+      "完成一项家务劳动",
+      "帮助一位同学",
+      "记录活动感受"
+     ]
+    }
+   ],
+   "pe": [
+    {
+     "unit": "第一单元：体能训练",
+     "tasks": [
+      "学习本单元运动技能",
+      "练习本单元动作要领",
+      "参加一次运动游戏",
+      "完成体能小测试"
+     ]
+    },
+    {
+     "unit": "第二单元：球类运动",
+     "tasks": [
+      "学习本单元运动技能",
+      "练习本单元动作要领",
+      "参加一次运动游戏",
+      "完成体能小测试"
+     ]
+    },
+    {
+     "unit": "体能与健康",
+     "tasks": [
+      "坚持每周锻炼3次",
+      "练习本册体能项目",
+      "了解运动安全知识",
+      "记录锻炼打卡"
+     ]
+    }
+   ],
+   "art": [
+    {
+     "unit": "第一单元：音乐表现",
+     "tasks": [
+      "学习本单元艺术知识",
+      "完成一件艺术作品",
+      "欣赏并评价作品",
+      "参加展示与分享"
+     ]
+    },
+    {
+     "unit": "第二单元：美术创作",
+     "tasks": [
+      "学习本单元艺术知识",
+      "完成一件艺术作品",
+      "欣赏并评价作品",
+      "参加展示与分享"
+     ]
+    },
+    {
+     "unit": "艺术实践",
+     "tasks": [
+      "练习本册歌曲",
+      "完成一幅绘画作品",
+      "参加一次艺术活动",
+      "展示艺术才艺"
+     ]
+    }
+   ],
+   "labor": [
+    {
+     "unit": "第一单元：家务劳动",
+     "tasks": [
+      "学习本单元劳动技能",
+      "独立完成一项劳动任务",
+      "记录劳动过程和感受",
+      "养成爱劳动的好习惯"
+     ]
+    },
+    {
+     "unit": "第二单元：烹饪学习",
+     "tasks": [
+      "学习本单元劳动技能",
+      "独立完成一项劳动任务",
+      "记录劳动过程和感受",
+      "养成爱劳动的好习惯"
+     ]
+    },
+    {
+     "unit": "劳动实践",
+     "tasks": [
+      "独立完成一项家务",
+      "学习本册劳动技能",
+      "参加校园劳动",
+      "记录劳动过程"
+     ]
+    }
+   ],
+   "practice": [
+    {
+     "unit": "第一单元：社区服务",
+     "tasks": [
+      "明确本单元活动主题",
+      "制定活动计划",
+      "参与并完成实践活动",
+      "展示交流活动成果"
+     ]
+    },
+    {
+     "unit": "第二单元：环保行动",
+     "tasks": [
+      "明确本单元活动主题",
+      "制定活动计划",
+      "参与并完成实践活动",
+      "展示交流活动成果"
+     ]
+    },
+    {
+     "unit": "项目展示",
+     "tasks": [
+      "整理项目成果",
+      "制作展示材料",
+      "向同学展示成果",
+      "听取改进意见"
+     ]
+    }
+   ]
+  },
+  "b": {
+   "chinese": [
+    {
+     "unit": "第三单元：习作练习",
+     "tasks": [
+      "学习本单元重点生字词",
+      "朗读本单元课文并理解内容",
+      "完成本单元练习与思考题",
+      "背诵指定段落或积累好词好句"
+     ]
+    },
+    {
+     "unit": "第四单元：古诗与课外阅读",
+     "tasks": [
+      "学习本单元重点生字词",
+      "朗读本单元课文并理解内容",
+      "完成本单元练习与思考题",
+      "背诵指定段落或积累好词好句"
+     ]
+    },
+    {
+     "unit": "综合实践：语文活动",
+     "tasks": [
+      "参加一次朗读活动",
+      "写一篇小练笔",
+      "和同学分享读书心得",
+      "完成本册复习自查"
+     ]
+    }
+   ],
+   "math": [
+    {
+     "unit": "第三单元：分数初步认识",
+     "tasks": [
+      "学习本单元核心概念",
+      "练习本单元计算或方法",
+      "解决本单元实际问题",
+      "完成本单元综合练习"
+     ]
+    },
+    {
+     "unit": "第四单元：图形与时间",
+     "tasks": [
+      "学习本单元核心概念",
+      "练习本单元计算或方法",
+      "解决本单元实际问题",
+      "完成本单元综合练习"
+     ]
+    },
+    {
+     "unit": "数学思维拓展",
+     "tasks": [
+      "挑战一道思维题",
+      "学习数学小故事",
+      "玩一个数学小游戏",
+      "向家人讲解一道题"
+     ]
+    }
+   ],
+   "english": [
+    {
+     "unit": "Unit 3：Animals",
+     "tasks": [
+      "学习本单元核心词汇",
+      "练习本单元重点句型",
+      "完成本单元听说练习",
+      "用英语进行简单交流"
+     ]
+    },
+    {
+     "unit": "Unit 4：Food & Drink",
+     "tasks": [
+      "学习本单元核心词汇",
+      "练习本单元重点句型",
+      "完成本单元听说练习",
+      "用英语进行简单交流"
+     ]
+    },
+    {
+     "unit": "Story Time（故事阅读）",
+     "tasks": [
+      "读一个英语小故事",
+      "学习故事中的生词",
+      "复述故事大意",
+      "角色扮演小故事"
+     ]
+    }
+   ],
+   "science": [
+    {
+     "unit": "第三单元：声音",
+     "tasks": [
+      "学习本单元科学概念",
+      "观察并记录实验现象",
+      "动手完成一个探究活动",
+      "总结本单元科学结论"
+     ]
+    },
+    {
+     "unit": "第四单元：磁铁",
+     "tasks": [
+      "学习本单元科学概念",
+      "观察并记录实验现象",
+      "动手完成一个探究活动",
+      "总结本单元科学结论"
+     ]
+    },
+    {
+     "unit": "科技小制作",
+     "tasks": [
+      "收集废旧材料",
+      "设计制作方案",
+      "制作一个科技小作品",
+      "展示并介绍作品"
+     ]
+    }
+   ],
+   "moral": [
+    {
+     "unit": "第三单元：传统文化",
+     "tasks": [
+      "学习本单元道德认知",
+      "参与讨论分享看法",
+      "完成一项实践活动",
+      "反思并记录收获"
+     ]
+    },
+    {
+     "unit": "第四单元：国情教育",
+     "tasks": [
+      "学习本单元道德认知",
+      "参与讨论分享看法",
+      "完成一项实践活动",
+      "反思并记录收获"
+     ]
+    },
+    {
+     "unit": "成长与反思",
+     "tasks": [
+      "反思自己的进步",
+      "学习他人的优点",
+      "制定一个小目标",
+      "写下成长心得"
+     ]
+    }
+   ],
+   "pe": [
+    {
+     "unit": "第三单元：跳绳达人",
+     "tasks": [
+      "学习本单元运动技能",
+      "练习本单元动作要领",
+      "参加一次运动游戏",
+      "完成体能小测试"
+     ]
+    },
+    {
+     "unit": "第四单元：体操动作",
+     "tasks": [
+      "学习本单元运动技能",
+      "练习本单元动作要领",
+      "参加一次运动游戏",
+      "完成体能小测试"
+     ]
+    },
+    {
+     "unit": "游戏与竞赛",
+     "tasks": [
+      "学习一个体育游戏",
+      "参与一次班级比赛",
+      "遵守比赛规则",
+      "和同学合作比赛"
+     ]
+    }
+   ],
+   "art": [
+    {
+     "unit": "第三单元：手工设计",
+     "tasks": [
+      "学习本单元艺术知识",
+      "完成一件艺术作品",
+      "欣赏并评价作品",
+      "参加展示与分享"
+     ]
+    },
+    {
+     "unit": "第四单元：文化欣赏",
+     "tasks": [
+      "学习本单元艺术知识",
+      "完成一件艺术作品",
+      "欣赏并评价作品",
+      "参加展示与分享"
+     ]
+    },
+    {
+     "unit": "作品展示与评价",
+     "tasks": [
+      "整理学期作品",
+      "欣赏同学的作品",
+      "评价和改进作品",
+      "举办班级作品展"
+     ]
+    }
+   ],
+   "labor": [
+    {
+     "unit": "第三单元：种植体验",
+     "tasks": [
+      "学习本单元劳动技能",
+      "独立完成一项劳动任务",
+      "记录劳动过程和感受",
+      "养成爱劳动的好习惯"
+     ]
+    },
+    {
+     "unit": "第四单元：工艺制作",
+     "tasks": [
+      "学习本单元劳动技能",
+      "独立完成一项劳动任务",
+      "记录劳动过程和感受",
+      "养成爱劳动的好习惯"
+     ]
+    },
+    {
+     "unit": "劳动成果展示",
+     "tasks": [
+      "展示一件劳动作品",
+      "分享劳动经验",
+      "评价劳动成果",
+      "体验劳动的快乐"
+     ]
+    }
+   ],
+   "practice": [
+    {
+     "unit": "第三单元：科学探究",
+     "tasks": [
+      "明确本单元活动主题",
+      "制定活动计划",
+      "参与并完成实践活动",
+      "展示交流活动成果"
+     ]
+    },
+    {
+     "unit": "第四单元：文化传承",
+     "tasks": [
+      "明确本单元活动主题",
+      "制定活动计划",
+      "参与并完成实践活动",
+      "展示交流活动成果"
+     ]
+    },
+    {
+     "unit": "学期总结与展望",
+     "tasks": [
+      "回顾学期收获",
+      "完成学期总结",
+      "制定下阶段计划",
+      "分享成长故事"
+     ]
+    }
+   ]
+  }
+ },
+ "4": {
+  "a": {
+   "chinese": [
+    {
+     "unit": "第一单元：阅读与习作",
+     "tasks": [
+      "学习本单元重点生字词",
+      "朗读本单元课文并理解内容",
+      "完成本单元练习与思考题",
+      "背诵指定段落或积累好词好句"
+     ]
+    },
+    {
+     "unit": "第二单元：古诗文",
+     "tasks": [
+      "学习本单元重点生字词",
+      "朗读本单元课文并理解内容",
+      "完成本单元练习与思考题",
+      "背诵指定段落或积累好词好句"
+     ]
+    },
+    {
+     "unit": "语文园地（复习巩固）",
+     "tasks": [
+      "认读本册重点生字",
+      "复习本册重点词语",
+      "完成语文园地练习",
+      "开展课外阅读"
+     ]
+    }
+   ],
+   "math": [
+    {
+     "unit": "第一单元：三位数乘两位数",
+     "tasks": [
+      "学习本单元核心概念",
+      "练习本单元计算或方法",
+      "解决本单元实际问题",
+      "完成本单元综合练习"
+     ]
+    },
+    {
+     "unit": "第二单元：除数是两位数",
+     "tasks": [
+      "学习本单元核心概念",
+      "练习本单元计算或方法",
+      "解决本单元实际问题",
+      "完成本单元综合练习"
+     ]
+    },
+    {
+     "unit": "综合与实践",
+     "tasks": [
+      "完成单元整理与复习",
+      "练习口算和计算",
+      "解决生活实际问题",
+      "整理错题本"
+     ]
+    }
+   ],
+   "english": [
+    {
+     "unit": "第一单元：日常交流",
+     "tasks": [
+      "学习本单元核心词汇",
+      "练习本单元重点句型",
+      "完成本单元听说练习",
+      "用英语进行简单交流"
+     ]
+    },
+    {
+     "unit": "第二单元：兴趣爱好",
+     "tasks": [
+      "学习本单元核心词汇",
+      "练习本单元重点句型",
+      "完成本单元听说练习",
+      "用英语进行简单交流"
+     ]
+    },
+    {
+     "unit": "Revision（复习巩固）",
+     "tasks": [
+      "复习本单元单词",
+      "复习重点句型",
+      "完成听力练习",
+      "英语口语展示"
+     ]
+    }
+   ],
+   "science": [
+    {
+     "unit": "第一单元：光的传播",
+     "tasks": [
+      "学习本单元科学概念",
+      "观察并记录实验现象",
+      "动手完成一个探究活动",
+      "总结本单元科学结论"
+     ]
+    },
+    {
+     "unit": "第二单元：声音传播",
+     "tasks": [
+      "学习本单元科学概念",
+      "观察并记录实验现象",
+      "动手完成一个探究活动",
+      "总结本单元科学结论"
+     ]
+    },
+    {
+     "unit": "科学探究活动",
+     "tasks": [
+      "提出一个科学问题",
+      "设计一个小实验",
+      "记录实验现象",
+      "分享实验结果"
+     ]
+    }
+   ],
+   "moral": [
+    {
+     "unit": "第一单元：规则与法律",
+     "tasks": [
+      "学习本单元道德认知",
+      "参与讨论分享看法",
+      "完成一项实践活动",
+      "反思并记录收获"
+     ]
+    },
+    {
+     "unit": "第二单元：消费意识",
+     "tasks": [
+      "学习本单元道德认知",
+      "参与讨论分享看法",
+      "完成一项实践活动",
+      "反思并记录收获"
+     ]
+    },
+    {
+     "unit": "实践活动",
+     "tasks": [
+      "参与一次班级活动",
+      "完成一项家务劳动",
+      "帮助一位同学",
+      "记录活动感受"
+     ]
+    }
+   ],
+   "pe": [
+    {
+     "unit": "第一单元：体能提升",
+     "tasks": [
+      "学习本单元运动技能",
+      "练习本单元动作要领",
+      "参加一次运动游戏",
+      "完成体能小测试"
+     ]
+    },
+    {
+     "unit": "第二单元：专项运动",
+     "tasks": [
+      "学习本单元运动技能",
+      "练习本单元动作要领",
+      "参加一次运动游戏",
+      "完成体能小测试"
+     ]
+    },
+    {
+     "unit": "体能与健康",
+     "tasks": [
+      "坚持每周锻炼3次",
+      "练习本册体能项目",
+      "了解运动安全知识",
+      "记录锻炼打卡"
+     ]
+    }
+   ],
+   "art": [
+    {
+     "unit": "第一单元：音乐创编",
+     "tasks": [
+      "学习本单元艺术知识",
+      "完成一件艺术作品",
+      "欣赏并评价作品",
+      "参加展示与分享"
+     ]
+    },
+    {
+     "unit": "第二单元：美术设计",
+     "tasks": [
+      "学习本单元艺术知识",
+      "完成一件艺术作品",
+      "欣赏并评价作品",
+      "参加展示与分享"
+     ]
+    },
+    {
+     "unit": "艺术实践",
+     "tasks": [
+      "练习本册歌曲",
+      "完成一幅绘画作品",
+      "参加一次艺术活动",
+      "展示艺术才艺"
+     ]
+    }
+   ],
+   "labor": [
+    {
+     "unit": "第一单元：烹饪技能",
+     "tasks": [
+      "学习本单元劳动技能",
+      "独立完成一项劳动任务",
+      "记录劳动过程和感受",
+      "养成爱劳动的好习惯"
+     ]
+    },
+    {
+     "unit": "第二单元：家电使用",
+     "tasks": [
+      "学习本单元劳动技能",
+      "独立完成一项劳动任务",
+      "记录劳动过程和感受",
+      "养成爱劳动的好习惯"
+     ]
+    },
+    {
+     "unit": "劳动实践",
+     "tasks": [
+      "独立完成一项家务",
+      "学习本册劳动技能",
+      "参加校园劳动",
+      "记录劳动过程"
+     ]
+    }
+   ],
+   "practice": [
+    {
+     "unit": "第一单元：社会调查",
+     "tasks": [
+      "明确本单元活动主题",
+      "制定活动计划",
+      "参与并完成实践活动",
+      "展示交流活动成果"
+     ]
+    },
+    {
+     "unit": "第二单元：科技制作",
+     "tasks": [
+      "明确本单元活动主题",
+      "制定活动计划",
+      "参与并完成实践活动",
+      "展示交流活动成果"
+     ]
+    },
+    {
+     "unit": "项目展示",
+     "tasks": [
+      "整理项目成果",
+      "制作展示材料",
+      "向同学展示成果",
+      "听取改进意见"
+     ]
+    }
+   ]
+  },
+  "b": {
+   "chinese": [
+    {
+     "unit": "第三单元：名著阅读",
+     "tasks": [
+      "学习本单元重点生字词",
+      "朗读本单元课文并理解内容",
+      "完成本单元练习与思考题",
+      "背诵指定段落或积累好词好句"
+     ]
+    },
+    {
+     "unit": "综合实践：语文活动",
+     "tasks": [
+      "参加一次朗读活动",
+      "写一篇小练笔",
+      "和同学分享读书心得",
+      "完成本册复习自查"
+     ]
+    }
+   ],
+   "math": [
+    {
+     "unit": "第三单元：条形统计图",
+     "tasks": [
+      "学习本单元核心概念",
+      "练习本单元计算或方法",
+      "解决本单元实际问题",
+      "完成本单元综合练习"
+     ]
+    },
+    {
+     "unit": "第四单元：角的度量与线",
+     "tasks": [
+      "学习本单元核心概念",
+      "练习本单元计算或方法",
+      "解决本单元实际问题",
+      "完成本单元综合练习"
+     ]
+    },
+    {
+     "unit": "数学思维拓展",
+     "tasks": [
+      "挑战一道思维题",
+      "学习数学小故事",
+      "玩一个数学小游戏",
+      "向家人讲解一道题"
+     ]
+    }
+   ],
+   "english": [
+    {
+     "unit": "第三单元：天气季节",
+     "tasks": [
+      "学习本单元核心词汇",
+      "练习本单元重点句型",
+      "完成本单元听说练习",
+      "用英语进行简单交流"
+     ]
+    },
+    {
+     "unit": "第四单元：节日文化",
+     "tasks": [
+      "学习本单元核心词汇",
+      "练习本单元重点句型",
+      "完成本单元听说练习",
+      "用英语进行简单交流"
+     ]
+    },
+    {
+     "unit": "Story Time（故事阅读）",
+     "tasks": [
+      "读一个英语小故事",
+      "学习故事中的生词",
+      "复述故事大意",
+      "角色扮演小故事"
+     ]
+    }
+   ],
+   "science": [
+    {
+     "unit": "第三单元：运动和力",
+     "tasks": [
+      "学习本单元科学概念",
+      "观察并记录实验现象",
+      "动手完成一个探究活动",
+      "总结本单元科学结论"
+     ]
+    },
+    {
+     "unit": "第四单元：地球表面",
+     "tasks": [
+      "学习本单元科学概念",
+      "观察并记录实验现象",
+      "动手完成一个探究活动",
+      "总结本单元科学结论"
+     ]
+    },
+    {
+     "unit": "科技小制作",
+     "tasks": [
+      "收集废旧材料",
+      "设计制作方案",
+      "制作一个科技小作品",
+      "展示并介绍作品"
+     ]
+    }
+   ],
+   "moral": [
+    {
+     "unit": "第三单元：环境保护",
+     "tasks": [
+      "学习本单元道德认知",
+      "参与讨论分享看法",
+      "完成一项实践活动",
+      "反思并记录收获"
+     ]
+    },
+    {
+     "unit": "第四单元：传统文化",
+     "tasks": [
+      "学习本单元道德认知",
+      "参与讨论分享看法",
+      "完成一项实践活动",
+      "反思并记录收获"
+     ]
+    },
+    {
+     "unit": "成长与反思",
+     "tasks": [
+      "反思自己的进步",
+      "学习他人的优点",
+      "制定一个小目标",
+      "写下成长心得"
+     ]
+    }
+   ],
+   "pe": [
+    {
+     "unit": "第三单元：体育精神",
+     "tasks": [
+      "学习本单元运动技能",
+      "练习本单元动作要领",
+      "参加一次运动游戏",
+      "完成体能小测试"
+     ]
+    },
+    {
+     "unit": "第四单元：健康知识",
+     "tasks": [
+      "学习本单元运动技能",
+      "练习本单元动作要领",
+      "参加一次运动游戏",
+      "完成体能小测试"
+     ]
+    },
+    {
+     "unit": "游戏与竞赛",
+     "tasks": [
+      "学习一个体育游戏",
+      "参与一次班级比赛",
+      "遵守比赛规则",
+      "和同学合作比赛"
+     ]
+    }
+   ],
+   "art": [
+    {
+     "unit": "第三单元：戏剧表演",
+     "tasks": [
+      "学习本单元艺术知识",
+      "完成一件艺术作品",
+      "欣赏并评价作品",
+      "参加展示与分享"
+     ]
+    },
+    {
+     "unit": "第四单元：艺术欣赏",
+     "tasks": [
+      "学习本单元艺术知识",
+      "完成一件艺术作品",
+      "欣赏并评价作品",
+      "参加展示与分享"
+     ]
+    },
+    {
+     "unit": "作品展示与评价",
+     "tasks": [
+      "整理学期作品",
+      "欣赏同学的作品",
+      "评价和改进作品",
+      "举办班级作品展"
+     ]
+    }
+   ],
+   "labor": [
+    {
+     "unit": "第三单元：种植养殖",
+     "tasks": [
+      "学习本单元劳动技能",
+      "独立完成一项劳动任务",
+      "记录劳动过程和感受",
+      "养成爱劳动的好习惯"
+     ]
+    },
+    {
+     "unit": "第四单元：工艺创新",
+     "tasks": [
+      "学习本单元劳动技能",
+      "独立完成一项劳动任务",
+      "记录劳动过程和感受",
+      "养成爱劳动的好习惯"
+     ]
+    },
+    {
+     "unit": "劳动成果展示",
+     "tasks": [
+      "展示一件劳动作品",
+      "分享劳动经验",
+      "评价劳动成果",
+      "体验劳动的快乐"
+     ]
+    }
+   ],
+   "practice": [
+    {
+     "unit": "第三单元：文化研究",
+     "tasks": [
+      "明确本单元活动主题",
+      "制定活动计划",
+      "参与并完成实践活动",
+      "展示交流活动成果"
+     ]
+    },
+    {
+     "unit": "第四单元：志愿服务",
+     "tasks": [
+      "明确本单元活动主题",
+      "制定活动计划",
+      "参与并完成实践活动",
+      "展示交流活动成果"
+     ]
+    },
+    {
+     "unit": "学期总结与展望",
+     "tasks": [
+      "回顾学期收获",
+      "完成学期总结",
+      "制定下阶段计划",
+      "分享成长故事"
+     ]
+    }
+   ]
+  }
+ },
+ "5": {
+  "a": {
+   "chinese": [
+    {
+     "unit": "第一单元：阅读与鉴赏",
+     "tasks": [
+      "学习本单元重点生字词",
+      "朗读本单元课文并理解内容",
+      "完成本单元练习与思考题",
+      "背诵指定段落或积累好词好句"
+     ]
+    },
+    {
+     "unit": "第二单元：习作与表达",
+     "tasks": [
+      "学习本单元重点生字词",
+      "朗读本单元课文并理解内容",
+      "完成本单元练习与思考题",
+      "背诵指定段落或积累好词好句"
+     ]
+    },
+    {
+     "unit": "语文园地（复习巩固）",
+     "tasks": [
+      "认读本册重点生字",
+      "复习本册重点词语",
+      "完成语文园地练习",
+      "开展课外阅读"
+     ]
+    }
+   ],
+   "math": [
+    {
+     "unit": "第一单元：小数乘除法",
+     "tasks": [
+      "学习本单元核心概念",
+      "练习本单元计算或方法",
+      "解决本单元实际问题",
+      "完成本单元综合练习"
+     ]
+    },
+    {
+     "unit": "第二单元：多边形面积",
+     "tasks": [
+      "学习本单元核心概念",
+      "练习本单元计算或方法",
+      "解决本单元实际问题",
+      "完成本单元综合练习"
+     ]
+    },
+    {
+     "unit": "综合与实践",
+     "tasks": [
+      "完成单元整理与复习",
+      "练习口算和计算",
+      "解决生活实际问题",
+      "整理错题本"
+     ]
+    }
+   ],
+   "english": [
+    {
+     "unit": "第一单元：日常交流进阶",
+     "tasks": [
+      "学习本单元核心词汇",
+      "练习本单元重点句型",
+      "完成本单元听说练习",
+      "用英语进行简单交流"
+     ]
+    },
+    {
+     "unit": "第二单元：旅行出行",
+     "tasks": [
+      "学习本单元核心词汇",
+      "练习本单元重点句型",
+      "完成本单元听说练习",
+      "用英语进行简单交流"
+     ]
+    },
+    {
+     "unit": "Revision（复习巩固）",
+     "tasks": [
+      "复习本单元单词",
+      "复习重点句型",
+      "完成听力练习",
+      "英语口语展示"
+     ]
+    }
+   ],
+   "science": [
+    {
+     "unit": "第一单元：光的反射",
+     "tasks": [
+      "学习本单元科学概念",
+      "观察并记录实验现象",
+      "动手完成一个探究活动",
+      "总结本单元科学结论"
+     ]
+    },
+    {
+     "unit": "第二单元：热传递",
+     "tasks": [
+      "学习本单元科学概念",
+      "观察并记录实验现象",
+      "动手完成一个探究活动",
+      "总结本单元科学结论"
+     ]
+    },
+    {
+     "unit": "科学探究活动",
+     "tasks": [
+      "提出一个科学问题",
+      "设计一个小实验",
+      "记录实验现象",
+      "分享实验结果"
+     ]
+    }
+   ],
+   "moral": [
+    {
+     "unit": "第一单元：民主法治",
+     "tasks": [
+      "学习本单元道德认知",
+      "参与讨论分享看法",
+      "完成一项实践活动",
+      "反思并记录收获"
+     ]
+    },
+    {
+     "unit": "第二单元：公民意识",
+     "tasks": [
+      "学习本单元道德认知",
+      "参与讨论分享看法",
+      "完成一项实践活动",
+      "反思并记录收获"
+     ]
+    },
+    {
+     "unit": "实践活动",
+     "tasks": [
+      "参与一次班级活动",
+      "完成一项家务劳动",
+      "帮助一位同学",
+      "记录活动感受"
+     ]
+    }
+   ],
+   "pe": [
+    {
+     "unit": "第一单元：专项运动",
+     "tasks": [
+      "学习本单元运动技能",
+      "练习本单元动作要领",
+      "参加一次运动游戏",
+      "完成体能小测试"
+     ]
+    },
+    {
+     "unit": "第二单元：体能强化",
+     "tasks": [
+      "学习本单元运动技能",
+      "练习本单元动作要领",
+      "参加一次运动游戏",
+      "完成体能小测试"
+     ]
+    },
+    {
+     "unit": "体能与健康",
+     "tasks": [
+      "坚持每周锻炼3次",
+      "练习本册体能项目",
+      "了解运动安全知识",
+      "记录锻炼打卡"
+     ]
+    }
+   ],
+   "art": [
+    {
+     "unit": "第一单元：音乐创作",
+     "tasks": [
+      "学习本单元艺术知识",
+      "完成一件艺术作品",
+      "欣赏并评价作品",
+      "参加展示与分享"
+     ]
+    },
+    {
+     "unit": "第二单元：美术表现",
+     "tasks": [
+      "学习本单元艺术知识",
+      "完成一件艺术作品",
+      "欣赏并评价作品",
+      "参加展示与分享"
+     ]
+    },
+    {
+     "unit": "艺术实践",
+     "tasks": [
+      "练习本册歌曲",
+      "完成一幅绘画作品",
+      "参加一次艺术活动",
+      "展示艺术才艺"
+     ]
+    }
+   ],
+   "labor": [
+    {
+     "unit": "第一单元：烹饪实践",
+     "tasks": [
+      "学习本单元劳动技能",
+      "独立完成一项劳动任务",
+      "记录劳动过程和感受",
+      "养成爱劳动的好习惯"
+     ]
+    },
+    {
+     "unit": "第二单元：家电维护",
+     "tasks": [
+      "学习本单元劳动技能",
+      "独立完成一项劳动任务",
+      "记录劳动过程和感受",
+      "养成爱劳动的好习惯"
+     ]
+    },
+    {
+     "unit": "劳动实践",
+     "tasks": [
+      "独立完成一项家务",
+      "学习本册劳动技能",
+      "参加校园劳动",
+      "记录劳动过程"
+     ]
+    }
+   ],
+   "practice": [
+    {
+     "unit": "第一单元：课题研究",
+     "tasks": [
+      "明确本单元活动主题",
+      "制定活动计划",
+      "参与并完成实践活动",
+      "展示交流活动成果"
+     ]
+    },
+    {
+     "unit": "第二单元：社会实践",
+     "tasks": [
+      "明确本单元活动主题",
+      "制定活动计划",
+      "参与并完成实践活动",
+      "展示交流活动成果"
+     ]
+    },
+    {
+     "unit": "项目展示",
+     "tasks": [
+      "整理项目成果",
+      "制作展示材料",
+      "向同学展示成果",
+      "听取改进意见"
+     ]
+    }
+   ]
+  },
+  "b": {
+   "chinese": [
+    {
+     "unit": "第三单元：古诗文名篇",
+     "tasks": [
+      "学习本单元重点生字词",
+      "朗读本单元课文并理解内容",
+      "完成本单元练习与思考题",
+      "背诵指定段落或积累好词好句"
+     ]
+    },
+    {
+     "unit": "第四单元：名著整本书阅读",
+     "tasks": [
+      "学习本单元重点生字词",
+      "朗读本单元课文并理解内容",
+      "完成本单元练习与思考题",
+      "背诵指定段落或积累好词好句"
+     ]
+    },
+    {
+     "unit": "综合实践：语文活动",
+     "tasks": [
+      "参加一次朗读活动",
+      "写一篇小练笔",
+      "和同学分享读书心得",
+      "完成本册复习自查"
+     ]
+    }
+   ],
+   "math": [
+    {
+     "unit": "第三单元：因数与倍数",
+     "tasks": [
+      "学习本单元核心概念",
+      "练习本单元计算或方法",
+      "解决本单元实际问题",
+      "完成本单元综合练习"
+     ]
+    },
+    {
+     "unit": "第四单元：分数加减法",
+     "tasks": [
+      "学习本单元核心概念",
+      "练习本单元计算或方法",
+      "解决本单元实际问题",
+      "完成本单元综合练习"
+     ]
+    },
+    {
+     "unit": "数学思维拓展",
+     "tasks": [
+      "挑战一道思维题",
+      "学习数学小故事",
+      "玩一个数学小游戏",
+      "向家人讲解一道题"
+     ]
+    }
+   ],
+   "english": [
+    {
+     "unit": "第三单元：健康生活",
+     "tasks": [
+      "学习本单元核心词汇",
+      "练习本单元重点句型",
+      "完成本单元听说练习",
+      "用英语进行简单交流"
+     ]
+    },
+    {
+     "unit": "第四单元：文学艺术",
+     "tasks": [
+      "学习本单元核心词汇",
+      "练习本单元重点句型",
+      "完成本单元听说练习",
+      "用英语进行简单交流"
+     ]
+    },
+    {
+     "unit": "Story Time（故事阅读）",
+     "tasks": [
+      "读一个英语小故事",
+      "学习故事中的生词",
+      "复述故事大意",
+      "角色扮演小故事"
+     ]
+    }
+   ],
+   "science": [
+    {
+     "unit": "第三单元：地球运动",
+     "tasks": [
+      "学习本单元科学概念",
+      "观察并记录实验现象",
+      "动手完成一个探究活动",
+      "总结本单元科学结论"
+     ]
+    },
+    {
+     "unit": "第四单元：生命活动",
+     "tasks": [
+      "学习本单元科学概念",
+      "观察并记录实验现象",
+      "动手完成一个探究活动",
+      "总结本单元科学结论"
+     ]
+    },
+    {
+     "unit": "科技小制作",
+     "tasks": [
+      "收集废旧材料",
+      "设计制作方案",
+      "制作一个科技小作品",
+      "展示并介绍作品"
+     ]
+    }
+   ],
+   "moral": [
+    {
+     "unit": "第三单元：国家安全",
+     "tasks": [
+      "学习本单元道德认知",
+      "参与讨论分享看法",
+      "完成一项实践活动",
+      "反思并记录收获"
+     ]
+    },
+    {
+     "unit": "第四单元：传统美德",
+     "tasks": [
+      "学习本单元道德认知",
+      "参与讨论分享看法",
+      "完成一项实践活动",
+      "反思并记录收获"
+     ]
+    },
+    {
+     "unit": "成长与反思",
+     "tasks": [
+      "反思自己的进步",
+      "学习他人的优点",
+      "制定一个小目标",
+      "写下成长心得"
+     ]
+    }
+   ],
+   "pe": [
+    {
+     "unit": "第三单元：运动策略",
+     "tasks": [
+      "学习本单元运动技能",
+      "练习本单元动作要领",
+      "参加一次运动游戏",
+      "完成体能小测试"
+     ]
+    },
+    {
+     "unit": "第四单元：健康生活",
+     "tasks": [
+      "学习本单元运动技能",
+      "练习本单元动作要领",
+      "参加一次运动游戏",
+      "完成体能小测试"
+     ]
+    },
+    {
+     "unit": "游戏与竞赛",
+     "tasks": [
+      "学习一个体育游戏",
+      "参与一次班级比赛",
+      "遵守比赛规则",
+      "和同学合作比赛"
+     ]
+    }
+   ],
+   "art": [
+    {
+     "unit": "第三单元：戏剧编演",
+     "tasks": [
+      "学习本单元艺术知识",
+      "完成一件艺术作品",
+      "欣赏并评价作品",
+      "参加展示与分享"
+     ]
+    },
+    {
+     "unit": "第四单元：数字艺术",
+     "tasks": [
+      "学习本单元艺术知识",
+      "完成一件艺术作品",
+      "欣赏并评价作品",
+      "参加展示与分享"
+     ]
+    },
+    {
+     "unit": "作品展示与评价",
+     "tasks": [
+      "整理学期作品",
+      "欣赏同学的作品",
+      "评价和改进作品",
+      "举办班级作品展"
+     ]
+    }
+   ],
+   "labor": [
+    {
+     "unit": "第三单元：农业体验",
+     "tasks": [
+      "学习本单元劳动技能",
+      "独立完成一项劳动任务",
+      "记录劳动过程和感受",
+      "养成爱劳动的好习惯"
+     ]
+    },
+    {
+     "unit": "第四单元：技术创新",
+     "tasks": [
+      "学习本单元劳动技能",
+      "独立完成一项劳动任务",
+      "记录劳动过程和感受",
+      "养成爱劳动的好习惯"
+     ]
+    },
+    {
+     "unit": "劳动成果展示",
+     "tasks": [
+      "展示一件劳动作品",
+      "分享劳动经验",
+      "评价劳动成果",
+      "体验劳动的快乐"
+     ]
+    }
+   ],
+   "practice": [
+    {
+     "unit": "第三单元：创新制作",
+     "tasks": [
+      "明确本单元活动主题",
+      "制定活动计划",
+      "参与并完成实践活动",
+      "展示交流活动成果"
+     ]
+    },
+    {
+     "unit": "第四单元：国际交流",
+     "tasks": [
+      "明确本单元活动主题",
+      "制定活动计划",
+      "参与并完成实践活动",
+      "展示交流活动成果"
+     ]
+    },
+    {
+     "unit": "学期总结与展望",
+     "tasks": [
+      "回顾学期收获",
+      "完成学期总结",
+      "制定下阶段计划",
+      "分享成长故事"
+     ]
+    }
+   ]
+  }
+ },
+ "6": {
+  "a": {
+   "chinese": [
+    {
+     "unit": "第一单元：阅读与鉴赏",
+     "tasks": [
+      "学习本单元重点生字词",
+      "朗读本单元课文并理解内容",
+      "完成本单元练习与思考题",
+      "背诵指定段落或积累好词好句"
+     ]
+    },
+    {
+     "unit": "第二单元：习作与表达",
+     "tasks": [
+      "学习本单元重点生字词",
+      "朗读本单元课文并理解内容",
+      "完成本单元练习与思考题",
+      "背诵指定段落或积累好词好句"
+     ]
+    },
+    {
+     "unit": "语文园地（复习巩固）",
+     "tasks": [
+      "认读本册重点生字",
+      "复习本册重点词语",
+      "完成语文园地练习",
+      "开展课外阅读"
+     ]
+    }
+   ],
+   "math": [
+    {
+     "unit": "第一单元：分数乘除法",
+     "tasks": [
+      "学习本单元核心概念",
+      "练习本单元计算或方法",
+      "解决本单元实际问题",
+      "完成本单元综合练习"
+     ]
+    },
+    {
+     "unit": "第二单元：圆",
+     "tasks": [
+      "学习本单元核心概念",
+      "练习本单元计算或方法",
+      "解决本单元实际问题",
+      "完成本单元综合练习"
+     ]
+    },
+    {
+     "unit": "综合与实践",
+     "tasks": [
+      "完成单元整理与复习",
+      "练习口算和计算",
+      "解决生活实际问题",
+      "整理错题本"
+     ]
+    }
+   ],
+   "english": [
+    {
+     "unit": "第一单元：综合交流",
+     "tasks": [
+      "学习本单元核心词汇",
+      "练习本单元重点句型",
+      "完成本单元听说练习",
+      "用英语进行简单交流"
+     ]
+    },
+    {
+     "unit": "第二单元：文化理解",
+     "tasks": [
+      "学习本单元核心词汇",
+      "练习本单元重点句型",
+      "完成本单元听说练习",
+      "用英语进行简单交流"
+     ]
+    },
+    {
+     "unit": "Revision（复习巩固）",
+     "tasks": [
+      "复习本单元单词",
+      "复习重点句型",
+      "完成听力练习",
+      "英语口语展示"
+     ]
+    }
+   ],
+   "science": [
+    {
+     "unit": "第一单元：能量转换",
+     "tasks": [
+      "学习本单元科学概念",
+      "观察并记录实验现象",
+      "动手完成一个探究活动",
+      "总结本单元科学结论"
+     ]
+    },
+    {
+     "unit": "第二单元：宇宙天体",
+     "tasks": [
+      "学习本单元科学概念",
+      "观察并记录实验现象",
+      "动手完成一个探究活动",
+      "总结本单元科学结论"
+     ]
+    },
+    {
+     "unit": "科学探究活动",
+     "tasks": [
+      "提出一个科学问题",
+      "设计一个小实验",
+      "记录实验现象",
+      "分享实验结果"
+     ]
+    }
+   ],
+   "moral": [
+    {
+     "unit": "第一单元：法治意识",
+     "tasks": [
+      "学习本单元道德认知",
+      "参与讨论分享看法",
+      "完成一项实践活动",
+      "反思并记录收获"
+     ]
+    },
+    {
+     "unit": "第二单元：公民责任",
+     "tasks": [
+      "学习本单元道德认知",
+      "参与讨论分享看法",
+      "完成一项实践活动",
+      "反思并记录收获"
+     ]
+    },
+    {
+     "unit": "实践活动",
+     "tasks": [
+      "参与一次班级活动",
+      "完成一项家务劳动",
+      "帮助一位同学",
+      "记录活动感受"
+     ]
+    }
+   ],
+   "pe": [
+    {
+     "unit": "第一单元：运动技能",
+     "tasks": [
+      "学习本单元运动技能",
+      "练习本单元动作要领",
+      "参加一次运动游戏",
+      "完成体能小测试"
+     ]
+    },
+    {
+     "unit": "第二单元：体能达标",
+     "tasks": [
+      "学习本单元运动技能",
+      "练习本单元动作要领",
+      "参加一次运动游戏",
+      "完成体能小测试"
+     ]
+    },
+    {
+     "unit": "体能与健康",
+     "tasks": [
+      "坚持每周锻炼3次",
+      "练习本册体能项目",
+      "了解运动安全知识",
+      "记录锻炼打卡"
+     ]
+    }
+   ],
+   "art": [
+    {
+     "unit": "第一单元：艺术表现",
+     "tasks": [
+      "学习本单元艺术知识",
+      "完成一件艺术作品",
+      "欣赏并评价作品",
+      "参加展示与分享"
+     ]
+    },
+    {
+     "unit": "第二单元：创意实践",
+     "tasks": [
+      "学习本单元艺术知识",
+      "完成一件艺术作品",
+      "欣赏并评价作品",
+      "参加展示与分享"
+     ]
+    },
+    {
+     "unit": "艺术实践",
+     "tasks": [
+      "练习本册歌曲",
+      "完成一幅绘画作品",
+      "参加一次艺术活动",
+      "展示艺术才艺"
+     ]
+    }
+   ],
+   "labor": [
+    {
+     "unit": "第一单元：生活技能",
+     "tasks": [
+      "学习本单元劳动技能",
+      "独立完成一项劳动任务",
+      "记录劳动过程和感受",
+      "养成爱劳动的好习惯"
+     ]
+    },
+    {
+     "unit": "第二单元：生产劳动",
+     "tasks": [
+      "学习本单元劳动技能",
+      "独立完成一项劳动任务",
+      "记录劳动过程和感受",
+      "养成爱劳动的好习惯"
+     ]
+    },
+    {
+     "unit": "劳动实践",
+     "tasks": [
+      "独立完成一项家务",
+      "学习本册劳动技能",
+      "参加校园劳动",
+      "记录劳动过程"
+     ]
+    }
+   ],
+   "practice": [
+    {
+     "unit": "第一单元：毕业项目",
+     "tasks": [
+      "明确本单元活动主题",
+      "制定活动计划",
+      "参与并完成实践活动",
+      "展示交流活动成果"
+     ]
+    },
+    {
+     "unit": "第二单元：社会调研",
+     "tasks": [
+      "明确本单元活动主题",
+      "制定活动计划",
+      "参与并完成实践活动",
+      "展示交流活动成果"
+     ]
+    },
+    {
+     "unit": "项目展示",
+     "tasks": [
+      "整理项目成果",
+      "制作展示材料",
+      "向同学展示成果",
+      "听取改进意见"
+     ]
+    }
+   ]
+  },
+  "b": {
+   "chinese": [
+    {
+     "unit": "第三单元：古诗文",
+     "tasks": [
+      "学习本单元重点生字词",
+      "朗读本单元课文并理解内容",
+      "完成本单元练习与思考题",
+      "背诵指定段落或积累好词好句"
+     ]
+    },
+    {
+     "unit": "第四单元：名著阅读与综合复习",
+     "tasks": [
+      "学习本单元重点生字词",
+      "朗读本单元课文并理解内容",
+      "完成本单元练习与思考题",
+      "背诵指定段落或积累好词好句"
+     ]
+    },
+    {
+     "unit": "综合实践：语文活动",
+     "tasks": [
+      "参加一次朗读活动",
+      "写一篇小练笔",
+      "和同学分享读书心得",
+      "完成本册复习自查"
+     ]
+    }
+   ],
+   "math": [
+    {
+     "unit": "第三单元：百分数",
+     "tasks": [
+      "学习本单元核心概念",
+      "练习本单元计算或方法",
+      "解决本单元实际问题",
+      "完成本单元综合练习"
+     ]
+    },
+    {
+     "unit": "第四单元：比例与统计",
+     "tasks": [
+      "学习本单元核心概念",
+      "练习本单元计算或方法",
+      "解决本单元实际问题",
+      "完成本单元综合练习"
+     ]
+    },
+    {
+     "unit": "数学思维拓展",
+     "tasks": [
+      "挑战一道思维题",
+      "学习数学小故事",
+      "玩一个数学小游戏",
+      "向家人讲解一道题"
+     ]
+    }
+   ],
+   "english": [
+    {
+     "unit": "第三单元：阅读写作",
+     "tasks": [
+      "学习本单元核心词汇",
+      "练习本单元重点句型",
+      "完成本单元听说练习",
+      "用英语进行简单交流"
+     ]
+    },
+    {
+     "unit": "第四单元：主题表达",
+     "tasks": [
+      "学习本单元核心词汇",
+      "练习本单元重点句型",
+      "完成本单元听说练习",
+      "用英语进行简单交流"
+     ]
+    },
+    {
+     "unit": "Story Time（故事阅读）",
+     "tasks": [
+      "读一个英语小故事",
+      "学习故事中的生词",
+      "复述故事大意",
+      "角色扮演小故事"
+     ]
+    }
+   ],
+   "science": [
+    {
+     "unit": "第三单元：生物多样性",
+     "tasks": [
+      "学习本单元科学概念",
+      "观察并记录实验现象",
+      "动手完成一个探究活动",
+      "总结本单元科学结论"
+     ]
+    },
+    {
+     "unit": "第四单元：科技发展",
+     "tasks": [
+      "学习本单元科学概念",
+      "观察并记录实验现象",
+      "动手完成一个探究活动",
+      "总结本单元科学结论"
+     ]
+    },
+    {
+     "unit": "科技小制作",
+     "tasks": [
+      "收集废旧材料",
+      "设计制作方案",
+      "制作一个科技小作品",
+      "展示并介绍作品"
+     ]
+    }
+   ],
+   "moral": [
+    {
+     "unit": "第三单元：国际视野",
+     "tasks": [
+      "学习本单元道德认知",
+      "参与讨论分享看法",
+      "完成一项实践活动",
+      "反思并记录收获"
+     ]
+    },
+    {
+     "unit": "第四单元：理想信念",
+     "tasks": [
+      "学习本单元道德认知",
+      "参与讨论分享看法",
+      "完成一项实践活动",
+      "反思并记录收获"
+     ]
+    },
+    {
+     "unit": "成长与反思",
+     "tasks": [
+      "反思自己的进步",
+      "学习他人的优点",
+      "制定一个小目标",
+      "写下成长心得"
+     ]
+    }
+   ],
+   "pe": [
+    {
+     "unit": "第三单元：体育文化",
+     "tasks": [
+      "学习本单元运动技能",
+      "练习本单元动作要领",
+      "参加一次运动游戏",
+      "完成体能小测试"
+     ]
+    },
+    {
+     "unit": "第四单元：健康管理",
+     "tasks": [
+      "学习本单元运动技能",
+      "练习本单元动作要领",
+      "参加一次运动游戏",
+      "完成体能小测试"
+     ]
+    },
+    {
+     "unit": "游戏与竞赛",
+     "tasks": [
+      "学习一个体育游戏",
+      "参与一次班级比赛",
+      "遵守比赛规则",
+      "和同学合作比赛"
+     ]
+    }
+   ],
+   "art": [
+    {
+     "unit": "第三单元：文化理解",
+     "tasks": [
+      "学习本单元艺术知识",
+      "完成一件艺术作品",
+      "欣赏并评价作品",
+      "参加展示与分享"
+     ]
+    },
+    {
+     "unit": "第四单元：审美提升",
+     "tasks": [
+      "学习本单元艺术知识",
+      "完成一件艺术作品",
+      "欣赏并评价作品",
+      "参加展示与分享"
+     ]
+    },
+    {
+     "unit": "作品展示与评价",
+     "tasks": [
+      "整理学期作品",
+      "欣赏同学的作品",
+      "评价和改进作品",
+      "举办班级作品展"
+     ]
+    }
+   ],
+   "labor": [
+    {
+     "unit": "第三单元：服务劳动",
+     "tasks": [
+      "学习本单元劳动技能",
+      "独立完成一项劳动任务",
+      "记录劳动过程和感受",
+      "养成爱劳动的好习惯"
+     ]
+    },
+    {
+     "unit": "第四单元：创新实践",
+     "tasks": [
+      "学习本单元劳动技能",
+      "独立完成一项劳动任务",
+      "记录劳动过程和感受",
+      "养成爱劳动的好习惯"
+     ]
+    },
+    {
+     "unit": "劳动成果展示",
+     "tasks": [
+      "展示一件劳动作品",
+      "分享劳动经验",
+      "评价劳动成果",
+      "体验劳动的快乐"
+     ]
+    }
+   ],
+   "practice": [
+    {
+     "unit": "第三单元：职业体验",
+     "tasks": [
+      "明确本单元活动主题",
+      "制定活动计划",
+      "参与并完成实践活动",
+      "展示交流活动成果"
+     ]
+    },
+    {
+     "unit": "第四单元：创新设计",
+     "tasks": [
+      "明确本单元活动主题",
+      "制定活动计划",
+      "参与并完成实践活动",
+      "展示交流活动成果"
+     ]
+    },
+    {
+     "unit": "学期总结与展望",
+     "tasks": [
+      "回顾学期收获",
+      "完成学期总结",
+      "制定下阶段计划",
+      "分享成长故事"
+     ]
+    }
+   ]
+  }
+ }
+};
+
+// Assign actual GRADE_DATA
+const GRADE_DATA = _GRADE_DATA;
+
+// ==================== 状态管理 ====================
+const STORAGE_KEY='yumuozuo_study_station_v2';
+let state={
+  grade:1,
+  sem:'a', // 'a'=上学期 'b'=下学期
+  pendingGrade:null,
+  pendingSem:null,
+  currentSubject:'chinese',
+  view:'home', // 'home' | 'poems'
+  points:0,
+  pointsResetV1:false, // 一次性积分清零标记（2026-08-12）
+  streak:0,
+  lastCheckin:null,
+  checkinToday:false,
+  completedTasks:{}, // {taskKey: true}
+  taskCompletionDates:{}, // {taskKey: dateString} used for today's task count
+  checkinHistory:[], // [date strings]
+  weeklyHouseholdTasks:[], // this week's random household tasks
+  householdWeekSeed:0, // week identifier
+  householdRefreshCount:0, // 更换推荐任务的次数
+  completedPoems:{}, // {'stage_idx': true} 已背诗词
+  whiteGems:0, // 实际发放的白宝石数量
+  weeklyGemRedeemed:null, // 本周打卡连胜兑换白宝石的周种子
+  currentPoemKey:null, // 当前待背诗词 key（'stage_idx'）
+  recSubjectKeys:[], // 本周推荐中的学科任务key（已完成的保留，不随更换移除）
+  recWeekSeed:0, // 生成本周学科推荐时的周种子
+  recDiscardedKeys:[], // 本周更换时被换下的学科任务key（本周内不再重复推荐）
+  exchangedColorGems:0, // 线下已兑换彩色宝石数（只能增加，不能减少）
+  exchangedWhiteGems:0, // 线下已兑换白宝石数（只能增加，不能减少）
+  xpTotal:0, // 累计经验值=打卡+学科任务+家务积分（1:1），背诗不算经验；不会被消费扣减
+};
+
+function loadState(){
+  let saved=null;
+  let hadData=false;
+  try{
+    saved=localStorage.getItem(STORAGE_KEY);
+    if(saved){ hadData=true;
+      const parsed=JSON.parse(saved);
+      // Migrate old completedTasks format
+      state={...state,...parsed};
+      if(!state.sem) state.sem='a';
+      if(!state.view) state.view='home';
+      if(!state.taskCompletionDates) state.taskCompletionDates={};
+      if(!state.weeklyHouseholdTasks) state.weeklyHouseholdTasks=[];
+      if(!state.householdWeekSeed) state.householdWeekSeed=0;
+      if(!state.completedPoems) state.completedPoems={};
+      if(!state.whiteGems) state.whiteGems=0;
+      if(!state.householdRefreshCount) state.householdRefreshCount=0;
+      if(!state.recSubjectKeys) state.recSubjectKeys=[];
+      if(!state.recWeekSeed) state.recWeekSeed=0;
+      if(!state.recDiscardedKeys) state.recDiscardedKeys=[];
+      if(!state.currentPoemKey) state.currentPoemKey=null;
+      if(state.weeklyGemRedeemed===undefined) state.weeklyGemRedeemed=null;
+      if(state.exchangedColorGems===undefined) state.exchangedColorGems=0;
+      if(state.exchangedWhiteGems===undefined) state.exchangedWhiteGems=0;
+      if(state.xpTotal===undefined) state.xpTotal=0;
+      migrateTaskKeys();
+      // 强制重新生成家务任务（兼容新版带周种子的key）
+      state.householdWeekSeed=0;
+      state.weeklyHouseholdTasks=[];
+      // 一次性清理：2024新版语文一上目录替换旧版后，清除旧版语文完成记录（同步扣回积分），避免串到新任务
+      if(state.chineseA1V26!==true){
+        const prefix='1_a_chinese_';
+        let cleared=0;
+        Object.keys(state.completedTasks).forEach(k=>{ if(k.indexOf(prefix)===0){delete state.completedTasks[k];cleared++;} });
+        Object.keys(state.taskCompletionDates).forEach(k=>{ if(k.indexOf(prefix)===0) delete state.taskCompletionDates[k]; });
+        state.recSubjectKeys=(state.recSubjectKeys||[]).filter(k=>k.indexOf(prefix)!==0);
+        state.recDiscardedKeys=(state.recDiscardedKeys||[]).filter(k=>k.indexOf(prefix)!==0);
+        if(cleared>0) state.points=Math.max(0,state.points-cleared*10);
+        state.chineseA1V26=true;
+      }
+      // 一次性清理：2024新版教材（数学苏教版/科学教科版/道法统编版/英语改启蒙）替换旧版后，清除一年级上学期其他科目旧完成记录（同步扣回积分），避免串到新任务
+      if(state.subjectsA1V27!==true){
+        const prefix='1_a_';
+        let cleared=0;
+        Object.keys(state.completedTasks).forEach(k=>{ if(k.indexOf(prefix)===0){delete state.completedTasks[k];cleared++;} });
+        Object.keys(state.taskCompletionDates).forEach(k=>{ if(k.indexOf(prefix)===0) delete state.taskCompletionDates[k]; });
+        state.recSubjectKeys=(state.recSubjectKeys||[]).filter(k=>k.indexOf(prefix)!==0);
+        state.recDiscardedKeys=(state.recDiscardedKeys||[]).filter(k=>k.indexOf(prefix)!==0);
+        if(cleared>0) state.points=Math.max(0,state.points-cleared*10);
+        state.subjectsA1V27=true;
+      }
+      // 一次性清理：科学扩充为6单元、道法扩充为8单元后，清除这两科旧完成记录（同步扣回积分），避免串到新任务
+      if(state.sciMoralA1V28!==true){
+        let cleared=0;
+        ['1_a_science_','1_a_moral_'].forEach(prefix=>{
+          Object.keys(state.completedTasks).forEach(k=>{ if(k.indexOf(prefix)===0){delete state.completedTasks[k];cleared++;} });
+          Object.keys(state.taskCompletionDates).forEach(k=>{ if(k.indexOf(prefix)===0) delete state.taskCompletionDates[k]; });
+          state.recSubjectKeys=(state.recSubjectKeys||[]).filter(k=>k.indexOf(prefix)!==0);
+          state.recDiscardedKeys=(state.recDiscardedKeys||[]).filter(k=>k.indexOf(prefix)!==0);
+        });
+        if(cleared>0) state.points=Math.max(0,state.points-cleared*10);
+        state.sciMoralA1V28=true;
+      }
+      // v2.9 口径升级：白宝石1颗=100积分（原50）；背诗不再直接+50积分，改由白宝石折合计入积分数量
+      // 迁移：把历史上每首已背诗的+50分从积分中移除（其价值已由白宝石折合体现）；经验值≈当前任务积分
+      if(state.gemsWorthV29!==true){
+        const poemCount=Object.keys(state.completedPoems||{}).length;
+        state.points=Math.max(0,(state.points||0)-poemCount*50);
+        if(!state.xpTotal) state.xpTotal=state.points;
+        state.gemsWorthV29=true;
+      }
+    }
+  }catch(e){console.error('Load error:',e);}
+  const today=new Date().toISOString().split('T')[0];
+  // Also try old storage key
+  if(!saved){
+    try{
+      const old=localStorage.getItem('yumuozuo_study_station');
+      if(old){
+        hadData=true;
+        const parsed=JSON.parse(old);
+        state={...state,...parsed};
+        if(!state.sem) state.sem='a';
+        if(!state.view) state.view='home';
+        if(!state.taskCompletionDates) state.taskCompletionDates={};
+        if(!state.weeklyHouseholdTasks) state.weeklyHouseholdTasks=[];
+        if(!state.householdWeekSeed) state.householdWeekSeed=0;
+        if(!state.completedPoems) state.completedPoems={};
+        if(!state.whiteGems) state.whiteGems=0;
+        if(!state.householdRefreshCount) state.householdRefreshCount=0;
+        if(!state.recSubjectKeys) state.recSubjectKeys=[];
+        if(!state.recWeekSeed) state.recWeekSeed=0;
+        if(!state.recDiscardedKeys) state.recDiscardedKeys=[];
+        if(!state.currentPoemKey) state.currentPoemKey=null;
+        if(state.weeklyGemRedeemed===undefined) state.weeklyGemRedeemed=null;
+        if(state.exchangedColorGems===undefined) state.exchangedColorGems=0;
+        if(state.exchangedWhiteGems===undefined) state.exchangedWhiteGems=0;
+        if(state.xpTotal===undefined) state.xpTotal=0;
+        migrateTaskKeys();
+        // Migrate and save to new key
+        saveState();
+      }
+    }catch(e){}
+  }
+  // 一次性积分清零（2026-08-12 用户要求：积分重新开始累计，只清一次）
+  if(hadData&&state.pointsResetV1!==true){
+    state.points=0;
+    state.pointsResetV1=true;
+    saveState();
+  }
+  state.checkinToday=(state.lastCheckin===today);
+}
+
+// 迁移旧任务key：旧格式 {grade}_{subject}_{unit}_{task} → 新格式 {grade}_{sem}_{subject}_{unit}_{task}（旧数据归入上学期）
+function migrateTaskKeys(){
+  const oldKeys=Object.keys(state.completedTasks);
+  let migrated=false;
+  oldKeys.forEach(k=>{
+    if(k.indexOf('_')<0) return;
+    const parts=k.split('_');
+    if(parts.length===4 && /^[1-6]$/.test(parts[0]) && SUBJECTS.some(s=>s.id===parts[1])){
+      const newKey=`${parts[0]}_a_${parts[1]}_${parts[2]}_${parts[3]}`;
+      state.completedTasks[newKey]=state.completedTasks[k];
+      delete state.completedTasks[k];
+      if(state.taskCompletionDates[k]){
+        state.taskCompletionDates[newKey]=state.taskCompletionDates[k];
+        delete state.taskCompletionDates[k];
+      }
+      migrated=true;
+    }
+  });
+  if(migrated){
+    // recSubjectKeys / recDiscardedKeys 同样迁移
+    const fixKeys=arr=>{
+      if(!Array.isArray(arr)) return arr;
+      return arr.map(k=>{
+        if(typeof k!=='string') return k;
+        const p=k.split('_');
+        if(p.length===4 && /^[1-6]$/.test(p[0]) && SUBJECTS.some(s=>s.id===p[1])){
+          return `${p[0]}_a_${p[1]}_${p[2]}_${p[3]}`;
+        }
+        return k;
+      });
+    };
+    state.recSubjectKeys=fixKeys(state.recSubjectKeys);
+    state.recDiscardedKeys=fixKeys(state.recDiscardedKeys);
+  }
+}
+
+// 当前年级+学期的任务数据
+function gradeData(){
+  return ((GRADE_DATA[state.grade]||{})[state.sem]||{});
+}
+
+function saveState(){
+  try{
+    state._lastSavedAt=new Date().toLocaleString('zh-CN');
+    localStorage.setItem(STORAGE_KEY,JSON.stringify(state));
+  }catch(e){console.error('Save error:',e);}
+}
+
+function getTaskKey(subjectId,unitIdx,taskIdx){
+  return `${state.grade}_${state.sem}_${subjectId}_${unitIdx}_${taskIdx}`;
+}
+
+function getHouseholdKey(weekSeed,idx){
+  return `household_${state.grade}_${state.sem}_${weekSeed}_${idx}`;
+}
+
+// 单元门控：判断某单元是否全部完成
+function isUnitComplete(subjectId,ui){
+  const units=gradeData()[subjectId]||[];
+  const unit=units[ui];
+  if(!unit) return false;
+  return unit.tasks.every((t,ti)=>state.completedTasks[getTaskKey(subjectId,ui,ti)]);
+}
+
+// 单元门控：单元完成率（0~1）
+function getUnitCompletionRate(subjectId,ui){
+  const units=gradeData()[subjectId]||[];
+  const unit=units[ui];
+  if(!unit||unit.tasks.length===0) return 0;
+  const done=unit.tasks.filter((t,ti)=>state.completedTasks[getTaskKey(subjectId,ui,ti)]).length;
+  return done/unit.tasks.length;
+}
+
+// 单元门控：某单元是否为当前应推荐的单元
+// 规则：前面所有单元都已全部完成 → 解锁；或该单元完成率>50% → 也可解锁后一单元
+function isActiveUnit(subjectId,ui){
+  for(let i=0;i<ui;i++){
+    if(!isUnitComplete(subjectId,i)&&getUnitCompletionRate(subjectId,i)<=0.5) return false;
+  }
+  return true;
+}
+
+// Get current ISO week identifier
+function getWeekSeed(){
+  const now=new Date();
+  const start=new Date(now.getFullYear(),0,1);
+  const days=Math.floor((now-start)/(86400000));
+  return Math.floor(days/7);
+}
+
+// 每周一 10:00 为周界的刷新标识：未到本周一10点视为仍属上周（本周推荐任务在周一10点才更新）
+function getRefreshWeekId(){
+  const now=new Date();
+  const day=now.getDay(); // 0=Sun
+  const mondayOffset=(day===0?-6:1-day);
+  const d=new Date(now.getFullYear(),now.getMonth(),now.getDate()+mondayOffset);
+  d.setHours(10,0,0,0); // 本周一 10:00
+  if(now<d) d.setDate(d.getDate()-7); // 还没到周一10点 → 用上周一10点
+  return d.getTime();
+}
+
+// 本周周一到周五的日期（与打卡日期同一时区逻辑）
+function getWeekDates(){
+  const now=new Date();
+  const day=now.getUTCDay();
+  const mondayOffset=(day===0?-6:1-day);
+  const monday=new Date(Date.UTC(now.getUTCFullYear(),now.getUTCMonth(),now.getUTCDate()+mondayOffset));
+  const dates=[];
+  for(let i=0;i<5;i++) dates.push(new Date(monday.getTime()+i*86400000).toISOString().split('T')[0]);
+  return dates;
+}
+
+// 本周周一到周五是否全部完成打卡
+function isWeeklyCheckinComplete(){
+  const dates=getWeekDates();
+  return dates.every(d=>(state.checkinHistory||[]).indexOf(d)>=0);
+}
+
+// 兑换本周打卡连胜的白宝石：白宝石+1、积分+50（每周限1次）
+function redeemWeeklyGem(){
+  if(!isWeeklyCheckinComplete()){
+    showToast('本周周一到周五还没全部完成打卡哦');
+    return;
+  }
+  const ws=getWeekSeed();
+  if(state.weeklyGemRedeemed===ws){
+    showToast('本周的白宝石已经兑换过啦');
+    return;
+  }
+  state.weeklyGemRedeemed=ws;
+  state.whiteGems=(state.whiteGems||0)+1;
+  saveState();
+  renderAll();
+  showToast('💎 兑换成功！白宝石+1（折合100积分）');
+}
+
+// Seeded random for consistent weekly tasks
+function seededRandom(seed){
+  let s=seed;
+  return function(){
+    s=(s*16807+0)%2147483647;
+    return (s-1)/2147483646;
+  };
+}
+
+// 基于种子稳定洗牌（同一周+同刷新次数结果一致）
+function seededShuffle(arr,seed){
+  const a=[...arr];
+  const rand=seededRandom(seed);
+  for(let i=a.length-1;i>0;i--){
+    const j=Math.floor(rand()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+
+// Generate this week's household tasks（每周固定5项，周一10点刷新，不随换任务更换）
+function generateHouseholdTasks(force){
+  const baseSeed=getRefreshWeekId()+state.grade*1000+(state.sem==='b'?500:0);
+  if(!force && state.householdWeekSeed===baseSeed && state.weeklyHouseholdTasks.length>0) return;
+  
+  state.householdWeekSeed=baseSeed;
+  const rand=seededRandom(baseSeed);
+  const pool=[...HOUSEHOLD_TASK_POOL];
+  // Fisher-Yates shuffle
+  for(let i=pool.length-1;i>0;i--){
+    const j=Math.floor(rand()*(i+1));
+    [pool[i],pool[j]]=[pool[j],pool[i]];
+  }
+  state.weeklyHouseholdTasks=pool.slice(0,5); // Pick 5 tasks
+  saveState();
+}
+
+// 由key还原任务信息（校验key是否仍有效）
+function resolveTaskKey(key){
+  const p=key.split('_');
+  // 新格式: grade_sem_subject_unit_task
+  if(p.length!==5) return null;
+  const sid=p[2],ui=parseInt(p[3],10),ti=parseInt(p[4],10);
+  const units=gradeData()[sid]||[];
+  const unit=units[ui];
+  const task=unit?unit.tasks[ti]:null;
+  if(!task) return null;
+  return {subject:SUBJECTS.find(s=>s.id===sid),unit:unit.unit,key,task,ui};
+}
+
+// 点击学科推荐卡片 = 更换任务
+// 语数英科道法：在同一单元内随机换一个未完成任务；其他学科：全学期随机换一个
+// 只要本学科当前范围内还有未完成的任务，就可以无限切换（不再被"已换过的"卡住）
+function swapRecTask(key){
+  const t=resolveTaskKey(key);
+  if(!t){showToast('任务已失效，请刷新页面');return;}
+  if(state.completedTasks[key]){showToast('✅ 该任务已完成，不能更换');return;}
+  const sid=t.subject.id;
+  const gated=UNIT_GATED_SUBJECTS.includes(sid);
+  // 候选：本学科当前范围内所有未完成的任务，且 ≠ 当前推荐的 key
+  const candidates=[];
+  (gradeData()[sid]||[]).forEach((unit,ui)=>{
+    if(gated&&ui!==t.ui) return; // 门控学科：只在该单元内
+    unit.tasks.forEach((task,ti)=>{
+      const k=getTaskKey(sid,ui,ti);
+      if(k===key) return; // 不换回同一个
+      if(state.completedTasks[k]) return; // 已完成的不可换
+      candidates.push(k);
+    });
+  });
+  if(candidates.length===0){
+    showToast(gated?'本单元所有任务都已完成，太棒了🎉':'该学科所有任务都已完成，太棒了🎉');
+    return;
+  }
+  const newKey=candidates[Math.floor(Math.random()*candidates.length)];
+  // 替换推荐列表中的旧 key；不再写入 recDiscardedKeys（避免自我污染卡死）
+  state.recSubjectKeys=(state.recSubjectKeys||[]).map(k=>k===key?newKey:k);
+  saveState();
+  renderRecommendations();
+  showToast('🔄 已换一个新任务');
+}
+
+// ==================== 诗词背诵 ====================
+// 某一级诗词的完成进度
+function getPoemProgress(stage){
+  const total=POEM_STAGES[stage].poems.length;
+  let done=0;
+  for(let i=0;i<total;i++){
+    if(state.completedPoems[stage+'_'+i]) done++;
+  }
+  return {done,total};
+}
+
+// 返回当前要背的诗：若 currentPoemKey 有效则返回它；否则在当前阶段（第一个有未完成诗的级别）内随机选一首
+function getCurrentPoem(){
+  if(state.currentPoemKey){
+    const p=state.currentPoemKey.split('_');
+    const st=parseInt(p[0],10),idx=parseInt(p[1],10);
+    if(POEM_STAGES[st]&&POEM_STAGES[st].poems[idx]&&!state.completedPoems[state.currentPoemKey]){
+      return {stage:st,stageName:POEM_STAGES[st].name,idx,poem:POEM_STAGES[st].poems[idx],total:POEM_STAGES[st].poems.length};
+    }
+    state.currentPoemKey=null;
+  }
+  for(let st=0;st<POEM_STAGES.length;st++){
+    const stage=POEM_STAGES[st];
+    const avail=[];
+    for(let i=0;i<stage.poems.length;i++){
+      if(!state.completedPoems[st+'_'+i]) avail.push(st+'_'+i);
+    }
+    if(avail.length>0){
+      const nk=avail[Math.floor(Math.random()*avail.length)];
+      state.currentPoemKey=nk;
+      saveState();
+      const p=nk.split('_');
+      return {stage:st,stageName:stage.name,idx:parseInt(p[1],10),poem:stage.poems[parseInt(p[1],10)],total:stage.poems.length};
+    }
+  }
+  return null;
+}
+
+// 背诗词卡片的"换一首"按钮：在当前阶段（小学→初中→高中）内随机重选一首未背的
+function refreshPoem(){
+  const poem=getCurrentPoem();
+  if(!poem){showToast('所有诗词都背完啦！🎉');return;}
+  const avail=[];
+  for(let i=0;i<POEM_STAGES[poem.stage].poems.length;i++){
+    if(!state.completedPoems[poem.stage+'_'+i]) avail.push(poem.stage+'_'+i);
+  }
+  if(avail.length<=1){showToast('本阶段只剩这一首未背的诗词啦');return;}
+  let nk=poem.stage+'_'+poem.idx;
+  while(nk===poem.stage+'_'+poem.idx){
+    nk=avail[Math.floor(Math.random()*avail.length)];
+  }
+  state.currentPoemKey=nk;
+  saveState();
+  renderAll();
+  const p=nk.split('_');
+  showToast(`🎲 换了一首：${POEM_STAGES[poem.stage].poems[parseInt(p[1],10)]}`);
+}
+
+// 完成背诗词任务：+白宝石1颗（折合100积分，计入积分数量；背诗不算经验值）
+function completePoem(){
+  const poem=getCurrentPoem();
+  if(!poem){showToast('所有诗词都背完啦！太厉害啦！🎉');return;}
+  const key='poem_'+poem.stage+'_'+poem.idx;
+  const today=new Date().toISOString().split('T')[0];
+  state.completedPoems[poem.stage+'_'+poem.idx]=true;
+  state.taskCompletionDates[key]=today;
+  state.whiteGems=(state.whiteGems||0)+1;
+  state.currentPoemKey=null; // 背完后重新随机选下一首（当前阶段背完自动进入下一阶段）
+  saveState();
+  renderAll();
+  const title=poem.poem.slice(0,poem.poem.indexOf('》')+1);
+  showToast(`📜 背出${title}！白宝石+1（折合100积分）💎`);
+}
+
+// 删除一首已背诗词（成果页）：同步扣除白宝石
+function deletePoem(stage,idx){
+  const key=stage+'_'+idx;
+  if(!state.completedPoems[key]) return;
+  delete state.completedPoems[key];
+  delete state.taskCompletionDates['poem_'+stage+'_'+idx];
+  // 同步扣除奖励：完成时 +1白宝石，删除时 -1白宝石（不低于0）；白宝石折合积分随颗数自动减少
+  state.whiteGems=Math.max(0,(state.whiteGems||0)-1);
+  if(state.currentPoemKey===key) state.currentPoemKey=null;
+  saveState();
+  renderAll();
+  showToast('🗑 已删除《'+POEM_STAGES[stage].poems[idx].slice(0,POEM_STAGES[stage].poems[idx].indexOf('》')+1)+'》（积分-50，白宝石-1）');
+}
+
+// Count today's completed tasks
+function getTodayCompletedCount(){
+  const today=new Date().toISOString().split('T')[0];
+  let count=0;
+  for(let key in state.taskCompletionDates){
+    if(state.taskCompletionDates[key]===today) count++;
+  }
+  return count;
+}
+
+// ==================== UI 渲染 ====================
+function renderSidebar(){
+  const nav=document.getElementById('subjectNav');
+  nav.innerHTML='';
+  SUBJECTS.forEach(s=>{
+    const btn=document.createElement('button');
+    btn.className='subject-btn'+(s.id===state.currentSubject&&state.view==='home'?' active':'');
+    btn.style.borderLeftColor=(s.id===state.currentSubject&&state.view==='home')?s.color:'transparent';
+    btn.innerHTML=`<span class="subject-color" style="background:${s.color}"></span><span class="subject-icon">${s.icon}</span><span>${s.name}</span>`;
+    btn.onclick=()=>{
+      state.currentSubject=s.id;
+      state.view='home';
+      saveState();
+      renderSidebar();
+      renderContent();
+    };
+    nav.appendChild(btn);
+  });
+  // 背诗词成果入口
+  const pBtn=document.createElement('button');
+  pBtn.className='subject-btn'+(state.view==='poems'?' active':'');
+  pBtn.style.borderLeftColor=state.view==='poems'?'#2E7D32':'transparent';
+  pBtn.innerHTML=`<span class="subject-color" style="background:#2E7D32"></span><span class="subject-icon">📜</span><span>背诗词成果</span>`;
+  pBtn.onclick=()=>{
+    state.view='poems';
+    saveState();
+    renderSidebar();
+    renderContent();
+  };
+  nav.appendChild(pBtn);
+}
+
+function getLevel(){
+  let current=LEVELS[0];
+  for(let l of LEVELS){
+    if((state.xpTotal||0)>=l.min) current=l;
+  }
+  return current;
+}
+
+function getNextLevel(){
+  const current=getLevel();
+  for(let l of LEVELS){
+    if(l.lv===current.lv+1) return l;
+  }
+  return null;
+}
+
+function renderHeader(){
+  const gradeNames=['','一年级','二年级','三年级','四年级','五年级','六年级'];
+  document.getElementById('gradeBadge').textContent=gradeNames[state.grade]+' · '+(state.sem==='b'?'下学期':'上学期');
+  
+  const level=getLevel();
+  const next=getNextLevel();
+  let levelText=`Lv.${level.lv} ${level.name}`;
+  if(next){
+    // 括号内：扣除前几级累计所需经验后，当前级别的经验 / 本级升级需要的总经验
+    const progress=Math.max(0,(state.xpTotal||0)-level.min);
+    const total=next.min-level.min;
+    levelText+=` (${progress}/${total})`;
+  }
+  document.getElementById('levelText').textContent=levelText;
+  
+  document.getElementById('streakText').textContent=state.streak+'天';
+
+  // v2.9 积分数量口径：
+  // 积分数量（共获得）= 任务积分（打卡/学科/家务）+ 白宝石折合（1颗=100积分）
+  // 大字显示 = 兑换完宝石还剩的积分 = 共获得 − 已兑宝石折合（彩色1颗=20积分，白色1颗=100积分）
+  const exColor=state.exchangedColorGems||0;
+  const exWhite=state.exchangedWhiteGems||0;
+  const exPoints=exColor*20+exWhite*100; // 已兑宝石折合积分
+  const totalPoints=(state.points||0)+(state.whiteGems||0)*100; // 共获得积分
+  const remainPoints=Math.max(0,totalPoints-exPoints); // 兑换完宝石还剩的积分
+  document.getElementById('pointsText').textContent=remainPoints;
+  document.getElementById('pointsSub').innerHTML=`<span style="font-size:12px;opacity:.9;">已兑宝石折合 ${exPoints} 积分 · 共获得 ${totalPoints} 积分</span>`;
+
+  // 彩色宝石可兑换数量提示
+  const coloredGems=Math.floor(remainPoints/20);
+  document.getElementById('gemRule').innerHTML=`💎 宝石成长规则：背诵诗词获得白宝石（1颗=100积分，折合积分计入积分数量）；每20积分可兑换1颗彩色宝石（1颗=20积分，当前还可兑换 ${coloredGems} 颗），宝石由爸爸妈妈发放给喻慕左`;
+  
+  // 已兑换宝石输入框回显
+  document.getElementById('exColorInput').value=exColor;
+  document.getElementById('exWhiteInput').value=exWhite;
+  
+  const checkinCard=document.getElementById('checkinCard');
+  if(state.checkinToday){
+    checkinCard.className='stat-card checked';
+    document.getElementById('checkinIcon').textContent='✅';
+    document.getElementById('checkinLabel').textContent='今日打卡';
+    document.getElementById('checkinText').textContent='已完成';
+  }else{
+    checkinCard.className='stat-card unchecked';
+    document.getElementById('checkinIcon').textContent='📋';
+    document.getElementById('checkinLabel').textContent='今日打卡';
+    document.getElementById('checkinText').textContent='未打卡';
+  }
+  
+  document.getElementById('checkinBtn').disabled=state.checkinToday;
+
+  // 本周打卡连胜：周一到周五全部打卡 → 可兑换白宝石1颗（+50积分，每周1次）
+  const wsEl=document.getElementById('weeklyStreak');
+  if(isWeeklyCheckinComplete()){
+    const ws=getWeekSeed();
+    if(state.weeklyGemRedeemed===ws){
+      wsEl.style.display='';
+      wsEl.className='weekly-streak redeemed';
+      wsEl.innerHTML='🔥 本周打卡连胜完成！周一到周五全部打卡 ✓ 白宝石已兑换';
+    }else{
+      wsEl.style.display='';
+      wsEl.className='weekly-streak ready';
+      wsEl.innerHTML=`🔥 本周打卡连胜！周一到周五全部完成打卡，可兑换 <strong>1颗白宝石</strong>（折合100积分）<button class="redeem-btn" onclick="redeemWeeklyGem()">💎 兑换白宝石</button>`;
+    }
+  }else{
+    wsEl.style.display='none';
+  }
+}
+
+// 手动修改"线下已兑换宝石"数量：只能增加，不能减少
+function updateExchangedGem(type,val){
+  const n=Math.max(0,parseInt(val,10)||0);
+  const key=type==='color'?'exchangedColorGems':'exchangedWhiteGems';
+  const gemName=type==='color'?'彩色宝石':'白宝石';
+  const old=state[key]||0;
+  if(n<old){
+    showToast(`❌ 已兑换的${gemName}不能减少哦（只能增加）`);
+    document.getElementById(type==='color'?'exColorInput':'exWhiteInput').value=old;
+    return;
+  }
+  if(n===old){
+    document.getElementById(type==='color'?'exColorInput':'exWhiteInput').value=old;
+    return;
+  }
+  state[key]=n;
+  saveState();
+  renderHeader();
+  showToast(`✅ 已兑换${gemName}更新为 ${n} 颗（+${(n-old)*(type==='color'?20:50)}积分折算）`);
+}
+
+function renderRecommendations(){
+  const container=document.getElementById('recommendTasks');
+  container.innerHTML='';
+
+  const now=new Date();
+  const start=new Date(now.getFullYear(),8,1);
+  if(now<start) start.setFullYear(start.getFullYear()-1);
+  const weekNum=Math.floor((now-start)/(7*24*60*60*1000))+1;
+
+  const gd=gradeData();
+  const weekSeed=getRefreshWeekId()+state.grade*1000+(state.sem==='b'?500:0);
+
+  // 新的一周（周一10点后）：清空上周的推荐与丢弃记录
+  if(state.recWeekSeed!==weekSeed){
+    state.recWeekSeed=weekSeed;
+    state.recSubjectKeys=[];
+    state.recDiscardedKeys=[];
+  }
+
+  // 每周固定家务任务（不随换任务更换）
+  generateHouseholdTasks(false);
+
+  // 收集某学科当前可推荐的任务（语数英科道法只取激活单元，其余学科全单元可选）
+  function collectTasks(sid){
+    const subject=SUBJECTS.find(s=>s.id===sid);
+    const units=gd[sid]||[];
+    const list=[];
+    units.forEach((unit,ui)=>{
+      if(UNIT_GATED_SUBJECTS.includes(sid)&&!isActiveUnit(sid,ui)) return;
+      unit.tasks.forEach((task,ti)=>{
+        list.push({subject,unit:unit.unit,key:getTaskKey(sid,ui,ti),task});
+      });
+    });
+    return list;
+  }
+
+  // 过滤本周推荐key中已失效的（如换学期后残留），其余全部保留展示
+  const keptKeys=(state.recSubjectKeys||[]).filter(Boolean).filter(key=>resolveTaskKey(key));
+  const excludeSet=new Set([...(state.recSubjectKeys||[]),...(state.recDiscardedKeys||[])]);
+
+  // 1) 本周推荐过的任务：全部保留展示（已完成的显示完成态，未完成的点击可换）
+  const picked=[];
+  keptKeys.forEach(key=>{
+    const t=resolveTaskKey(key);
+    if(t) picked.push(t);
+  });
+
+  // 该科本周是否已有未完成的推荐（有则不重复推荐）
+  function hasFresh(sid){
+    return keptKeys.some(k=>{
+      if(!k) return false;
+      const p=k.split('_');
+      return p.length===5&&p[2]===sid&&!state.completedTasks[k];
+    });
+  }
+
+  // 2) 核心五科（语数英科道法）必含：每科确保1个当前激活单元的未完成任务
+  ['chinese','math','english','science','moral'].forEach((sid,idx)=>{
+    if(hasFresh(sid)) return;
+    const avail=collectTasks(sid).filter(t=>!excludeSet.has(t.key)&&!state.completedTasks[t.key]);
+    if(avail.length===0) return; // 该科当前单元任务已全部完成
+    const rand=seededRandom(weekSeed+idx*131+(state.sem==='b'?777:0));
+    const chosen=avail[Math.floor(rand()*avail.length)];
+    state.recSubjectKeys=[...(state.recSubjectKeys||[]),chosen.key];
+    picked.push(chosen);
+  });
+
+  // 3) 体育/艺术/劳动/综合实践补足：同时最多2个未完成的extra推荐（每科最多1个新任务）
+  const extraIds=['pe','art','labor','practice'];
+  let extraFreshCount=keptKeys.filter(k=>extraIds.includes(k.split('_')[2])&&!state.completedTasks[k]).length;
+  extraIds.forEach((sid,idx)=>{
+    if(extraFreshCount>=2) return;
+    if(hasFresh(sid)) return;
+    const avail=collectTasks(sid).filter(t=>!excludeSet.has(t.key)&&!state.completedTasks[t.key]);
+    if(avail.length===0) return;
+    const rand=seededRandom(weekSeed+idx*211+(state.sem==='b'?999:0));
+    const chosen=avail[Math.floor(rand()*avail.length)];
+    state.recSubjectKeys=[...(state.recSubjectKeys||[]),chosen.key];
+    picked.push(chosen);
+    extraFreshCount++;
+  });
+
+  document.getElementById('weekLabel').textContent=`（第${weekNum}周）`;
+
+  // 背诗词任务卡片：单击=完成背诵；右上角刷新按钮=换一首
+  const poem=getCurrentPoem();
+  if(poem){
+    const p=getPoemProgress(poem.stage);
+    const pct=Math.round(p.done/p.total*100);
+    const div=document.createElement('div');
+    div.className='recommend-task poem';
+    div.innerHTML=`
+      <div class="rec-subject" style="color:#2E7D32;display:flex;align-items:center;gap:6px;">📜 背诗词 · ${poem.stageName}<span class="poem-refresh-btn" onclick="event.stopPropagation();refreshPoem()" title="换一首诗词">🔄</span></div>
+      <div class="rec-name">${poem.poem}</div>
+      <div class="poem-progress"><div class="poem-progress-fill" style="width:${pct}%"></div></div>
+      <div class="rec-points">💎白宝石×1（折合100积分，已完成 ${p.done}/${p.total}）· 点击卡片=完成背诵</div>
+      ${renderPoemDetail(poem.poem)}
+    `;
+    div.onclick=completePoem;
+    container.appendChild(div);
+  }
+
+  // 学科推荐任务：点击=更换任务（已完成不支持更换）
+  picked.forEach(t=>{
+    const isDone=!!state.completedTasks[t.key];
+    const div=document.createElement('div');
+    div.className='recommend-task'+(isDone?' done':'');
+    div.innerHTML=`<div class="rec-subject" style="color:${t.subject.color}">${t.subject.icon} ${t.subject.name} · ${t.unit}</div><div class="rec-name">${t.task}</div>${isDone?'<div class="rec-points">✅ 已完成</div>':'<div class="rec-points" style="font-size:11px;color:#999;">点击可换一个任务</div>'}`;
+    div.onclick=()=>swapRecTask(t.key);
+    container.appendChild(div);
+  });
+
+  // 家务任务：点击完成，完成后任务框消失（本周内不重复显示）
+  const today=new Date().toISOString().split('T')[0];
+  state.weeklyHouseholdTasks.forEach((ht,i)=>{
+    const hKey=getHouseholdKey(state.householdWeekSeed,i);
+    if(state.taskCompletionDates[hKey]) return; // 本周已完成 → 任务框消失
+    const div=document.createElement('div');
+    div.className='recommend-task household';
+    div.innerHTML=`
+      <div class="rec-subject" style="color:#8D6E63">🏠 家务实践</div>
+      <div class="rec-name">${ht.task}</div>
+      <div class="rec-points">+10积分</div>
+    `;
+    div.onclick=()=>{
+      state.taskCompletionDates[hKey]=today;
+      state.points+=10;
+      state.xpTotal=(state.xpTotal||0)+10;
+      saveState();
+      renderAll();
+      showToast('🏠 完成家务！+10积分');
+    };
+    container.appendChild(div);
+  });
+
+  if(picked.length===0 && state.weeklyHouseholdTasks.length===0 && !poem){
+    container.innerHTML='<div style="color:#888;font-size:14px;">当前学期所有任务都完成啦！太棒了！🎉</div>';
+  }
+}
+
+
+function renderProgressBars(){
+  const container=document.getElementById('progressSection');
+  const subject=SUBJECTS.find(s=>s.id===state.currentSubject);
+  if(!subject) return;
+  
+  const gd=gradeData();
+  const units=gd[subject.id]||[];
+  
+  let totalAll=0,doneAll=0;
+  units.forEach((unit,ui)=>{
+    unit.tasks.forEach((task,ti)=>{
+      totalAll++;
+      const key=getTaskKey(subject.id,ui,ti);
+      if(state.completedTasks[key]) doneAll++;
+    });
+  });
+  
+  const overallPct=totalAll>0?Math.round(doneAll/totalAll*100):0;
+  const html=`<div class="progress-bar-item">
+    <div class="progress-bar-header">
+      <span style="font-weight:700;">${subject.icon} ${subject.name} 总完成进度</span>
+      <span style="font-weight:700;">${doneAll}/${totalAll} (${overallPct}%)</span>
+    </div>
+    <div class="progress-bar-track">
+      <div class="progress-bar-fill" style="width:${overallPct}%;background:${subject.color};">${overallPct>10?overallPct+'%':''}</div>
+    </div>
+  </div>`;
+  container.innerHTML=html;
+}
+
+function renderTaskCards(){
+  const container=document.getElementById('taskCards');
+  const subject=SUBJECTS.find(s=>s.id===state.currentSubject);
+  if(!subject) return;
+  
+  const gd=gradeData();
+  const units=gd[subject.id]||[];
+  
+  container.innerHTML='';
+  
+  units.forEach((unit,ui)=>{
+    const card=document.createElement('div');
+    card.className='unit-card';
+    card.style.borderTop=`3px solid ${subject.color}`;
+    
+    let doneCount=0;
+    let taskHtml='';
+    unit.tasks.forEach((task,ti)=>{
+      const key=getTaskKey(subject.id,ui,ti);
+      const isDone=!!state.completedTasks[key];
+      if(isDone) doneCount++;
+      taskHtml+=`<div class="task-item ${isDone?'done':''}" data-key="${key}" onclick="toggleTask('${subject.id}',${ui},${ti})">
+        <div class="task-checkbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+        <div class="task-name">${task}</div>
+        <div class="task-points">${isDone?'✅ 已完成':'+10分'}</div>
+      </div>`;
+    });
+    
+    const pct=unit.tasks.length>0?Math.round(doneCount/unit.tasks.length*100):0;
+    
+    card.innerHTML=`
+      <div class="unit-title">
+        <span style="color:${subject.color}">${subject.icon}</span>
+        <span>${unit.unit}</span>
+        <span class="unit-progress">${doneCount}/${unit.tasks.length} (${pct}%)</span>
+      </div>
+      ${taskHtml}
+    `;
+    container.appendChild(card);
+  });
+}
+
+// 背诗词成果展示页
+function renderPoemsPage(){
+  const progress=document.getElementById('progressSection');
+  const container=document.getElementById('taskCards');
+  // 总体统计
+  let totalAll=0,doneAll=0;
+  POEM_STAGES.forEach((stage,st)=>{
+    stage.poems.forEach((poem,i)=>{
+      totalAll++;
+      if(state.completedPoems[st+'_'+i]) doneAll++;
+    });
+  });
+  const pct=totalAll>0?Math.round(doneAll/totalAll*100):0;
+  const white=state.whiteGems||0;
+  progress.innerHTML=`<div class="poems-overview">
+    <div style="font-size:16px;font-weight:700;">📜 背诗词成果展示</div>
+    <div style="font-size:13px;color:#666;margin-top:4px;">共会背 <strong style="color:#2E7D32;">${doneAll}/${totalAll}</strong> 首（${pct}%），累计获得白宝石 <strong style="color:#2E7D32;">${white}</strong> 颗（1颗=100积分）。若某首实际不会背，点右侧 🗑 删除。</div>
+    <div class="progress-bar-track" style="margin-top:10px;"><div class="progress-bar-fill" style="width:${pct}%;background:#43A047;">${pct>10?pct+'%':''}</div></div>
+  </div>`;
+  // 三个阶段卡片
+  container.innerHTML='';
+  POEM_STAGES.forEach((stage,st)=>{
+    const card=document.createElement('div');
+    card.className='unit-card';
+    card.style.borderTop='3px solid #43A047';
+    const doneInStage=stage.poems.filter((_,i)=>state.completedPoems[st+'_'+i]).length;
+    const stagePct=stage.poems.length>0?Math.round(doneInStage/stage.poems.length*100):0;
+    let html=`<div class="unit-title"><span>📜 ${stage.name}</span><span class="unit-progress">${doneInStage}/${stage.poems.length} (${stagePct}%)</span></div>`;
+    if(doneInStage===0){
+      html+='<div style="color:#bbb;font-size:13px;padding:8px;">还没有会背的诗词，先去本周推荐里背一首吧！</div>';
+    }else{
+      stage.poems.forEach((poem,i)=>{
+        if(state.completedPoems[st+'_'+i]){
+          html+=`<div class="task-item done">
+            <div class="task-checkbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+            <div class="task-name">${poem}</div>
+            <button class="poem-del-btn" onclick="deletePoem(${st},${i})" title="删除这首（不算会背）">🗑</button>
+          </div>`;
+        }
+      });
+    }
+    card.innerHTML=html;
+    container.appendChild(card);
+  });
+}
+
+function renderContent(){
+  const recSection=document.getElementById('recommendTasks').closest('.recommend-section');
+  if(state.view==='poems'){
+    if(recSection) recSection.style.display='none';
+    renderPoemsPage();
+    return;
+  }
+  if(recSection) recSection.style.display='';
+  renderRecommendations();
+  renderProgressBars();
+  renderTaskCards();
+}
+
+let _lastLevelShown=null; // 用于跨渲染检测升级
+function renderAll(){
+  renderHeader();
+  renderSidebar();
+  renderContent();
+  // 达到当前级别积分总数自动升级，并弹提示
+  const lv=getLevel().lv;
+  if(_lastLevelShown!==null&&lv>_lastLevelShown){
+    const l=getLevel();
+    showToast('🎉 升级啦！'+l.icon+' '+l.name);
+  }
+  _lastLevelShown=lv;
+}
+
+// ==================== 交互功能 ====================
+function toggleTask(subjectId,unitIdx,taskIdx){
+  const key=getTaskKey(subjectId,unitIdx,taskIdx);
+  const today=new Date().toISOString().split('T')[0];
+  if(state.completedTasks[key]){
+    delete state.completedTasks[key];
+    delete state.taskCompletionDates[key];
+    state.points-=10;
+    state.xpTotal=Math.max(0,(state.xpTotal||0)-10);
+  }else{
+    state.completedTasks[key]=true;
+    state.taskCompletionDates[key]=today;
+    state.points+=10;
+    state.xpTotal=(state.xpTotal||0)+10;
+    showToast('🎉 完成！+10积分');
+  }
+  saveState();
+  renderAll();
+}
+
+function toggleGradeSelect(){
+  const wrap=document.getElementById('gradeSelectWrap');
+  if(wrap.classList.contains('show')){
+    wrap.classList.remove('show');
+  }else{
+    wrap.classList.add('show');
+    document.getElementById('gradeSelect').value=state.grade;
+    document.getElementById('semSelect').value=state.sem;
+  }
+}
+
+function confirmGrade(){
+  const newGrade=parseInt(document.getElementById('gradeSelect').value);
+  const newSem=document.getElementById('semSelect').value;
+  if(newGrade===state.grade&&newSem===state.sem){
+    toggleGradeSelect();
+    return;
+  }
+  const gradeNames=['','一年级','二年级','三年级','四年级','五年级','六年级'];
+  const semName=newSem==='b'?'下学期':'上学期';
+  const overlay=document.createElement('div');
+  overlay.className='modal-overlay show';
+  overlay.innerHTML=`<div class="grade-confirm-box">
+    <h3>确认切换</h3>
+    <p>切换到 <strong style="color:#667eea;font-size:18px;">${gradeNames[newGrade]} · ${semName}</strong> ？<br>已完成的任务记录会保留，但将显示对应学期的任务内容。</p>
+    <button class="btn-confirm" onclick="doGradeChange(${newGrade},'${newSem}')">确认切换</button>
+    <button class="btn-cancel" onclick="this.closest('.modal-overlay').remove()">取消</button>
+  </div>`;
+  document.body.appendChild(overlay);
+}
+
+function doGradeChange(newGrade,newSem){
+  state.grade=newGrade;
+  state.sem=newSem||'a';
+  // 重置本周数据（推荐、家务按新年级+学期重新生成）
+  state.householdWeekSeed=0;
+  state.weeklyHouseholdTasks=[];
+  state.recWeekSeed=0;
+  state.recSubjectKeys=[];
+  state.recDiscardedKeys=[];
+  saveState();
+  document.querySelectorAll('.modal-overlay').forEach(el=>{
+    if(!el.id) el.remove();
+  });
+  document.getElementById('gradeSelectWrap').classList.remove('show');
+  renderAll();
+  showToast('已切换到'+['','一年级','二年级','三年级','四年级','五年级','六年级'][newGrade]+(newSem==='b'?'下学期':'上学期'));
+}
+
+function doCheckin(){
+  if(state.checkinToday){
+    showToast('今天已经打卡啦！');
+    return;
+  }
+  
+  // Check if at least one task was completed today
+  const todayCount=getTodayCompletedCount();
+  if(todayCount===0){
+    showToast('今天还没完成任何任务哦！先完成至少一个任务再打卡吧~');
+    return;
+  }
+  
+  const today=new Date().toISOString().split('T')[0];
+  const yesterday=new Date(Date.now()-86400000).toISOString().split('T')[0];
+  
+  if(state.lastCheckin===yesterday){
+    state.streak++;
+  }else{
+    state.streak=1;
+  }
+  
+  let earned=5;
+  if(state.streak>=7) earned+=5;
+  if(state.streak>=14) earned+=5;
+  if(state.streak>=30) earned+=10;
+  
+  state.points+=earned;
+  state.xpTotal=(state.xpTotal||0)+earned;
+  state.lastCheckin=today;
+  state.checkinToday=true;
+  state.checkinHistory.push(today);
+  
+  saveState();
+  renderAll();
+  showToast(`🎉 打卡成功！连续${state.streak}天，+${earned}积分！今天完成了${todayCount}个任务`);
+}
+
+// ==================== 数据体检（v2.8.1）：排查"数据不见了"类问题 ====================
+function poemTitleByKey(key){
+  try{
+    const p=key.split('_');
+    const st=parseInt(p[0],10),idx=parseInt(p[1],10);
+    const poem=POEM_STAGES[st].poems[idx];
+    const end=poem.indexOf('》');
+    return poem.slice(0,end+1);
+  }catch(e){return key;}
+}
+function showDataDiag(){
+  let raw=null,rawOld=null,parsed=null,parseErr=false;
+  try{raw=localStorage.getItem(STORAGE_KEY);}catch(e){}
+  try{rawOld=localStorage.getItem('yumuozuo_study_station');}catch(e){}
+  if(raw){try{parsed=JSON.parse(raw);}catch(e){parseErr=true;}}
+  const file=(location.href.split('/').pop()||location.href).split('?')[0];
+  const lines=[];
+  lines.push('【当前打开的文件】');
+  lines.push(decodeURIComponent(file));
+  lines.push('');
+  lines.push('【浏览器本地存储】');
+  if(raw){
+    lines.push('✅ 找到存档（'+raw.length+' 字符，最后保存于：'+((parsed&&parsed._lastSavedAt)?parsed._lastSavedAt:'未知')+'）');
+  }else if(rawOld){
+    lines.push('⚠️ 只有旧版(v1)存档，新版存档不存在');
+  }else{
+    lines.push('❌ 这个浏览器里没有找到任何存档数据');
+  }
+  if(parseErr) lines.push('⚠️ 存档数据损坏，无法解析');
+  lines.push('');
+  if(parsed){
+    const cp=parsed.completedPoems||{};
+    const ct=parsed.completedTasks||{};
+    const poemKeys=Object.keys(cp);
+    lines.push('【存档里的数据】');
+    lines.push('任务积分：'+(parsed.points||0)+'    经验值：'+(parsed.xpTotal||0)+'    白宝石：'+(parsed.whiteGems||0)+'（折合'+(parsed.whiteGems||0)*100+'积分）');
+    lines.push('连续打卡：'+(parsed.streak||0)+'天    最近打卡：'+(parsed.lastCheckin||'无'));
+    lines.push('已完成学科任务：'+Object.keys(ct).length+'项');
+    lines.push('已背诗词：'+poemKeys.length+'首'+(poemKeys.length?'（'+poemKeys.map(poemTitleByKey).join('、')+'）':''));
+    const curCount=Object.keys(state.completedPoems||{}).length;
+    lines.push('');
+    lines.push('【诊断结论】');
+    if(poemKeys.length>0&&curCount===0){
+      lines.push('⚠️ 存档里有诗词记录但页面没显示，属于页面加载问题，请联系助手修复');
+    }else if(poemKeys.length===0){
+      lines.push('❗ 存档本身就没有诗词记录。如果之前明明背过，说明当时记录存在另一个浏览器/另一台设备/另一个文件里');
+    }else{
+      lines.push('✅ 存档与页面显示一致，数据正常');
+    }
+  }else{
+    lines.push('【诊断结论】');
+    lines.push('❗ 这里读不到存档。最常见原因：');
+    lines.push('1. 换了浏览器或用了无痕/隐私窗口打开');
+    lines.push('2. 打开的不是原来那个文件（副本/检查点文件在 Safari 里是独立存储）');
+    lines.push('3. 浏览器清理了网站数据');
+    lines.push('解决办法：回到原来用的浏览器，打开原来那个文件。');
+  }
+  lines.push('');
+  lines.push('💡 建议：定期用「导出数据」备份，换设备时用「导入数据」恢复。');
+  // 弹窗展示
+  let mask=document.getElementById('diagMask');
+  if(mask) mask.remove();
+  mask=document.createElement('div');
+  mask.id='diagMask';
+  mask.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:3000;display:flex;align-items:center;justify-content:center;padding:20px;';
+  const box=document.createElement('div');
+  box.style.cssText='background:#fff;border-radius:14px;max-width:520px;max-height:80vh;overflow:auto;padding:22px 24px;font-size:14px;line-height:1.7;color:#333;box-shadow:0 10px 40px rgba(0,0,0,.25);';
+  box.innerHTML='<div style="font-size:16px;font-weight:700;margin-bottom:10px;">🔍 数据体检报告</div>'+
+    '<pre style="white-space:pre-wrap;font-family:inherit;margin:0;">'+lines.join('\n').replace(/</g,'&lt;')+'</pre>'+
+    '<button style="margin-top:16px;width:100%;padding:10px;border:none;border-radius:8px;background:#4A90D9;color:#fff;font-size:14px;cursor:pointer;" onclick="document.getElementById(\'diagMask\').remove()">我知道了</button>';
+  mask.appendChild(box);
+  mask.onclick=function(ev){if(ev.target===mask)mask.remove();};
+  document.body.appendChild(mask);
+}
+
+function exportData(){
+  const data={
+    ...state,
+    exportDate:new Date().toISOString(),
+    version:'2.8.1',
+  };
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;
+  a.download=`喻慕左学习数据_${new Date().toISOString().split('T')[0]}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('📤 数据已导出！');
+}
+
+function importData(event){
+  const file=event.target.files[0];
+  if(!file) return;
+  const reader=new FileReader();
+  reader.onload=function(e){
+    try{
+      const data=JSON.parse(e.target.result);
+      if(data.grade===undefined && data.points===undefined){
+        showToast('❌ 文件格式不正确！');
+        return;
+      }
+      state={...state,...data};
+      delete state.exportDate; delete state.version;
+      if(!state.sem) state.sem='a';
+      if(!state.view) state.view='home';
+      if(!state.currentPoemKey) state.currentPoemKey=null;
+      if(state.weeklyGemRedeemed===undefined) state.weeklyGemRedeemed=null;
+      migrateTaskKeys();
+      if(!state.taskCompletionDates) state.taskCompletionDates={};
+      if(!state.weeklyHouseholdTasks) state.weeklyHouseholdTasks=[];
+      if(!state.householdWeekSeed) state.householdWeekSeed=0;
+      if(!state.completedPoems) state.completedPoems={};
+      if(!state.whiteGems) state.whiteGems=0;
+      if(!state.householdRefreshCount) state.householdRefreshCount=0;
+      if(!state.recSubjectKeys) state.recSubjectKeys=[];
+      if(!state.recWeekSeed) state.recWeekSeed=0;
+      if(!state.recDiscardedKeys) state.recDiscardedKeys=[];
+      if(state.exchangedColorGems===undefined) state.exchangedColorGems=0;
+      if(state.exchangedWhiteGems===undefined) state.exchangedWhiteGems=0;
+      state.householdWeekSeed=0;
+      state.weeklyHouseholdTasks=[];
+      // 一次性积分清零（与 loadState 保持一致）
+      if(state.pointsResetV1!==true){ state.points=0; state.pointsResetV1=true; }
+      const today=new Date().toISOString().split('T')[0];
+      state.checkinToday=(state.lastCheckin===today);
+      saveState();
+      renderAll();
+      showToast('📥 数据导入成功！');
+    }catch(err){
+      showToast('❌ 导入失败：'+err.message);
+    }
+  };
+  reader.readAsText(file);
+  event.target.value='';
+}
+
+function showToast(msg){
+  const toast=document.createElement('div');
+  toast.className='toast';
+  toast.textContent=msg;
+  document.body.appendChild(toast);
+  setTimeout(()=>{
+    toast.style.opacity='0';
+    toast.style.transition='opacity 0.3s';
+    setTimeout(()=>toast.remove(),300);
+  },2500);
+}
+
+// ==================== 初始化 ====================
+loadState();
+renderAll();
+
+// Check for streak reset
+if(state.lastCheckin && !state.checkinToday){
+  const today=new Date();
+  const last=new Date(state.lastCheckin);
+  const diff=Math.floor((today-last)/(86400000));
+  if(diff>1){
+    state.streak=0;
+    saveState();
+  }
+}
+
+// 每周一 10:00 自动刷新本周推荐任务（页面持续打开时也生效）
+setInterval(()=>{
+  const rid=getRefreshWeekId()+state.grade*1000+(state.sem==='b'?500:0);
+  if(state.recWeekSeed!==0 && state.recWeekSeed!==rid){
+    state.recWeekSeed=rid;
+    state.recSubjectKeys=[];
+    state.recDiscardedKeys=[];
+    generateHouseholdTasks(true);
+    saveState();
+    renderAll();
+    showToast('🔄 每周一10点：本周推荐任务已自动刷新');
+  }
+},60000);
+</script>
+</body>
+</html>
