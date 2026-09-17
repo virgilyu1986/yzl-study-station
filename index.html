@@ -7,6 +7,27 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
 <meta name="app-version" content="v2.9.1">
+<script>
+// Safari 缓存自检：用带时间戳的请求拉取线上最新版本号，若与当前页面版本不一致，自动跳转新版（绕过缓存）
+(async function checkAppUpdate(){
+  try{
+    if(location.protocol==='file:') return; // 本地文件无需自检
+    const res=await fetch(location.pathname+'?update_check='+Date.now(),{cache:'no-store'});
+    if(!res.ok) return;
+    const txt=await res.text();
+    const m=txt.match(/app-version" content="([^"]+)"/);
+    const remote=m?m[1]:null;
+    const localMeta=document.querySelector('meta[name="app-version"]');
+    const localV=localMeta?localMeta.getAttribute('content'):null;
+    if(remote&&localV&&remote!==localV){
+      showToast&&showToast('🔄 发现新版本，正在自动更新…');
+      setTimeout(function(){
+        location.replace(location.href.split('#')[0].split('?')[0]+'?v='+encodeURIComponent(remote));
+      },600);
+    }
+  }catch(e){/* 静默失败，不影响使用 */}
+})();
+</script>
 <title>喻慕左的学习能量站</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
