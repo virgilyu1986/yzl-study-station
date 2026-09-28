@@ -6,7 +6,7 @@
 <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<meta name="app-version" content="v2.9.2">
+<meta name="app-version" content="v2.10">
 <script>
 // Safari 缓存自检：用带时间戳的请求拉取线上最新版本号，若与当前页面版本不一致，自动跳转新版（绕过缓存）
 (async function checkAppUpdate(){
@@ -141,6 +141,21 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hira
 .poem-detail-text{font-size:15px;line-height:1.9;color:#33691e;font-weight:500;}
 .poem-detail-mean{font-size:13px;line-height:1.7;color:#556b2f;margin-top:8px;padding-top:8px;border-top:1px dashed #c5e1a5;}
 .poem-detail-missing{font-size:12px;color:#999;margin-top:6px;}
+/* 诗词搜索（v2.10） */
+.poem-search{margin:8px 0 2px;position:relative;}
+.poem-search input{width:100%;box-sizing:border-box;padding:7px 10px;border:1px solid #c5e1a5;border-radius:8px;font-size:13px;outline:none;background:#fff;color:#333;}
+.poem-search input:focus{border-color:#43A047;box-shadow:0 0 0 2px rgba(67,160,71,.12);}
+.poem-search-results{position:absolute;left:0;right:0;top:100%;z-index:60;background:#fff;border:1px solid #c5e1a5;border-radius:8px;box-shadow:0 4px 14px rgba(0,0,0,.14);max-height:240px;overflow-y:auto;margin-top:2px;text-align:left;}
+.poem-search-results.hidden{display:none;}
+.poem-search-item{padding:8px 10px;font-size:13px;color:#333;cursor:pointer;border-bottom:1px solid #f1f8e9;}
+.poem-search-item:last-child{border-bottom:none;}
+.poem-search-item:hover{background:#f1f8e9;}
+.poem-search-item.done{color:#9e9e9e;cursor:default;}
+.poem-search-item.done:hover{background:#fff;}
+.poem-search-stage{font-size:11px;color:#2E7D32;}
+.poem-search-more{padding:6px 10px;font-size:11px;color:#999;}
+/* 成果页复习（v2.10） */
+.poem-review-item .task-name{color:#2E7D32;}
 /* Responsive */
 @media(max-width:768px){
   .sidebar{width:60px;}
@@ -414,24 +429,71 @@ const POEM_DETAILS={
 };
 
 // 诗词全文+释义面板（插入推荐任务卡片内；点击面板不会误触发"完成背诵"）
-function renderPoemDetail(poemKey){
+// suffix：DOM id 后缀（推荐卡片用默认''；成果页复习用 '_r{stage}_{idx}'）；startHidden：默认是否收起
+function renderPoemDetail(poemKey,suffix='',startHidden=false){
   const d=POEM_DETAILS[poemKey];
   if(!d) return '<div class="poem-detail-missing" onclick="event.stopPropagation();">📖 全文请对照课本朗读</div>';
   const textHtml=(d.t||'').replace(/([，。？！；：])/g,'$1<br>');
   return `
-    <div class="poem-detail-toggle" id="poemDetailToggle" onclick="event.stopPropagation();togglePoemDetail()">📖 收起全文/释义</div>
-    <div class="poem-detail" id="poemDetailBody" onclick="event.stopPropagation();">
+    <div class="poem-detail-toggle" id="poemDetailToggle${suffix}" onclick="event.stopPropagation();togglePoemDetail('${suffix}')">📖 ${startHidden?'展开全文/释义':'收起全文/释义'}</div>
+    <div class="poem-detail${startHidden?' hidden':''}" id="poemDetailBody${suffix}" onclick="event.stopPropagation();">
       <div class="poem-detail-text">${textHtml}</div>
       <div class="poem-detail-mean">💡 <b>释义：</b>${d.m||''}</div>
     </div>
   `;
 }
-function togglePoemDetail(){
-  const body=document.getElementById('poemDetailBody');
-  const toggle=document.getElementById('poemDetailToggle');
+function togglePoemDetail(suffix=''){
+  const body=document.getElementById('poemDetailBody'+suffix);
+  const toggle=document.getElementById('poemDetailToggle'+suffix);
   if(!body) return;
   const isHidden=body.classList.toggle('hidden');
   if(toggle) toggle.textContent=isHidden?'📖 展开全文/释义':'📖 收起全文/释义';
+}
+
+// 诗词搜索：按诗人或诗名关键字搜索全部阶段的诗词
+function searchPoems(q){
+  q=(q||'').trim();
+  if(!q) return [];
+  const res=[];
+  POEM_STAGES.forEach((stage,st)=>{
+    stage.poems.forEach((poem,i)=>{
+      const bi=poem.indexOf('》');
+      const title=poem.slice(0,bi+1);
+      const author=poem.slice(bi+1);
+      if(title.indexOf(q)>=0||author.indexOf(q)>=0){
+        res.push({st,i,title,author,stageName:stage.name,done:!!state.completedPoems[st+'_'+i]});
+      }
+    });
+  });
+  return res;
+}
+// 渲染搜索结果下拉（点击结果选中；已背过的仅提示可去成果页复习）
+function renderPoemSearch(q){
+  const box=document.getElementById('poemSearchResults');
+  if(!box) return;
+  const res=searchPoems(q);
+  if(res.length===0){ box.classList.add('hidden'); return; }
+  box.classList.remove('hidden');
+  const items=res.slice(0,10).map(r=>
+    `<div class="poem-search-item${r.done?' done':''}" onclick="event.stopPropagation();${r.done?`pickSearchedDone('${r.title}')`:`selectPoem(${r.st},${r.i})`}">
+      ${r.title}${r.author} <span class="poem-search-stage">· ${r.stageName}${r.done?' · 已背过':''}</span>
+    </div>`).join('');
+  const more=res.length>10?`<div class="poem-search-more">共找到 ${res.length} 首，仅显示前 10 首，请继续输入缩小范围</div>`:'';
+  box.innerHTML=items+more;
+}
+function pickSearchedDone(title){
+  showToast('《'+title.replace(/[《》]/g,'')+'》已经背过啦！可到「背诗词成果」页点击它复习');
+}
+// 搜索选中一首未背的诗词：设为当前待背（展示在框内），点击卡片即完成背诵
+function selectPoem(st,idx){
+  const box=document.getElementById('poemSearchResults');
+  if(box) box.classList.add('hidden');
+  const inp=document.getElementById('poemSearchInput');
+  if(inp) inp.value='';
+  state.currentPoemKey=st+'_'+idx;
+  saveState();
+  renderAll();
+  showToast('📜 已选：'+POEM_STAGES[st].poems[idx]+'，点击卡片完成背诵');
 }
 
 // 各年级各学科任务数据（grade → semester(a/b) → subject → units）
@@ -4935,6 +4997,10 @@ function renderRecommendations(){
     div.innerHTML=`
       <div class="rec-subject" style="color:#2E7D32;display:flex;align-items:center;gap:6px;">📜 背诗词 · ${poem.stageName}<span class="poem-refresh-btn" onclick="event.stopPropagation();refreshPoem()" title="换一首诗词">🔄</span></div>
       <div class="rec-name">${poem.poem}</div>
+      <div class="poem-search" onclick="event.stopPropagation();">
+        <input id="poemSearchInput" type="text" placeholder="🔍 搜索诗人或诗名，选一首来背" oninput="renderPoemSearch(this.value)" autocomplete="off">
+        <div id="poemSearchResults" class="poem-search-results hidden"></div>
+      </div>
       <div class="poem-progress"><div class="poem-progress-fill" style="width:${pct}%"></div></div>
       <div class="rec-points">💎白宝石×1（=100积分，已完成 ${p.done}/${p.total}）· 点击卡片=完成背诵</div>
       ${renderPoemDetail(poem.poem)}
@@ -5070,7 +5136,7 @@ function renderPoemsPage(){
   const white=state.whiteGems||0;
   progress.innerHTML=`<div class="poems-overview">
     <div style="font-size:16px;font-weight:700;">📜 背诗词成果展示</div>
-    <div style="font-size:13px;color:#666;margin-top:4px;">共会背 <strong style="color:#2E7D32;">${doneAll}/${totalAll}</strong> 首（${pct}%），累计获得白宝石 <strong style="color:#2E7D32;">${white}</strong> 颗（1颗=100积分）。若某首实际不会背，点右侧 🗑 删除。</div>
+    <div style="font-size:13px;color:#666;margin-top:4px;">共会背 <strong style="color:#2E7D32;">${doneAll}/${totalAll}</strong> 首（${pct}%），累计获得白宝石 <strong style="color:#2E7D32;">${white}</strong> 颗（1颗=100积分）。<b>点击诗词名可展开全文和释义复习</b>；若某首实际不会背，点右侧 🗑 删除。</div>
     <div class="progress-bar-track" style="margin-top:10px;"><div class="progress-bar-fill" style="width:${pct}%;background:#43A047;">${pct>10?pct+'%':''}</div></div>
   </div>`;
   // 三个阶段卡片
@@ -5087,11 +5153,11 @@ function renderPoemsPage(){
     }else{
       stage.poems.forEach((poem,i)=>{
         if(state.completedPoems[st+'_'+i]){
-          html+=`<div class="task-item done">
+          html+=`<div class="task-item done poem-review-item">
             <div class="task-checkbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
-            <div class="task-name">${poem}</div>
+            <div class="task-name" style="cursor:pointer;" onclick="togglePoemDetail('_r${st}_${i}')" title="点击展开全文和释义复习">${poem}</div>
             <button class="poem-del-btn" onclick="deletePoem(${st},${i})" title="删除这首（不算会背）">🗑</button>
-          </div>`;
+          </div>${renderPoemDetail(poem,'_r'+st+'_'+i,true)}`;
         }
       });
     }
